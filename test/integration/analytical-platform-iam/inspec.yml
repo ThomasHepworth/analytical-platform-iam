@@ -1,0 +1,8 @@
+name: analytical-platform-iam
+title: Analytical Plaform IAM
+maintainer: analytics-platform-tech@digital.justice.gov.uk
+license: Apache-2.0
+summary: InSpec Compliance Profile for Analytical Plaform IAM
+version: 0.1.0
+supports:
+  platform: aws
