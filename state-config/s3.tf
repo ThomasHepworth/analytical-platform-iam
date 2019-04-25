@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "state" {
-  bucket = "${var.tf_state_name}-analytical-platform-landing"
+  bucket = "${var.tf_state_name}-analytical-platform-dev"
   acl    = "private"
   region = "${var.region}"
 
