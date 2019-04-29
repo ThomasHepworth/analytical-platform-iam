@@ -21,6 +21,13 @@ resource "aws_iam_role" "codepipeline_role" {
   ]
 }
 EOF
+
+  tags {
+    business-unit = "${var.tags["business-unit"]}"
+    application   = "${var.tags["application"]}"
+    is-production = "${var.tags["is-production"]}"
+    owner         = "${var.tags["owner"]}"
+  }
 }
 
 resource "aws_iam_role_policy" "codepipeline_policy" {
@@ -149,6 +156,13 @@ resource "aws_iam_role" "codebuild_role" {
   ]
 }
 EOF
+
+  tags {
+    business-unit = "${var.tags["business-unit"]}"
+    application   = "${var.tags["application"]}"
+    is-production = "${var.tags["is-production"]}"
+    owner         = "${var.tags["owner"]}"
+  }
 }
 
 resource "aws_iam_role_policy" "codebuild_policy" {
@@ -190,7 +204,32 @@ resource "aws_iam_role_policy" "codebuild_policy" {
     {
       "Effect": "Allow",
       "Action": "s3:*Object",
-      "Resource": "${aws_s3_bucket.codepipeline_bucket.arn}/tfplan"
+      "Resource": [
+        "${aws_s3_bucket.codepipeline_bucket.arn}/tfplan",
+        "arn:aws:s3:::${var.tf_state_bucket}/iam"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::${var.tf_state_bucket}"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:Decrypt",
+        "kms:Encrypt"
+      ],
+      "Resource": "${var.tf_state_kms_key_arn}"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:PutItem",
+        "dynamodb:GetItem",
+        "dynamodb:DeleteItem"
+      ],
+      "Resource": "${var.tf_lock_table_arn}"
     }
   ]
 } 
@@ -229,8 +268,11 @@ resource "aws_codebuild_project" "build_project_tf_plan" {
     buildspec = "pipeline/buildspec-plan.yml"
   }
 
-  tags = {
-    "environment-name" = "landing"
+  tags {
+    business-unit = "${var.tags["business-unit"]}"
+    application   = "${var.tags["application"]}"
+    is-production = "${var.tags["is-production"]}"
+    owner         = "${var.tags["owner"]}"
   }
 }
 
@@ -266,7 +308,10 @@ resource "aws_codebuild_project" "build_project_tf_apply" {
     buildspec = "pipeline/buildspec-apply.yml"
   }
 
-  tags = {
-    "environment-name" = "landing"
+  tags {
+    business-unit = "${var.tags["business-unit"]}"
+    application   = "${var.tags["application"]}"
+    is-production = "${var.tags["is-production"]}"
+    owner         = "${var.tags["owner"]}"
   }
 }
