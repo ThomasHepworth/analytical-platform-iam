@@ -230,6 +230,11 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         "dynamodb:DeleteItem"
       ],
       "Resource": "${var.tf_lock_table_arn}"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
+      "Resource": "arn:aws:iam::*:role/landing-iam-role"
     }
   ]
 } 
