@@ -49,3 +49,7 @@ variable "read_data_only_name" {
 variable "data_admin_name" {
   default = "data-admin-in"
 }
+
+variable "terraform_infrastructure_name" {
+  default = "terraform-infrastructure"
+}
