@@ -2,6 +2,13 @@ variable "name" {}
 variable "pipeline_github_owner" {}
 variable "pipeline_github_repo" {}
 variable "pipeline_github_branch" {}
+
+data "aws_caller_identity" "current" {}
+
+variable "region" {
+  default = "eu-west-1"
+}
+
 variable "tf_plan_timeout" {
   default = 5
 }
