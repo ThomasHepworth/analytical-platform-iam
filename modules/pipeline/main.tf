@@ -2,10 +2,22 @@
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "${var.name}-ap-codepipeline-bucket"
   acl    = "private"
+  versioning {
+    enabled = true
+  }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm     = "AES256"
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "codepipeline_role" {
   name = "${var.name}-codepipeline-role"
+  force_detach_policies = true
 
   assume_role_policy = <<EOF
 {
@@ -98,7 +110,6 @@ resource "aws_codepipeline" "codepipeline" {
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["source_output"]
-      output_artifacts = ["plan_output"]
       version          = "1"
 
       configuration = {
@@ -127,7 +138,7 @@ resource "aws_codepipeline" "codepipeline" {
       category        = "Build"
       owner           = "AWS"
       provider        = "CodeBuild"
-      input_artifacts = ["plan_output"]
+      input_artifacts = ["source_output"]
       version         = "1"
 
       configuration = {
@@ -141,6 +152,7 @@ resource "aws_codepipeline" "codepipeline" {
 #####  Codebuild #####
 resource "aws_iam_role" "codebuild_role" {
   name = "${var.name}-codebuild-role"
+  force_detach_policies = true
 
   assume_role_policy = <<EOF
 {
@@ -220,7 +232,10 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         "kms:Decrypt",
         "kms:Encrypt"
       ],
-      "Resource": "${var.tf_state_kms_key_arn}"
+      "Resource": [
+        "arn:aws:kms:${var.region}:${data.aws_caller_identity.current.account_id}:alias/aws/s3",
+        "${var.tf_state_kms_key_arn}"
+      ] 
     },
     {
       "Effect": "Allow",
