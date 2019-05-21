@@ -8,6 +8,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "automation:*",
       "autoscaling:*",
       "aws-marketplace:*",
+      "codepipeline:*",
       "cloudtrail:*",
       "cloudwatch:*",
       "cognito:*",

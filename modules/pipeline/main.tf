@@ -230,7 +230,10 @@ resource "aws_iam_role_policy" "codebuild_policy" {
       "Effect": "Allow",
       "Action": [
         "kms:Decrypt",
-        "kms:Encrypt"
+        "kms:Encrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey*",
+        "kms:ReEncrypt*"
       ],
       "Resource": [
         "arn:aws:kms:${var.region}:${data.aws_caller_identity.current.account_id}:alias/aws/s3",
