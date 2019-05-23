@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     resources = ["*"]
   }
   statement {
-    sid       = "GuardDutyLandingLinkedRolesTerraform"
+    sid       = "GuardDutyLinkedRolesTerraform"
     effect    = "Allow"
     actions   = ["iam:CreateServiceLinkedRole"]
     resources = ["arn:aws:iam:::role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"]
