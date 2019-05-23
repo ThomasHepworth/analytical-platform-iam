@@ -53,3 +53,7 @@ variable "data_admin_name" {
 variable "terraform_infrastructure_name" {
   default = "terraform-infrastructure"
 }
+
+variable "terraform_guardduty_name" {
+  default = "terraform-guardduty"
+}
