@@ -1,0 +1,53 @@
+# Permissions required by Terraform for enabling GuardDuty
+data "aws_iam_policy_document" "ap_terraform_guardduty" {
+  statement {
+    sid       = "GuardDutyLandingTerraform"
+    effect    = "Allow"
+    actions   = [
+      "guardduty:*"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    sid       = "GuardDutyLinkedRolesTerraform"
+    effect    = "Allow"
+    actions   = ["iam:CreateServiceLinkedRole"]
+    resources = ["arn:aws:iam:::role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"]
+    condition {
+      test = "StringLike"
+      variable = "iam:AWSServiceName"
+      values = [
+        "guardduty.amazonaws.com"
+      ]
+    }
+  }
+  statement {
+    sid       = "GuardDutyRWRolesTerraform"
+    effect    = "Allow"
+    actions   = [
+      "iam:PutRolePolicy",
+      "iam:DeleteRolePolicy"
+    ]
+    resources = ["arn:aws:iam:::role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"]
+  }
+}
+
+# Create terraform role in dev account
+module "add_terraform_guardduty_role_in_dev" {
+  source = "modules/role"
+
+  assume_role_in_account_id = "${var.ap_accounts["dev"]}"
+  role_name                 = "${var.terraform_guardduty_name}-${local.dev}"
+  landing_account_id        = "${var.landing_account_id}"
+  role_policy               = "${data.aws_iam_policy_document.ap_terraform_guardduty.json}"
+}
+
+# Create terraform role in prod account
+module "add_terraform_guardduty_role_in_prod" {
+  source = "modules/role"
+
+  assume_role_in_account_id = "${var.ap_accounts["prod"]}"
+  role_name                 = "${var.terraform_guardduty_name}-${local.prod}"
+  landing_account_id        = "${var.landing_account_id}"
+  role_policy               = "${data.aws_iam_policy_document.ap_terraform_guardduty.json}"
+}
