@@ -92,6 +92,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:PutUserPolicy",
       "iam:RemoveRoleFromInstanceProfile",
       "iam:RemoveUserFromGroup",
+      "iam:TagRole",
       "iam:UntagRole",
       "iam:UpdateAccessKey",
       "iam:UploadSSHPublicKey",
