@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     sid       = "GuardDutyLinkedRolesTerraform"
     effect    = "Allow"
     actions   = ["iam:CreateServiceLinkedRole"]
-    resources = ["arn:aws:iam:::role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"]
+    resources = ["*"]
     condition {
       test = "StringLike"
       variable = "iam:AWSServiceName"
@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
       "iam:PutRolePolicy",
       "iam:DeleteRolePolicy"
     ]
-    resources = ["arn:aws:iam:::role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"]
+    resources = ["*"]
   }
 }
 
