@@ -30,6 +30,14 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     ]
     resources = ["*"]
   }
+  statement {
+    sid       = "GuardDutyCloudWatchEvent"
+    effect    = "Allow"
+    actions   = [
+      "events:*"
+    ]
+    resources = ["*"]
+  }
 }
 
 # Create terraform role in landing account
