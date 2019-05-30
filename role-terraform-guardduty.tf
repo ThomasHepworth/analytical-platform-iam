@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     actions   = [
       "kms:Decrypt"
     ]
-    resources = ["arn:aws:kms:eu-west-1:${landing_account_id}:key/925a5b6c-7df1-49a0-a3cc-471e8524637d"]
+    resources = ["arn:aws:kms:eu-west-1:${var.landing_account_id}:key/925a5b6c-7df1-49a0-a3cc-471e8524637d"]
   }
 }
 
