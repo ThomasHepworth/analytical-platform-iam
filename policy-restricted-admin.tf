@@ -25,6 +25,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "es:*",
       "events:*",
       "glacier:*",
+      "guardduty:*"
       "health:*",
       "inspector:*",
       "kinesis:*",
