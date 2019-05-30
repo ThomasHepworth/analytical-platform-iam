@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     resources = ["*"]
   }
   statement {
-    sid       = "SSMParameterAccess"
+    sid       = "KMSDecryptAccess"
     effect    = "Allow"
     actions   = [
       "kms:Decrypt"
