@@ -54,6 +54,23 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     ]
     resources = ["arn:aws:kms:eu-west-1:${var.landing_account_id}:key/925a5b6c-7df1-49a0-a3cc-471e8524637d"]
   }
+  statement {
+    sid       = "SNSTopicCreation"
+    effect    = "Allow"
+    actions   = [
+      "sns:*"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    sid       = "LambdaCreation"
+    effect    = "Allow"
+    not_actions   = [
+      "lambda:AddPermission",
+      "lambda:PutFunctionConcurrency"
+    ]
+    resources = ["arn:aws:lambda:*:*:function:*"]
+  }
 }
 
 # Create terraform role in landing account
