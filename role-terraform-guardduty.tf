@@ -14,6 +14,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     actions   = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
+      "logs:DeleteLogGroup",
       "logs:Describe*",
       "logs:List*",
       "logs:PutLogEvents",
@@ -42,6 +43,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
       "iam:CreatePolicy",
       "iam:CreateRole",
       "iam:DeleteRolePolicy",
+      "iam:DetachRolePolicy",
       "iam:Get*",
       "iam:List*",
       "iam:PassRole",
