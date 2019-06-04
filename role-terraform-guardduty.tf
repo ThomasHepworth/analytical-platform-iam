@@ -14,8 +14,9 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     actions   = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
+      "logs:DescribeLogStreams",
       "logs:PutLogEvents",
-      "logs:DescribeLogStreams"
+      "logs:PutRetentionPolicy"
     ]
     resources = ["arn:aws:logs:*:*:*"]
   }
@@ -36,9 +37,11 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     sid       = "GuardDutyRWRolesTerraform"
     effect    = "Allow"
     actions   = [
-      "iam:PutRolePolicy",
+      "iam:CreatePolicy",
+      "iam:CreateRole",
       "iam:DeleteRolePolicy",
-      "iam:CreateRole"
+      "iam:GetRole",
+      "iam:PutRolePolicy"
     ]
     resources = ["*"]
   }
