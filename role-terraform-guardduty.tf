@@ -9,6 +9,17 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     resources = ["*"]
   }
   statement {
+    sid       = "GuarddutyPipelineLogGroup"
+    effect    = "Allow"
+    actions   = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "logs:DescribeLogStreams"
+    ]
+    resources = ["arn:aws:logs:*:*:*"]
+  }
+  statement {
     sid       = "GuardDutyLinkedRolesTerraform"
     effect    = "Allow"
     actions   = ["iam:CreateServiceLinkedRole"]
