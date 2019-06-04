@@ -85,7 +85,6 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     sid       = "LambdaCreation"
     effect    = "Allow"
     not_actions   = [
-      "lambda:AddPermission",
       "lambda:PutFunctionConcurrency"
     ]
     resources = ["arn:aws:lambda:*:*:function:*"]
