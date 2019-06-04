@@ -42,6 +42,8 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
       "iam:AttachRolePolicy",
       "iam:CreatePolicy",
       "iam:CreateRole",
+      "iam:DeletePolicy",
+      "iam:DeleteRole",
       "iam:DeleteRolePolicy",
       "iam:DetachRolePolicy",
       "iam:Get*",
