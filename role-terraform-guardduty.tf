@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
       "iam:CreatePolicy",
       "iam:CreateRole",
       "iam:DeleteRolePolicy",
-      "iam:GetRole",
+      "iam:Get*",
       "iam:PutRolePolicy"
     ]
     resources = ["*"]
