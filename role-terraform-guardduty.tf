@@ -26,7 +26,8 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     effect    = "Allow"
     actions   = [
       "iam:PutRolePolicy",
-      "iam:DeleteRolePolicy"
+      "iam:DeleteRolePolicy",
+      "iam:CreateRole"
     ]
     resources = ["*"]
   }
