@@ -15,6 +15,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:DescribeLogStreams",
+      "logs:DescribeLogGroups",
       "logs:PutLogEvents",
       "logs:PutRetentionPolicy"
     ]
