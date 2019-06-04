@@ -38,6 +38,7 @@ data "aws_iam_policy_document" "ap_terraform_guardduty" {
     sid       = "GuardDutyRWRolesTerraform"
     effect    = "Allow"
     actions   = [
+      "iam:AttachRolePolicy",
       "iam:CreatePolicy",
       "iam:CreateRole",
       "iam:DeleteRolePolicy",
