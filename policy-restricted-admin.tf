@@ -33,6 +33,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "lambda:*",
       "logs:*",
       "rds:*",
+      "resource-groups:ListGroups*",
       "route53:*",
       "route53domains:*",
       "s3:*",
