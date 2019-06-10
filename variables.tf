@@ -54,6 +54,6 @@ variable "terraform_infrastructure_name" {
   default = "terraform-infrastructure"
 }
 
-variable "terraform_guardduty_name" {
-  default = "terraform-guardduty"
+variable "terraform_aws_security_name" {
+  default = "terraform-aws-security"
 }
