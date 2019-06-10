@@ -96,7 +96,7 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
 }
 
 # Create terraform role in landing account
-module "add_terraform_aws_security_role_in_landing" {
+module "add_terraform_guardduty_role_in_landing" {
   source = "modules/role"
 
   assume_role_in_account_id = "${var.landing_account_id}"
@@ -106,7 +106,7 @@ module "add_terraform_aws_security_role_in_landing" {
 }
 
 # Create terraform role in dev account
-module "add_terraform_aws_security_role_in_dev" {
+module "add_terraform_guardduty_role_in_dev" {
   source = "modules/role"
 
   assume_role_in_account_id = "${var.ap_accounts["dev"]}"
@@ -116,7 +116,7 @@ module "add_terraform_aws_security_role_in_dev" {
 }
 
 # Create terraform role in prod account
-module "add_terraform_aws_security_role_in_prod" {
+module "add_terraform_guardduty_role_in_prod" {
   source = "modules/role"
 
   assume_role_in_account_id = "${var.ap_accounts["prod"]}"
@@ -126,7 +126,7 @@ module "add_terraform_aws_security_role_in_prod" {
 }
 
 # Create terraform role in data account
-module "add_terraform_aws_security_role_in_data" {
+module "add_terraform_guardduty_role_in_data" {
   source = "modules/role"
 
   assume_role_in_account_id = "${var.ap_accounts["data"]}"
