@@ -18,6 +18,7 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
     actions   = [
       "config:Get*",
       "config:List*",
+      "config:Delete*",
       "config:Describe*",
       "config:Put*",
       "config:Start*"
