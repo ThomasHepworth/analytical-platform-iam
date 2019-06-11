@@ -18,7 +18,8 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
       "config:Get*",
       "config:List*",
       "config:Describe*",
-      "config:Put*"
+      "config:Put*",
+      "config:Start*"
     ]
     resources = ["*"]
   }
