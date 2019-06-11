@@ -1,6 +1,28 @@
 # Permissions required by Terraform for enabling GuardDuty
 data "aws_iam_policy_document" "ap_terraform_aws_security" {
   statement {
+    sid       = "BucketCreation"
+    effect    = "Allow"
+    actions   = [
+      "s3:Get*",
+      "s3:List*",
+      "s3:Put*",
+      "s3:Create*"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    sid       = "AWSConfigCreation"
+    effect    = "Allow"
+    actions   = [
+      "config:Get*",
+      "config:List*",
+      "config:Describe*",
+      "config:Put*"
+    ]
+    resources = ["*"]
+  }
+  statement {
     sid       = "GuardDutyLandingTerraform"
     effect    = "Allow"
     actions   = [
