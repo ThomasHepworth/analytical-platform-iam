@@ -7,6 +7,7 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
       "s3:Get*",
       "s3:List*",
       "s3:Put*",
+      "s3:Delete*",
       "s3:Create*"
     ]
     resources = ["*"]
