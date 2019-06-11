@@ -5,7 +5,7 @@ terraform {
     acl            = "private"
     bucket         = "tf-state-analytical-platform-landing"
     encrypt        = true
-    key            = "iam"
+    key            = "iam.tfstate"
     region         = "eu-west-1"
     dynamodb_table = "tf-state-lock"
     kms_key_id     = "arn:aws:kms:eu-west-1:335823981503:key/925a5b6c-7df1-49a0-a3cc-471e8524637d"
@@ -15,6 +15,10 @@ terraform {
 provider "aws" {
   region  = "eu-west-1"
   version = "~> 2.6"
+
+  assume_role {
+    role_arn = "arn:aws:iam::${var.landing_account_id}:role/${var.landing_iam_role}"
+  }
 }
 
 variable "landing_account_id" {
@@ -56,4 +60,8 @@ variable "terraform_infrastructure_name" {
 
 variable "terraform_aws_security_name" {
   default = "terraform-aws-security"
+}
+
+variable "landing_iam_role" {
+  default = "landing-iam-role"
 }
