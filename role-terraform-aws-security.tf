@@ -1,6 +1,20 @@
 # Permissions required by Terraform for enabling GuardDuty
 data "aws_iam_policy_document" "ap_terraform_aws_security" {
   statement {
+    sid       = "CloudformationCreationUpdate"
+    effect    = "Allow"
+    actions   = [
+      "cloudformation:CreateStack",
+      "cloudformation:UpdateStack",
+      "cloudformation:DescribeStacks",
+      "cloudformation:DescribeStackEvents",
+      "cloudformation:DescribeStackResources",
+      "cloudformation:GetTemplate",
+      "cloudformation:ValidateTemplate"
+    ]
+    resources = ["*"]
+  }
+  statement {
     sid       = "BucketCreation"
     effect    = "Allow"
     actions   = [
