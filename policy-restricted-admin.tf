@@ -11,6 +11,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "codecommit:*",
       "codebuild:*",
       "codepipeline:*",
+      "cloudformation:*",
       "cloudtrail:*",
       "cloudwatch:*",
       "cognito:*",
