@@ -62,6 +62,27 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
     resources = ["arn:aws:logs:*:*:*"]
   }
   statement {
+    sid       = "SecurityHubTerraform"
+    effect    = "Allow"
+    actions   = [
+      "securityhub:*"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    sid       = "SecurityHubLinkedRole"
+    effect    = "Allow"
+    actions   = ["iam:CreateServiceLinkedRole"]
+    resources = ["*"]
+    condition {
+      test = "StringLike"
+      variable = "iam:AWSServiceName"
+      values = [
+        "securityhub.amazonaws.com"
+      ]
+    }
+  }
+  statement {
     sid       = "GuardDutyLinkedRolesTerraform"
     effect    = "Allow"
     actions   = ["iam:CreateServiceLinkedRole"]
