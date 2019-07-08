@@ -12,8 +12,8 @@ data "aws_iam_policy_document" "assume" {
     effect = "Allow"
 
     principals {
-      identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
-      type        = "AWS"
+      identifiers = "${var.role_principal_identifiers}"
+      type        = "${var.role_principal_type}"
     }
 
     actions = ["sts:AssumeRole"]
