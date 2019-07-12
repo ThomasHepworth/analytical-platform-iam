@@ -68,8 +68,10 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:CreateAccessKey",
       "iam:CreateGroup",
       "iam:CreateInstanceProfile",
+      "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
       "iam:CreateRole",
+      "iam:CreateSAMLProvider",
       "iam:CreateUser",
       "iam:CreateVirtualMFADevice",
       "iam:DeactivateMFADevice",
@@ -80,6 +82,8 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:DeletePolicy",
       "iam:DeleteRole",
       "iam:DeleteRolePolicy",
+      "iam:DeleteSAMLProvider",
+      "iam:DeleteOpenIDConnectProvider",
       "iam:DeleteSSHPublicKey",
       "iam:DeleteUser",
       "iam:DeleteUserPolicy",
@@ -101,6 +105,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:TagRole",
       "iam:UntagRole",
       "iam:UpdateAccessKey",
+      "iam:UpdateOpenIDConnectProviderThumbprint",
       "iam:UploadSSHPublicKey",
     ]
 
