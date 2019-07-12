@@ -141,3 +141,53 @@ Tidy up
 ```bash
 bundle exec kitchen destroy
 ```
+
+### Authenticating
+
+[awscli]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
+[aws profile]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+If you want to run tests or apply terraform config from your local machine you'll first need to authenticate
+
+##### Prerequisites
+
+- Firstly ensure you have an existing `IAM` user account in the Landing account. See [Usage](#usage)
+
+- Ensure you have installed the [awscli][awscli]
+
+- **Optional**: Create a profile for your landing user account. See [Creating an AWS Profile][aws profile] 
+
+**Note** you can set this profile as your default by assigning to the `AWS_PROFILE` environment variable
+
+
+__Request temporary credentials to assume the appropriate role in the desired account__:
+
+```bash
+aws sts assume-role --role-arn "arn:aws:iam::525294151996:role/restricted-admin-dev" --role-session-name DEV-Session
+```
+
+__Set temporary credentials as environment variables__:
+
+```bash
+export AWS_ACCESS_KEY_ID=ASIAX........
+export AWS_SECRET_ACCESS_KEY=0vwDrU5..........
+export AWS_SESSION_TOKEN="FQoGZXIvYXdzEHQaDHBH......."
+```
+
+__Did it work?__
+
+```bash
+aws sts get-caller-identity
+```
+
+**Note** If using credentials to apply terraform config, you'll need to pass the flag `-lock=false` as the role you're assuming will not have 
+permissions to access the lock table.. i.e. `terraform plan -lock=false`
+
+__When finished!__:
+
+Your credentials are temporary and will expire after 1 hour.  You'll need to repeat the process to be able to authenticate after this time
+
+Unset your credentials:
+```bash
+unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+```
