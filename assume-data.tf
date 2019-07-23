@@ -90,7 +90,13 @@ module "assume_read_s3_only_in_data" {
   landing_account_id = "${var.landing_account_id}"
   group_name         = "${var.read_data_only_name}-${local.data}-acc"
 
-  users = [""]
+  users = [
+    "${aws_iam_user.mikael.name}",
+    "${aws_iam_user.shojul.name}",
+    "${aws_iam_user.aldo.name}",
+    "${aws_iam_user.ravi.name}",
+    "${aws_iam_user.olivier.name}"
+  ]
 }
 
 ## Create read s3 only role in data account

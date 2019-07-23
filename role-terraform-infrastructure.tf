@@ -6,6 +6,7 @@ data "aws_iam_policy_document" "landing_terraform_infrastructure" {
     actions   = [
       "route53:*",
       "s3:*",
+      "ec2:*",
       "ssm:*",
       "kms:Decrypt",
       "logs:CreateLogGroup",
@@ -13,6 +14,15 @@ data "aws_iam_policy_document" "landing_terraform_infrastructure" {
       "logs:PutLogEvents"
     ]
     resources = ["*"]
+  }
+
+  statement {
+    sid       = "AssumeTFRole"
+    effect    = "Allow"
+    actions   = [
+      "sts:AssumeRole"
+    ]
+    resources = ["arn:aws:iam::*:role/${var.terraform_infrastructure_name}"]
   }
 }
 
@@ -57,8 +67,8 @@ module "add_terraform_infrastructure_role_in_dev" {
   role_name                  = "${var.terraform_infrastructure_name}"
   landing_account_id         = "${var.landing_account_id}"
   role_policy                = "${data.aws_iam_policy_document.ap_terraform_infrastructure.json}"
-  role_principal_identifiers = ["codebuild.amazonaws.com"]
-  role_principal_type        = "Service"
+  role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:role/${var.terraform_infrastructure_name}"]
+  role_principal_type        = "AWS"
 }
 
 module "add_terraform_infrastructure_role_in_prod" {
@@ -68,6 +78,6 @@ module "add_terraform_infrastructure_role_in_prod" {
   role_name                  = "${var.terraform_infrastructure_name}"
   landing_account_id         = "${var.landing_account_id}"
   role_policy                = "${data.aws_iam_policy_document.ap_terraform_infrastructure.json}"
-  role_principal_identifiers = ["codebuild.amazonaws.com"]
-  role_principal_type        = "Service"
+  role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:role/${var.terraform_infrastructure_name}"]
+  role_principal_type        = "AWS"
 }
