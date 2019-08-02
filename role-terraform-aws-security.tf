@@ -6,6 +6,7 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
     actions   = [
       "cloudwatch:Get*",
       "cloudwatch:List*",
+      "cloudwatch:Describe*",
       "cloudwatch:PutMetricAlarm"
     ]
     resources = ["*"]
