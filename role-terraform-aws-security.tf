@@ -1,6 +1,16 @@
 # Permissions required by Terraform for enabling GuardDuty
 data "aws_iam_policy_document" "ap_terraform_aws_security" {
   statement {
+    sid       = "CloudWatchAlarms"
+    effect    = "Allow"
+    actions   = [
+      "cloudwatch:Get*",
+      "cloudwatch:List*",
+      "cloudwatch:PutMetricAlarm"
+    ]
+    resources = ["*"]
+  }
+  statement {
     sid       = "CloudformationCreationUpdate"
     effect    = "Allow"
     actions   = [
