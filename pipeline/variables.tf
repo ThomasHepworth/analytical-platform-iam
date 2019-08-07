@@ -6,7 +6,6 @@ variable "region" {
   default = "eu-west-1"
 }
 
-
 variable "codebuild_compute_type" {
   default = "BUILD_GENERAL1_SMALL"
 }
@@ -14,7 +13,6 @@ variable "codebuild_compute_type" {
 variable "codebuild_image" {
   default = "aws/codebuild/standard:1.0"
 }
-
 
 variable "tf_plan_timeout" {
   default = "5"

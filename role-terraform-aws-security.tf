@@ -1,115 +1,143 @@
 # Permissions required by Terraform for enabling GuardDuty
 data "aws_iam_policy_document" "ap_terraform_aws_security" {
   statement {
-    sid       = "CloudWatchAlarms"
-    effect    = "Allow"
-    actions   = [
+    sid    = "CloudWatchAlarms"
+    effect = "Allow"
+
+    actions = [
       "cloudwatch:Get*",
       "cloudwatch:List*",
       "cloudwatch:Describe*",
-      "cloudwatch:PutMetricAlarm"
+      "cloudwatch:PutMetricAlarm",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "CloudformationCreationUpdate"
-    effect    = "Allow"
-    actions   = [
+    sid    = "CloudformationCreationUpdate"
+    effect = "Allow"
+
+    actions = [
       "cloudformation:CreateStack",
       "cloudformation:UpdateStack",
       "cloudformation:DescribeStacks",
       "cloudformation:DescribeStackEvents",
       "cloudformation:DescribeStackResources",
       "cloudformation:GetTemplate",
-      "cloudformation:ValidateTemplate"
+      "cloudformation:ValidateTemplate",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "BucketCreation"
-    effect    = "Allow"
-    actions   = [
+    sid    = "BucketCreation"
+    effect = "Allow"
+
+    actions = [
       "s3:Get*",
       "s3:List*",
       "s3:Put*",
       "s3:Delete*",
-      "s3:Create*"
+      "s3:Create*",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "AWSConfigCreation"
-    effect    = "Allow"
-    actions   = [
+    sid    = "AWSConfigCreation"
+    effect = "Allow"
+
+    actions = [
       "config:Get*",
       "config:List*",
       "config:Delete*",
       "config:Describe*",
       "config:Put*",
-      "config:Start*"
+      "config:Start*",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "GuardDutyLandingTerraform"
-    effect    = "Allow"
-    actions   = [
-      "guardduty:*"
+    sid    = "GuardDutyLandingTerraform"
+    effect = "Allow"
+
+    actions = [
+      "guardduty:*",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "GuarddutyPipelineLogGroup"
-    effect    = "Allow"
-    actions   = [
+    sid    = "GuarddutyPipelineLogGroup"
+    effect = "Allow"
+
+    actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:DeleteLogGroup",
       "logs:Describe*",
       "logs:List*",
       "logs:PutLogEvents",
-      "logs:PutRetentionPolicy"
+      "logs:PutRetentionPolicy",
     ]
+
     resources = ["arn:aws:logs:*:*:*"]
   }
+
   statement {
-    sid       = "SecurityHubTerraform"
-    effect    = "Allow"
-    actions   = [
-      "securityhub:*"
+    sid    = "SecurityHubTerraform"
+    effect = "Allow"
+
+    actions = [
+      "securityhub:*",
     ]
+
     resources = ["*"]
   }
+
   statement {
     sid       = "SecurityHubLinkedRole"
     effect    = "Allow"
     actions   = ["iam:CreateServiceLinkedRole"]
     resources = ["*"]
+
     condition {
-      test = "StringLike"
+      test     = "StringLike"
       variable = "iam:AWSServiceName"
+
       values = [
-        "securityhub.amazonaws.com"
+        "securityhub.amazonaws.com",
       ]
     }
   }
+
   statement {
     sid       = "GuardDutyLinkedRolesTerraform"
     effect    = "Allow"
     actions   = ["iam:CreateServiceLinkedRole"]
     resources = ["*"]
+
     condition {
-      test = "StringLike"
+      test     = "StringLike"
       variable = "iam:AWSServiceName"
+
       values = [
-        "guardduty.amazonaws.com"
+        "guardduty.amazonaws.com",
       ]
     }
   }
+
   statement {
-    sid       = "GuardDutyRWRolesTerraform"
-    effect    = "Allow"
-    actions   = [
+    sid    = "GuardDutyRWRolesTerraform"
+    effect = "Allow"
+
+    actions = [
       "iam:AttachRolePolicy",
       "iam:CreatePolicy",
       "iam:CreatePolicyVersion",
@@ -121,48 +149,64 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
       "iam:Get*",
       "iam:List*",
       "iam:PassRole",
-      "iam:PutRolePolicy"
+      "iam:PutRolePolicy",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "GuardDutyCloudWatchEvent"
-    effect    = "Allow"
-    actions   = [
-      "events:*"
+    sid    = "GuardDutyCloudWatchEvent"
+    effect = "Allow"
+
+    actions = [
+      "events:*",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "SSMParameterAccess"
-    effect    = "Allow"
-    actions   = [
-      "ssm:GetParameter*"
+    sid    = "SSMParameterAccess"
+    effect = "Allow"
+
+    actions = [
+      "ssm:GetParameter*",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "KMSDecryptAccess"
-    effect    = "Allow"
-    actions   = [
-      "kms:Decrypt"
+    sid    = "KMSDecryptAccess"
+    effect = "Allow"
+
+    actions = [
+      "kms:Decrypt",
     ]
+
     resources = ["arn:aws:kms:eu-west-1:${var.landing_account_id}:key/925a5b6c-7df1-49a0-a3cc-471e8524637d"]
   }
+
   statement {
-    sid       = "SNSTopicCreation"
-    effect    = "Allow"
-    actions   = [
-      "sns:*"
+    sid    = "SNSTopicCreation"
+    effect = "Allow"
+
+    actions = [
+      "sns:*",
     ]
+
     resources = ["*"]
   }
+
   statement {
-    sid       = "LambdaCreation"
-    effect    = "Allow"
-    not_actions   = [
-      "lambda:PutFunctionConcurrency"
+    sid    = "LambdaCreation"
+    effect = "Allow"
+
+    not_actions = [
+      "lambda:PutFunctionConcurrency",
     ]
+
     resources = ["arn:aws:lambda:*:*:function:*"]
   }
 }
