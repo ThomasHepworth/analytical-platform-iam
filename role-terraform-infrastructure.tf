@@ -1,9 +1,10 @@
 # Change to whatever terraform requires in the landing account (doesn't need R53 yet)
 data "aws_iam_policy_document" "landing_terraform_infrastructure" {
   statement {
-    sid       = "Route53"
-    effect    = "Allow"
-    actions   = [
+    sid    = "Route53"
+    effect = "Allow"
+
+    actions = [
       "route53:*",
       "s3:*",
       "ec2:*",
@@ -11,17 +12,20 @@ data "aws_iam_policy_document" "landing_terraform_infrastructure" {
       "kms:Decrypt",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:PutLogEvents",
     ]
+
     resources = ["*"]
   }
 
   statement {
-    sid       = "AssumeTFRole"
-    effect    = "Allow"
-    actions   = [
-      "sts:AssumeRole"
+    sid    = "AssumeTFRole"
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
     ]
+
     resources = ["arn:aws:iam::*:role/${var.terraform_infrastructure_name}"]
   }
 }
@@ -29,9 +33,10 @@ data "aws_iam_policy_document" "landing_terraform_infrastructure" {
 # Permissions required by Terraform in the Analytical Platform accounts (excluding landing account)
 data "aws_iam_policy_document" "ap_terraform_infrastructure" {
   statement {
-    sid       = "apRemoteTerraform"
-    effect    = "Allow"
-    actions   = [
+    sid    = "apRemoteTerraform"
+    effect = "Allow"
+
+    actions = [
       "route53:*",
       "cloudtrail:*",
       "iam:*",
@@ -41,8 +46,9 @@ data "aws_iam_policy_document" "ap_terraform_infrastructure" {
       "elasticloadbalancing:*",
       "cloudwatch:*",
       "autoscaling:*",
-      "kms:Decrypt"
-      ]
+      "kms:Decrypt",
+    ]
+
     resources = ["*"]
   }
 }

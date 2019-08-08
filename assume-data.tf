@@ -22,7 +22,7 @@ module "assume_restricted_admin_in_data" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
-    "${aws_iam_user.olivier.name}"
+    "${aws_iam_user.olivier.name}",
   ]
 }
 
@@ -58,7 +58,7 @@ module "assume_read_only_in_data" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
-    "${aws_iam_user.olivier.name}"
+    "${aws_iam_user.olivier.name}",
   ]
 }
 
@@ -72,7 +72,6 @@ module "add_read_only_role_in_data" {
   role_policy                = "${data.aws_iam_policy_document.read_only.json}"
   role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
   role_principal_type        = "AWS"
-  
 }
 
 ##### READ S3 ONLY #####
@@ -95,7 +94,7 @@ module "assume_read_s3_only_in_data" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
-    "${aws_iam_user.olivier.name}"
+    "${aws_iam_user.olivier.name}",
   ]
 }
 
@@ -131,7 +130,7 @@ module "assume_data_admin_in_data" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
-    "${aws_iam_user.olivier.name}"
+    "${aws_iam_user.olivier.name}",
   ]
 }
 
