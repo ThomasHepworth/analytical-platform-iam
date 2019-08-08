@@ -73,3 +73,21 @@ module "add_read_only_role_in_landing" {
   role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
   role_principal_type        = "AWS"
 }
+
+##### SUSPENDED USERS #####
+## Create suspended users group for inactive users
+
+module "add_suspended_users_group_in_landing" {
+  source = "modules/assume"
+
+  assumed_role_name = "nil"
+
+  assume_role_in_account_id = ["nil"]
+  landing_account_id        = "${var.landing_account_id}"
+  group_name                = "${var.suspended_users_name}"
+  group_effect              = "Deny"
+
+  users = [
+    "${aws_iam_user.suspended.name}",
+  ]
+}

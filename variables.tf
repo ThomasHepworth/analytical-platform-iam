@@ -65,3 +65,9 @@ variable "terraform_aws_security_name" {
 variable "landing_iam_role" {
   default = "landing-iam-role"
 }
+
+## Suspended Users
+
+variable "suspended_users_name" {
+  default = "suspended_users"
+}
