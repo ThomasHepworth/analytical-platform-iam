@@ -68,6 +68,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:CreateAccessKey",
       "iam:CreateGroup",
       "iam:CreateInstanceProfile",
+      "iam:CreateLoginProfile",
       "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
       "iam:CreateRole",
@@ -105,6 +106,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:TagRole",
       "iam:UntagRole",
       "iam:UpdateAccessKey",
+      "iam:UpdateLoginProfile",
       "iam:UpdateOpenIDConnectProviderThumbprint",
       "iam:UploadSSHPublicKey",
     ]
