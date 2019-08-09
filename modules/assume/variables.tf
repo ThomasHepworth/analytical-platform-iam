@@ -20,3 +20,8 @@ variable "users" {
   description = "A list of users"
   type        = "list"
 }
+
+variable "group_effect" {
+  description = "The explicit Allow or Deny on the group's policy"
+  default     = "Allow"
+}

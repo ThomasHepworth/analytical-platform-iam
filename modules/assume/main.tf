@@ -1,12 +1,12 @@
 locals {
-  roles = "${join(",\n",formatlist("arn:aws:iam::%s:role/%s", var.assume_role_in_account_id, var.assumed_role_name))}"
+  roles = "${join(",\n", formatlist("arn:aws:iam::%s:role/%s", var.assume_role_in_account_id, var.assumed_role_name))}"
 }
 
 data "aws_iam_policy_document" "policy" {
   statement {
-    effect    = "Allow"
-    actions   = ["sts:AssumeRole"]
-    resources = ["${local.roles}"]
+    effect    = "${var.group_effect}"
+    actions   = ["${var.group_effect == "Allow" ? "sts:AssumeRole" : "*"}"]
+    resources = ["${var.group_effect == "Allow" ? local.roles : "*"}"]
   }
 }
 
