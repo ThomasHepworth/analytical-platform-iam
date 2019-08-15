@@ -10,6 +10,7 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
       "cloudtrail:List*",
       "cloudtrail:Get*",
       "cloudtrail:StartLogging",
+      "cloudtrail:UpdateTrail",
     ]
 
     resources = ["*"]
