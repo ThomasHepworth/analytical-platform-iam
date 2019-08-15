@@ -1,6 +1,19 @@
 # Permissions required by Terraform for enabling GuardDuty
 data "aws_iam_policy_document" "ap_terraform_aws_security" {
   statement {
+    sid    = "CloudtrailCreation"
+    effect = "Allow"
+
+    actions = [
+      "cloudtrail:CreateTrail",
+      "cloudtrail:List*",
+      "cloudtrail:Describe*",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
     sid    = "CloudWatchAlarms"
     effect = "Allow"
 
