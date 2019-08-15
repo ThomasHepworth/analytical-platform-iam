@@ -8,6 +8,7 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
       "cloudtrail:CreateTrail",
       "cloudtrail:Describe*",
       "cloudtrail:List*",
+      "cloudtrail:Get*",
       "cloudtrail:StartLogging",
     ]
 
