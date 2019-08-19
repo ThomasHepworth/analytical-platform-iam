@@ -15,6 +15,8 @@ data "aws_iam_policy_document" "read_only" {
       "events:Describe*",
       "events:Get*",
       "events:List*",
+      "iam:Get*",
+      "iam:List*",
       "logs:Describe*",
       "logs:Get*",
       "route53:Get*",
