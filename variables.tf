@@ -30,6 +30,12 @@ variable "ap_accounts" {
   description = "IDs of accounts to assume role into"
 }
 
+## MVision account
+
+variable "mvision_account_id" {
+  default = "000000000000"
+}
+
 ## Restricted Admin
 
 variable "restricted_admin_name" {
