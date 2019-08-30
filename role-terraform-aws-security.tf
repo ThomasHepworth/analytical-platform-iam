@@ -155,9 +155,11 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
 
     actions = [
       "iam:AttachRolePolicy",
+      "iam:CreateAccessKey",
       "iam:CreatePolicy",
       "iam:CreatePolicyVersion",
       "iam:CreateRole",
+      "iam:CreateUser",
       "iam:DeletePolicy",
       "iam:DeleteRole",
       "iam:DeleteRolePolicy",
