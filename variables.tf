@@ -33,7 +33,7 @@ variable "ap_accounts" {
 ## MVision account
 
 variable "mvision_account_id" {
-  default = "000000000000"
+  description = "ID of account containing mcafee mvision"
 }
 
 ## Restricted Admin
