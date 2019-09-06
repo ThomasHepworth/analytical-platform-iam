@@ -1,4 +1,4 @@
-# Permissions required by Terraform for enabling GuardDuty
+# Permissions required by Mvision
 data "aws_iam_policy_document" "mvision_readonly_access" {
   statement {
     sid    = "ReadOnlyAccessManagedPolicy"
@@ -476,7 +476,7 @@ module "add_mvision_role_in_landing" {
   source = "modules/role"
 
   assume_role_in_account_id  = "${var.landing_account_id}"
-  role_name                  = "${var.terraform_aws_security_name}"
+  role_name                  = "${var.terraform_mcafee_mvision}"
   landing_account_id         = "${var.mvision_account_id}"
   role_policy                = "${data.aws_iam_policy_document.mvision_readonly_access.json}"
   role_principal_identifiers = ["arn:aws:iam::${var.mvision_account_id}:root"]

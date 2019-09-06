@@ -64,6 +64,10 @@ variable "terraform_infrastructure_name" {
   default = "terraform-infrastructure"
 }
 
+variable "terraform_mcafee_mvision" {
+  default = "terraform-mcafee-mvision"
+}
+
 variable "terraform_aws_security_name" {
   default = "terraform-aws-security"
 }
