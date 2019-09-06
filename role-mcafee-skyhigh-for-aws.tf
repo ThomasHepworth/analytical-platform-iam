@@ -477,7 +477,7 @@ module "add_mvision_role_in_landing" {
 
   assume_role_in_account_id  = "${var.landing_account_id}"
   role_name                  = "${var.terraform_aws_security_name}"
-  mvision_account_id         = "${var.mvision_account_id}"
+  landing_account_id         = "${var.mvision_account_id}"
   role_policy                = "${data.aws_iam_policy_document.mvision_readonly_access.json}"
   role_principal_identifiers = ["arn:aws:iam::${var.mvision_account_id}:root"]
   role_principal_type        = "AWS"
