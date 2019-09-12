@@ -3,7 +3,7 @@ Analytical Platform IAM config
 
 Creates IAM resources in both landing and remote aws accounts
 
-### Prerequisites
+### Prerequisites 
 
 Before you continue see [IAM-ROLE](iam-role/README.md)
 
@@ -24,12 +24,12 @@ resource "aws_iam_user" "sticky" {
 ```
 
 **Note**
-Managing users with Terraform is still at best clunky. We made a decision to not manage user's credentials here. Instead
+Managing users with Terraform is still at best clunky. We made a decision to not manage user's credentials here. Instead 
 we manage things like user's passwords in the console.  This is required for a user to be able to log in.
 
 ### Variables:
 
-Common labels like names should be added to [variables.tf](variables.tf). For example if you wanted a group called `glue-admins`
+Common labels like names should be added to [variables.tf](variables.tf). For example if you wanted a group called `glue-admins` 
 You would add something like below to [variables.tf](variables.tf)
 
 ```hcl
@@ -42,8 +42,8 @@ variable "glue_admins_name" {
 
 ### Policies:
 
-Rather than making use of managed policies its preferred that you construct a policy for purpose. Following the least privileged
-model you can iterate on policies that already exist in this repository or create a policy document from scratch. Policy
+Rather than making use of managed policies its preferred that you construct a policy for purpose. Following the least privileged 
+model you can iterate on policies that already exist in this repository or create a policy document from scratch. Policy 
 files should be prefixed with `policy` for clarity. For example `policy-glue-admins.tf`
 
 To use a managed policy instead, you can refer to the policy by using it's ARN with the parameter `role_policy_arn`
@@ -56,15 +56,14 @@ module "add_glue_admins_role_in_dev" {
   role_name                 = "${var.glue_admins_name}-${local.dev}"
   landing_account_id        = "${var.landing_account_id}"
   role_policy_arn           = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess"
-  external_id               = "${var.external_id}" (OPTIONAL)
 }
 ```
 
 ### Roles and Groups:
 
-The main portion of this repo provisions roles in remote aws accounts and groups where members can assume those roles.
-To do this you need to invoke both the `assume` and `role` modules. The `assume` module defines the group, it's members
-and the relationship with the role in the remote account. The `role` module defines the role and attached policies that
+The main portion of this repo provisions roles in remote aws accounts and groups where members can assume those roles. 
+To do this you need to invoke both the `assume` and `role` modules. The `assume` module defines the group, it's members 
+and the relationship with the role in the remote account. The `role` module defines the role and attached policies that 
 get created in the remote account.
 
 ```hcl
@@ -98,7 +97,7 @@ module "add_glue_admins_role_in_dev" {
 
 ### Testing
 
-This project uses the [Kitchen Terraform](https://github.com/newcontext-oss/kitchen-terraform) testing harness. Admittedly
+This project uses the [Kitchen Terraform](https://github.com/newcontext-oss/kitchen-terraform) testing harness. Admittedly 
 Its not suited for IAM as [Inspec](https://www.inspec.io/docs/reference/resources/#aws-resources) has limited support.
 
 __TODO__:
@@ -156,7 +155,7 @@ If you want to run tests or apply terraform config from your local machine you'l
 
 - Ensure you have installed the [awscli][awscli]
 
-- **Optional**: Create a profile for your landing user account. See [Creating an AWS Profile][aws profile]
+- **Optional**: Create a profile for your landing user account. See [Creating an AWS Profile][aws profile] 
 
 **Note** you can set this profile as your default by assigning to the `AWS_PROFILE` environment variable
 
@@ -181,7 +180,7 @@ __Did it work?__
 aws sts get-caller-identity
 ```
 
-**Note** If using credentials to apply terraform config, you'll need to pass the flag `-lock=false` as the role you're assuming will not have
+**Note** If using credentials to apply terraform config, you'll need to pass the flag `-lock=false` as the role you're assuming will not have 
 permissions to access the lock table.. i.e. `terraform plan -lock=false`
 
 __When finished!__:
