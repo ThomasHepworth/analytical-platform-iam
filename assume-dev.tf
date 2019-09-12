@@ -72,3 +72,16 @@ module "add_read_only_role_in_dev" {
   role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
   role_principal_type        = "AWS"
 }
+
+## Create mvision trial read only role in dev
+module "add_mvision_trial_role_in_dev" {
+  source = "modules/role"
+
+  assume_role_in_account_id  = "${var.ap_accounts["dev"]}"
+  role_name                  = "${var.mcafee_mvision_trial_role}"
+  landing_account_id         = "${var.landing_account_id}"
+  role_policy_arn            = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  role_principal_identifiers = ["arn:aws:iam::${var.mvision_account_id}:root"]
+  role_principal_type        = "AWS"
+  external_id                = "${var.mvision_external_id}"
+}

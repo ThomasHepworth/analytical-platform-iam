@@ -92,7 +92,7 @@ module "add_suspended_users_group_in_landing" {
   ]
 }
 
-## Create read only role in data account
+## Create mvision trial read only role in landing
 module "add_mvision_trial_role_in_landing" {
   source = "modules/role"
 
