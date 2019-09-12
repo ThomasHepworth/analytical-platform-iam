@@ -16,6 +16,16 @@ data "aws_iam_policy_document" "assume" {
       type        = "${var.role_principal_type}"
     }
 
+    condition {
+      count    = "${var.external_id == "" ? 0 : 1}"
+      test     = "StringLike"
+      variable = "sts:ExternalId"
+
+      values = [
+        "${var.external_id}",
+      ]
+    }
+
     actions = ["sts:AssumeRole"]
   }
 }
