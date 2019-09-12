@@ -20,10 +20,33 @@ data "aws_iam_policy_document" "assume" {
   }
 }
 
+data "aws_iam_policy_document" "assume_with_condition" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      identifiers = "${var.role_principal_identifiers}"
+      type        = "${var.role_principal_type}"
+    }
+
+    condition {
+
+      test     = "StringLike"
+      variable = "sts:ExternalId"
+
+      values = [
+        "${var.external_id}",
+      ]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
 # Create role in remote account
 resource "aws_iam_role" "role" {
   name               = "${var.role_name}"
-  assume_role_policy = "${data.aws_iam_policy_document.assume.json}"
+  assume_role_policy = "${var.external_id == "" ? data.aws_iam_policy_document.assume.json : data.aws_iam_policy_document.assume_with_condition.json}"
 
   tags {
     business-unit = "${var.tags["business-unit"]}"
