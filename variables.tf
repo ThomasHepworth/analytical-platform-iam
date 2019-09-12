@@ -64,8 +64,8 @@ variable "terraform_infrastructure_name" {
   default = "terraform-infrastructure"
 }
 
-variable "mcafee_mvision_trial_role" {
-  default = "mcafee-mvision-trial-role"
+variable "terraform_mcafee_mvision" {
+  default = "terraform-mcafee-mvision"
 }
 
 variable "terraform_aws_security_name" {
@@ -80,8 +80,4 @@ variable "landing_iam_role" {
 
 variable "suspended_users_name" {
   default = "suspended_users"
-}
-
-variable "mvision_external_id" {
-  default = "9886771"
 }
