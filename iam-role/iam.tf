@@ -37,6 +37,7 @@ data "aws_iam_policy_document" "iam_role" {
       "iam:DetachRolePolicy",
       "iam:GetRole",
       "iam:GetRolePolicy",
+      "iam:ListAttachedRolePolicies",
       "iam:ListInstanceProfilesForRole",
       "iam:PutRolePolicy",
       "iam:TagRole",
