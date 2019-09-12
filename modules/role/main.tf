@@ -30,7 +30,6 @@ data "aws_iam_policy_document" "assume_with_condition" {
     }
 
     condition {
-
       test     = "StringLike"
       variable = "sts:ExternalId"
 
