@@ -82,6 +82,18 @@ variable "suspended_users_name" {
   default = "suspended_users"
 }
 
+## MVision external ID
+
 variable "mvision_external_id" {
   default = "9886771"
+}
+
+## Audit Security role name
+
+variable "audit_security_name" {
+  default = "AuditAdminRole"
+}
+
+variable "security_account_id" {
+  description = "AWS Security account ID"
 }

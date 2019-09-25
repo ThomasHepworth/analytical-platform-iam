@@ -135,3 +135,13 @@ module "add_data_admin_role_in_data" {
   landing_account_id        = "${var.landing_account_id}"
   role_policy               = "${data.aws_iam_policy_document.data_admin.json}"
 }
+
+## Create audit security role in data account
+module "add_audit_security_role_in_data" {
+  source = "modules/role"
+
+  assume_role_in_account_id = "${var.ap_accounts["data"]}"
+  role_name                 = "${var.audit_security_name}"
+  landing_account_id        = "${var.security_account_id}"
+  role_policy_arn           = "arn:aws:iam::aws:policy/SecurityAudit"
+}
