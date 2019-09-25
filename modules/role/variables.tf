@@ -28,12 +28,6 @@ variable "role_policy_arn" {
   default     = ""
 }
 
-variable "role_principal_identifiers" {
-  type = "list"
-}
-
-variable "role_principal_type" {}
-
 variable "tags" {
   type = "map"
 

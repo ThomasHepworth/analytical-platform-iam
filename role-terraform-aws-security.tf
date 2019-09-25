@@ -237,46 +237,38 @@ data "aws_iam_policy_document" "ap_terraform_aws_security" {
 module "add_terraform_guardduty_role_in_landing" {
   source = "modules/role"
 
-  assume_role_in_account_id  = "${var.landing_account_id}"
-  role_name                  = "${var.terraform_aws_security_name}"
-  landing_account_id         = "${var.landing_account_id}"
-  role_policy                = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
-  role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
-  role_principal_type        = "AWS"
+  assume_role_in_account_id = "${var.landing_account_id}"
+  role_name                 = "${var.terraform_aws_security_name}"
+  landing_account_id        = "${var.landing_account_id}"
+  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
 
 # Create terraform role in dev account
 module "add_terraform_guardduty_role_in_dev" {
   source = "modules/role"
 
-  assume_role_in_account_id  = "${var.ap_accounts["dev"]}"
-  role_name                  = "${var.terraform_aws_security_name}"
-  landing_account_id         = "${var.landing_account_id}"
-  role_policy                = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
-  role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
-  role_principal_type        = "AWS"
+  assume_role_in_account_id = "${var.ap_accounts["dev"]}"
+  role_name                 = "${var.terraform_aws_security_name}"
+  landing_account_id        = "${var.landing_account_id}"
+  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
 
 # Create terraform role in prod account
 module "add_terraform_guardduty_role_in_prod" {
   source = "modules/role"
 
-  assume_role_in_account_id  = "${var.ap_accounts["prod"]}"
-  role_name                  = "${var.terraform_aws_security_name}"
-  landing_account_id         = "${var.landing_account_id}"
-  role_policy                = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
-  role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
-  role_principal_type        = "AWS"
+  assume_role_in_account_id = "${var.ap_accounts["prod"]}"
+  role_name                 = "${var.terraform_aws_security_name}"
+  landing_account_id        = "${var.landing_account_id}"
+  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
 
 # Create terraform role in data account
 module "add_terraform_guardduty_role_in_data" {
   source = "modules/role"
 
-  assume_role_in_account_id  = "${var.ap_accounts["data"]}"
-  role_name                  = "${var.terraform_aws_security_name}"
-  landing_account_id         = "${var.landing_account_id}"
-  role_policy                = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
-  role_principal_identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
-  role_principal_type        = "AWS"
+  assume_role_in_account_id = "${var.ap_accounts["data"]}"
+  role_name                 = "${var.terraform_aws_security_name}"
+  landing_account_id        = "${var.landing_account_id}"
+  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
