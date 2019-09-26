@@ -98,3 +98,13 @@ module "add_mvision_trial_role_in_landing" {
   role_policy_arn           = "arn:aws:iam::aws:policy/ReadOnlyAccess"
   external_id               = "${var.mvision_external_id}"
 }
+
+## Create audit security role in landing account
+module "add_audit_security_role_in_landing" {
+  source = "modules/role"
+
+  assume_role_in_account_id = "${var.landing_account_id}"
+  role_name                 = "${var.audit_security_name}"
+  landing_account_id        = "${var.security_account_id}"
+  role_policy_arn           = "arn:aws:iam::aws:policy/SecurityAudit"
+}
