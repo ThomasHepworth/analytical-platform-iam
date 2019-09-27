@@ -146,3 +146,33 @@ module "add_audit_security_role_in_data" {
   landing_account_id        = "${var.security_account_id}"
   role_policy_arn           = "arn:aws:iam::aws:policy/SecurityAudit"
 }
+
+##### CALUM TEST #####
+## Calum Test Group
+
+module "assume_calum_test_in_data" {
+  source = "modules/assume"
+
+  assumed_role_name = "${var.calum_test_name}-${local.data}-acc"
+
+  assume_role_in_account_id = [
+    "${var.ap_accounts["data"]}",
+  ]
+
+  landing_account_id = "${var.landing_account_id}"
+  group_name         = "${var.calum_test_name}-${local.data}-acc"
+
+  users = [
+    "${aws_iam_user.calum.name}",
+  ]
+}
+
+## Create Calum test role in data account
+module "add_calum_test_role_in_data" {
+  source = "modules/role"
+
+  assume_role_in_account_id = "${var.ap_accounts["data"]}"
+  role_name                 = "${var.calum_test_name}-${local.data}-acc"
+  landing_account_id        = "${var.landing_account_id}"
+  role_policy               = "${data.aws_iam_policy_document.calum_test.json}"
+}
