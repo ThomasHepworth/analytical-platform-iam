@@ -97,9 +97,3 @@ variable "audit_security_name" {
 variable "security_account_id" {
   description = "AWS Security account ID"
 }
-
-## Calum Test
-
-variable "calum_test_name" {
-  default = "calum_test"
-}
