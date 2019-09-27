@@ -126,6 +126,7 @@ module "assume_data_admin_in_data" {
     "${aws_iam_user.olivier.name}",
     "${aws_iam_user.karik.name}",
     "${aws_iam_user.george.name}",
+    "${aws_iam_user.adam.name}",
   ]
 }
 

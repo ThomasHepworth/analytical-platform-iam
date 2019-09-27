@@ -44,3 +44,8 @@ resource "aws_iam_user" "george" {
   name          = "george.kelly@digital.justice.gov.uk"
   force_destroy = true
 }
+
+resource "aws_iam_user" "adam" {
+  name          = "adam.booker@digital.justice.gov.uk"
+  force_destroy = true
+}
