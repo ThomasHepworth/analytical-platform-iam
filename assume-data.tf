@@ -89,6 +89,7 @@ module "assume_read_s3_only_in_data" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
+    "${aws_iam_user.calum.name}",
   ]
 }
 
