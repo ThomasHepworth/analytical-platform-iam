@@ -30,10 +30,13 @@ module "assume_restricted_admin_in_prod" {
 module "add_restricted_admin_role_in_prod" {
   source = "modules/role"
 
-  assume_role_in_account_id = "${var.ap_accounts["prod"]}"
-  role_name                 = "${var.restricted_admin_name}-${local.prod}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy               = "${data.aws_iam_policy_document.restricted_admin.json}"
+  providers = {
+    aws = "aws.prod"
+  }
+
+  role_name          = "${var.restricted_admin_name}-${local.prod}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.restricted_admin.json}"
 }
 
 ##### READ ONLY #####
@@ -63,29 +66,38 @@ module "assume_read_only_in_prod" {
 module "add_read_only_role_in_prod" {
   source = "modules/role"
 
-  assume_role_in_account_id = "${var.ap_accounts["prod"]}"
-  role_name                 = "${var.read_only_name}-${local.prod}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy               = "${data.aws_iam_policy_document.read_only.json}"
+  providers = {
+    aws = "aws.prod"
+  }
+
+  role_name          = "${var.read_only_name}-${local.prod}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.read_only.json}"
 }
 
 ## Create mvision trial read only role in prod
 module "add_mvision_trial_role_in_prod" {
   source = "modules/role"
 
-  assume_role_in_account_id = "${var.ap_accounts["prod"]}"
-  role_name                 = "${var.mcafee_mvision_trial_role}"
-  landing_account_id        = "${var.mvision_account_id}"
-  role_policy_arn           = "arn:aws:iam::aws:policy/ReadOnlyAccess"
-  external_id               = "${var.mvision_external_id}"
+  providers = {
+    aws = "aws.prod"
+  }
+
+  role_name          = "${var.mcafee_mvision_trial_role}"
+  landing_account_id = "${var.mvision_account_id}"
+  role_policy_arn    = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  external_id        = "${var.mvision_external_id}"
 }
 
 ## Create audit security role in prod account
 module "add_audit_security_role_in_prod" {
   source = "modules/role"
 
-  assume_role_in_account_id = "${var.ap_accounts["prod"]}"
-  role_name                 = "${var.audit_security_name}"
-  landing_account_id        = "${var.security_account_id}"
-  role_policy_arn           = "arn:aws:iam::aws:policy/SecurityAudit"
+  providers = {
+    aws = "aws.prod"
+  }
+
+  role_name          = "${var.audit_security_name}"
+  landing_account_id = "${var.security_account_id}"
+  role_policy_arn    = "arn:aws:iam::aws:policy/SecurityAudit"
 }

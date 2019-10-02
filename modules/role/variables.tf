@@ -2,10 +2,6 @@ variable "region" {
   default = "eu-west-1"
 }
 
-variable "assume_role_in_account_id" {
-  description = "The ID of the account with the role you want to assume"
-}
-
 variable "landing_account_id" {
   default     = "335823981503"
   description = "The Landing account ID"
