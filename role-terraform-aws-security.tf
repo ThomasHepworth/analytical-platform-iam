@@ -241,9 +241,9 @@ module "add_terraform_guardduty_role_in_landing" {
     aws = "aws.landing"
   }
 
-  role_name                 = "${var.terraform_aws_security_name}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
+  role_name          = "${var.terraform_aws_security_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
 
 # Create terraform role in dev account
@@ -254,9 +254,9 @@ module "add_terraform_guardduty_role_in_dev" {
     aws = "aws.dev"
   }
 
-  role_name                 = "${var.terraform_aws_security_name}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
+  role_name          = "${var.terraform_aws_security_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
 
 # Create terraform role in prod account
@@ -267,9 +267,9 @@ module "add_terraform_guardduty_role_in_prod" {
     aws = "aws.prod"
   }
 
-  role_name                 = "${var.terraform_aws_security_name}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
+  role_name          = "${var.terraform_aws_security_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
 
 # Create terraform role in data account
@@ -280,7 +280,7 @@ module "add_terraform_guardduty_role_in_data" {
     aws = "aws.data"
   }
 
-  role_name                 = "${var.terraform_aws_security_name}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy               = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
+  role_name          = "${var.terraform_aws_security_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.ap_terraform_aws_security.json}"
 }
