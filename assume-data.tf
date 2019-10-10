@@ -153,6 +153,20 @@ module "add_data_admin_role_in_data" {
   role_policy        = "${data.aws_iam_policy_document.data_admin.json}"
 }
 
+## Create mvision trial read only role in data
+module "add_mvision_trial_role_in_data" {
+  source = "modules/role"
+
+  providers = {
+    aws = "aws.data"
+  }
+
+  role_name          = "${var.mcafee_mvision_trial_role}"
+  landing_account_id = "${var.mvision_account_id}"
+  role_policy_arn    = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  external_id        = "${var.mvision_external_id}"
+}
+
 ## Create audit security role in data account
 module "add_audit_security_role_in_data" {
   source = "modules/role"
