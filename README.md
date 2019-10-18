@@ -51,8 +51,10 @@ To use a managed policy instead, you can refer to the policy by using it's ARN w
 ```hcl
 module "add_glue_admins_role_in_dev" {
   source = "modules/role"
+  providers = {
+    aws = "aws.dev"
+  }
 
-  assume_role_in_account_id = "${var.ap_accounts["dev"]}"
   role_name                 = "${var.glue_admins_name}-${local.dev}"
   landing_account_id        = "${var.landing_account_id}"
   role_policy_arn           = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess"
@@ -88,8 +90,10 @@ module "assume_glue_admins_in_dev" {
 
 module "add_glue_admins_role_in_dev" {
   source = "modules/role"
+  providers = {
+    aws = "aws.dev"
+  }
 
-  assume_role_in_account_id = "${var.ap_accounts["dev"]}"
   role_name                 = "${var.glue_admins_name}-${local.dev}"
   landing_account_id        = "${var.landing_account_id}"
   role_policy               = "${data.aws_iam_policy_document.glue_admins.json}"
