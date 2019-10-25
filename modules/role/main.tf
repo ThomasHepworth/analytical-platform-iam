@@ -7,6 +7,15 @@ data "aws_iam_policy_document" "assume" {
       type        = "AWS"
     }
 
+    condition {
+      test     = "BoolIfExists"
+      variable = "aws:MultiFactorAuthPresent"
+
+      values = [
+        "true",
+      ]
+    }
+
     actions = ["sts:AssumeRole"]
   }
 }

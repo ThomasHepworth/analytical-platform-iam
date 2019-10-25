@@ -22,9 +22,21 @@ resource "aws_iam_group_membership" "group_membership" {
   users = ["${var.users}"]
 }
 
+resource "aws_iam_policy" "manage" {
+  policy = "${data.aws_iam_policy_document.manage_own_creds.json}"
+  name   = "manage-own-creds"
+}
+
 resource "aws_iam_policy" "assume" {
   policy = "${data.aws_iam_policy_document.policy.json}"
   name   = "assume-role-${var.group_name}"
+}
+
+## Attach policy to group
+resource "aws_iam_policy_attachment" "manage" {
+  name       = "${aws_iam_group.group.name}"
+  policy_arn = "${aws_iam_policy.manage.arn}"
+  groups     = ["${aws_iam_group.group.name}"]
 }
 
 ## Attach policy to group
