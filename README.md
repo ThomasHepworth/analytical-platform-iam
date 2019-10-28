@@ -5,7 +5,7 @@ Creates IAM resources in both landing and remote aws accounts
 
 ### Prerequisites
 
-Before you continue see [IAM-ROLE](iam-role/README.md)
+Before you continue see [INIT-ROLES](init-roles/README.md)
 
 ## Usage
 
