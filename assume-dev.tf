@@ -75,20 +75,6 @@ module "add_read_only_role_in_dev" {
   role_policy        = "${data.aws_iam_policy_document.read_only.json}"
 }
 
-## Create mvision trial read only role in dev
-module "add_mvision_trial_role_in_dev" {
-  source = "modules/role"
-
-  providers = {
-    aws = "aws.dev"
-  }
-
-  role_name          = "${var.mcafee_mvision_trial_role}"
-  landing_account_id = "${var.mvision_account_id}"
-  role_policy_arn    = "arn:aws:iam::aws:policy/ReadOnlyAccess"
-  external_id        = "${var.mvision_external_id}"
-}
-
 ## Create audit security role in dev account
 module "add_audit_security_role_in_dev" {
   source = "modules/role"

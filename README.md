@@ -58,7 +58,6 @@ module "add_glue_admins_role_in_dev" {
   role_name                 = "${var.glue_admins_name}-${local.dev}"
   landing_account_id        = "${var.landing_account_id}"
   role_policy_arn           = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess"
-  external_id               = "${var.external_id}" (OPTIONAL)
 }
 ```
 

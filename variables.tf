@@ -7,12 +7,6 @@ variable "ap_accounts" {
   description = "IDs of accounts to assume role into"
 }
 
-## MVision account
-
-variable "mvision_account_id" {
-  description = "ID of account containing mcafee mvision"
-}
-
 ## Restricted Admin
 
 variable "restricted_admin_name" {
@@ -37,18 +31,6 @@ variable "data_admin_name" {
   default = "data-admin-in"
 }
 
-variable "terraform_infrastructure_name" {
-  default = "terraform-infrastructure"
-}
-
-variable "mcafee_mvision_trial_role" {
-  default = "mcafee-mvision-trial-role"
-}
-
-variable "terraform_aws_security_name" {
-  default = "terraform-aws-security"
-}
-
 variable "landing_iam_role" {
   default = "landing-iam-role"
 }
@@ -57,12 +39,6 @@ variable "landing_iam_role" {
 
 variable "suspended_users_name" {
   default = "suspended_users"
-}
-
-## MVision external ID
-
-variable "mvision_external_id" {
-  default = "9886771"
 }
 
 ## Audit Security role name

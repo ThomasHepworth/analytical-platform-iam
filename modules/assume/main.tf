@@ -24,7 +24,7 @@ resource "aws_iam_group_membership" "group_membership" {
 
 resource "aws_iam_policy" "manage" {
   policy = "${data.aws_iam_policy_document.manage_own_creds.json}"
-  name   = "manage-own-creds"
+  name   = "manage-own-creds-${var.group_name}"
 }
 
 resource "aws_iam_policy" "assume" {

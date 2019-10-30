@@ -34,8 +34,3 @@ variable "tags" {
     owner         = "analytical-platform:analytics-platform-tech@digital.justice.gov.uk"
   }
 }
-
-variable "external_id" {
-  description = "OPTIONAL: External ID for referencing external third party AWS account"
-  default     = ""
-}

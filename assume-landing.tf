@@ -95,20 +95,6 @@ module "add_suspended_users_group_in_landing" {
   ]
 }
 
-## Create mvision trial read only role in landing
-module "add_mvision_trial_role_in_landing" {
-  source = "modules/role"
-
-  providers = {
-    aws = "aws.landing"
-  }
-
-  role_name          = "${var.mcafee_mvision_trial_role}"
-  landing_account_id = "${var.mvision_account_id}"
-  role_policy_arn    = "arn:aws:iam::aws:policy/ReadOnlyAccess"
-  external_id        = "${var.mvision_external_id}"
-}
-
 ## Create audit security role in landing account
 module "add_audit_security_role_in_landing" {
   source = "modules/role"
