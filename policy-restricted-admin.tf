@@ -72,6 +72,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:CreateLoginProfile",
       "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
+      "iam:CreatePolicyVersion",
       "iam:CreateRole",
       "iam:CreateSAMLProvider",
       "iam:CreateUser",
