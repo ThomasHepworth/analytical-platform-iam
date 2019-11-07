@@ -42,6 +42,7 @@ data "aws_iam_policy_document" "terraform_inf_role" {
       "route53:*",
       "kms:Decrypt",
       "iam:*",
+      "logs:*",
       "elasticloadbalancing:*",
       "ec2:*",
       "cloudwatch:*",
