@@ -43,6 +43,7 @@ data "aws_iam_policy_document" "terraform_inf_role" {
       "cloudwatch:*",
       "cloudtrail:*",
       "autoscaling:*",
+      "lambda:*",
     ]
 
     resources = ["*"]
