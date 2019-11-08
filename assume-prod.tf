@@ -22,7 +22,6 @@ module "assume_restricted_admin_in_prod" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
-    "${aws_iam_user.olivier.name}",
   ]
 }
 
