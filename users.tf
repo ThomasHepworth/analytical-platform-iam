@@ -20,11 +20,6 @@ resource "aws_iam_user" "aldo" {
   force_destroy = true
 }
 
-resource "aws_iam_user" "olivier" {
-  name          = "olivier.butterbach@digital.justice.gov.uk"
-  force_destroy = true
-}
-
 resource "aws_iam_user" "suspended" {
   name          = "suspended.test@digital.justice.gov.uk"
   force_destroy = true
