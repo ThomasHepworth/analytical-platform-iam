@@ -23,6 +23,7 @@ module "assume_restricted_admin_in_landing" {
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
     "${aws_iam_user.sam.name}",
+    "${aws_iam_user.david.name}",
   ]
 }
 
@@ -60,6 +61,7 @@ module "assume_read_only_in_landing" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.ravi.name}",
+    "${aws_iam_user.david.name}",
   ]
 }
 
