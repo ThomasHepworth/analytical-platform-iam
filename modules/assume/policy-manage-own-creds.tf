@@ -127,12 +127,6 @@ data "aws_iam_policy_document" "manage_own_creds" {
     effect = "Deny"
 
     actions = [
-      "iam:CreateVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:GetUser",
-      "iam:ListMFADevices",
-      "iam:ListVirtualMFADevices",
-      "iam:ResyncMFADevice",
       "sts:GetSessionToken",
     ]
 
