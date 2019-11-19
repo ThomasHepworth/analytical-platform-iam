@@ -50,3 +50,9 @@ variable "audit_security_name" {
 variable "security_account_id" {
   description = "AWS Security account ID"
 }
+
+## Data Engineers
+
+variable "data_engineers_name" {
+  default = "data-engineers"
+}

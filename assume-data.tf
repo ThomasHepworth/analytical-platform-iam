@@ -175,3 +175,42 @@ module "add_audit_security_role_in_data" {
   landing_account_id = "${var.security_account_id}"
   role_policy_arn    = "arn:aws:iam::aws:policy/SecurityAudit"
 }
+
+##### DATA Engineer #####
+## Data Engineers Group
+
+module "add_data_engineers_group" {
+  source = "modules/assume"
+
+  assumed_role_name = "${var.data_engineers_name}"
+
+  assume_role_in_account_id = [
+    "${var.ap_accounts["data"]}",
+  ]
+
+  landing_account_id = "${var.landing_account_id}"
+  group_name         = "${var.data_engineers_name}"
+
+  users = [
+    "${aws_iam_user.karik.name}",
+    "${aws_iam_user.george.name}",
+    "${aws_iam_user.adam.name}",
+    "${aws_iam_user.josh.name}",
+    "${aws_iam_user.calum.name}",
+    "${aws_iam_user.sam.name}",
+  ]
+}
+
+## Create Data Engineers Role in Data Account
+
+module "add_data_engineers_role_in_data_account" {
+  source = "modules/role"
+
+  providers = {
+    aws = "aws.data"
+  }
+
+  role_name          = "${var.data_engineers_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.data_engineer.json}"
+}
