@@ -102,7 +102,7 @@ data "aws_iam_policy_document" "manage_own_creds" {
     ]
 
     resources = [
-      "arn:aws:iam::*:user/$${aws:username}",
+      "arn:aws:iam::*:mfa/$${aws:username}",
     ]
   }
 
