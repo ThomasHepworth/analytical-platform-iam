@@ -24,6 +24,7 @@ module "assume_restricted_admin_in_dev" {
     "${aws_iam_user.ravi.name}",
     "${aws_iam_user.david.name}",
     "${aws_iam_user.andy.name}",
+    "${aws_iam_user.josh.name}",
   ]
 }
 
@@ -62,6 +63,7 @@ module "assume_read_only_in_dev" {
     "${aws_iam_user.ravi.name}",
     "${aws_iam_user.david.name}",
     "${aws_iam_user.andy.name}",
+    "${aws_iam_user.josh.name}",
   ]
 }
 
