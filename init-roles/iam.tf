@@ -20,20 +20,33 @@ data "aws_iam_policy_document" "iam_role" {
     effect = "Allow"
 
     actions = [
+      "iam:AddUserToGroup",
       "iam:AttachRolePolicy",
+      "iam:AttachUserPolicy",
+      "iam:CreatePolicyVersion",
+      "iam:CreateGroup",
+      "iam:CreatePolicy",
       "iam:CreatePolicyVersion",
       "iam:CreateRole",
+      "iam:CreateUser",
       "iam:DeactivateMFADevice",
       "iam:DeleteAccessKey",
+      "iam:DeleteGroup",
       "iam:DeleteLoginProfile",
+      "iam:DeletePolicy",
+      "iam:DeletePolicyVersion",
       "iam:DeleteRole",
       "iam:DeleteRolePolicy",
+      "iam:DeleteUser",
+      "iam:DeleteUserPolicy",
       "iam:DetachRolePolicy",
       "iam:Get*",
       "iam:List*",
       "iam:PutRolePolicy",
       "iam:TagRole",
       "iam:UpdateAssumeRolePolicy",
+      "iam:UpdateGroup",
+      "iam:UpdateUser",
     ]
 
     resources = ["*"]
