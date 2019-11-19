@@ -17,9 +17,23 @@ provider "aws" {
   version = "~> 2.6"
 }
 
+provider "aws" {
+  region  = "eu-west-1"
+  version = "~> 2.6"
+  alias   = "landing"
+
+  assume_role {
+    role_arn = "arn:aws:iam::${var.landing_account_id}:role/${var.landing_iam_role}"
+  }
+}
+
 variable "landing_account_id" {
   description = "ID of account containing IAM users"
   default     = "335823981503"
+}
+
+variable "landing_iam_role" {
+  default = "landing-iam-role"
 }
 
 variable "ap_accounts" {
