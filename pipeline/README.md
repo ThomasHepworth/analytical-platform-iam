@@ -15,3 +15,7 @@ The commands run within the codebuild stages are in the [buildspec-plan.yml](bui
 ### Diagram:
 
 ![Image](iam-pipeline.png?raw=true)
+
+
+### Checking pipeline progress
+The progress of the pipeline execution can be checked in the AWS Console in "AWS CodePipeline" > "Pipelines" in the `landing` AWS account (be sure to be in the Ireland region).
