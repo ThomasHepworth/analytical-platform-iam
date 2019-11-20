@@ -146,8 +146,12 @@ Once you've [created your user](#User-creation) you have access to the AWS conso
 From this account you can click on your user menu and then "switch role" to a role in another AWS account. e.g. to account `mojanalytics` as `restricted-admin-data`.
 
 Alternatively just use these links:
+* https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=read-only-data&displayName=read-only@data
 * https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=restricted-admin-data&displayName=restricted-admin@data
-* https://signin.aws.amazon.com/switchrole?account=landing&roleName=restricted-admin-landing&displayName=restricted-admin@data
+* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=read-only-landing&displayName=read-only@data
+* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@data
+
+Please use the 'read-only' roles by default - only use 'restricted-admin' when you need to make a change.
 
 #### AWS CLI using profile
 
@@ -231,7 +235,7 @@ Lint
 rubocop test/integration/analytical-platform-iam/controls
 ```
 
-Set your AWS profile to the dev account (Kitchen will create AWS resources with your current AWS profile)
+Set your AWS profile to be the landing account and assume-role into the same account as the objects you're testing. (Kitchen will create AWS resources).
 
 Ensure there are no fixtures remaining from previous test runs
 

@@ -1,6 +1,7 @@
-## INIT-ROLES
+# INIT-ROLES
 
-Creates an IAM roles and policies to be used by the [role module](../modules/role) and codebuild
+Defines some IAM roles that are needed in every AWS account, which get used by the [role module](../modules/role) and CodeBuild
+
 
 ### Why
 
