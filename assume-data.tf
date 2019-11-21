@@ -216,3 +216,158 @@ module "add_data_engineers_role_in_data_account" {
   landing_account_id = "${var.landing_account_id}"
   role_policy        = "${data.aws_iam_policy_document.data_engineer.json}"
 }
+
+#### HMCTS S3 Data Admin
+module "add_hmcts_data_engineers_group" {
+  source = "modules/assume"
+
+  assumed_role_name = "${var.hmcts_data_engineers_name}"
+
+  assume_role_in_account_id = [
+    "${var.ap_accounts["data"]}",
+  ]
+
+  landing_account_id = "${var.landing_account_id}"
+  group_name         = "${var.hmcts_data_engineers_name}"
+
+  users = [
+    "${aws_iam_user.karik.name}",
+    "${aws_iam_user.george.name}",
+    "${aws_iam_user.adam.name}",
+    "${aws_iam_user.josh.name}",
+    "${aws_iam_user.calum.name}",
+    "${aws_iam_user.anthony.name}",
+    "${aws_iam_user.robin.name}",
+    "${aws_iam_user.sam.name}",
+  ]
+}
+
+## Create HMCTS Data Engineers Role in Data Account
+module "add_hmcts_data_engineers_role_in_data_account" {
+  source = "modules/role"
+
+  providers = {
+    aws = "aws.data"
+  }
+
+  role_name          = "${var.hmcts_data_engineers_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.hmcts_data_engineer.json}"
+}
+
+
+#### PROBATION S3 Data Admin
+module "add_probation_data_engineers_group" {
+  source = "modules/assume"
+
+  assumed_role_name = "${var.probation_data_engineers_name}"
+
+  assume_role_in_account_id = [
+    "${var.ap_accounts["data"]}",
+  ]
+
+  landing_account_id = "${var.landing_account_id}"
+  group_name         = "${var.probation_data_engineers_name}"
+
+  users = [
+    "${aws_iam_user.karik.name}",
+    "${aws_iam_user.george.name}",
+    "${aws_iam_user.adam.name}",
+    "${aws_iam_user.josh.name}",
+    "${aws_iam_user.calum.name}",
+    "${aws_iam_user.anthony.name}",
+    "${aws_iam_user.robin.name}",
+    "${aws_iam_user.sam.name}",
+  ]
+}
+
+## Create PROBATION Data Engineers Role in Data Account
+module "add_probation_data_engineers_role_in_data_account" {
+  source = "modules/role"
+
+  providers = {
+    aws = "aws.data"
+  }
+
+  role_name          = "${var.probation_data_engineers_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.probation_data_engineer.json}"
+}
+
+
+#### PRISON S3 Data Admin
+module "add_prison_data_engineers_group" {
+  source = "modules/assume"
+
+  assumed_role_name = "${var.prison_data_engineers_name}"
+
+  assume_role_in_account_id = [
+    "${var.ap_accounts["data"]}",
+  ]
+
+  landing_account_id = "${var.landing_account_id}"
+  group_name         = "${var.prison_data_engineers_name}"
+
+  users = [
+    "${aws_iam_user.karik.name}",
+    "${aws_iam_user.george.name}",
+    "${aws_iam_user.adam.name}",
+    "${aws_iam_user.josh.name}",
+    "${aws_iam_user.calum.name}",
+    "${aws_iam_user.anthony.name}",
+    "${aws_iam_user.robin.name}",
+    "${aws_iam_user.sam.name}",
+  ]
+}
+
+## Create PRISON Data Engineers Role in Data Account
+module "add_prison_data_engineers_role_in_data_account" {
+  source = "modules/role"
+
+  providers = {
+    aws = "aws.data"
+  }
+
+  role_name          = "${var.prison_data_engineers_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.prison_data_engineer.json}"
+}
+
+
+#### CORPORATE S3 Data Admin
+module "add_corporate_data_engineers_group" {
+  source = "modules/assume"
+
+  assumed_role_name = "${var.corporate_data_engineers_name}"
+
+  assume_role_in_account_id = [
+    "${var.ap_accounts["data"]}",
+  ]
+
+  landing_account_id = "${var.landing_account_id}"
+  group_name         = "${var.corporate_data_engineers_name}"
+
+  users = [
+    "${aws_iam_user.karik.name}",
+    "${aws_iam_user.george.name}",
+    "${aws_iam_user.adam.name}",
+    "${aws_iam_user.josh.name}",
+    "${aws_iam_user.calum.name}",
+    "${aws_iam_user.anthony.name}",
+    "${aws_iam_user.robin.name}",
+    "${aws_iam_user.sam.name}",
+  ]
+}
+
+## Create CORPORATE Data Engineers Role in Data Account
+module "add_corporate_data_engineers_role_in_data_account" {
+  source = "modules/role"
+
+  providers = {
+    aws = "aws.data"
+  }
+
+  role_name          = "${var.corporate_data_engineers_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.corporate_data_engineer.json}"
+}

@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "readwrite_de_corporate" {
+data "aws_iam_policy_document" "corporate_data_engineer" {
   statement {
     sid    = "ReadWrite"
     effect = "Allow"
