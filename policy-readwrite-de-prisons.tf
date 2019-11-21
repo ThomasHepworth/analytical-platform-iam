@@ -1,7 +1,6 @@
 data "aws_iam_policy_document" "readwrite_de_prisons" {
   statement {
-
-    sid = "ReadWrite"
+    sid    = "ReadWrite"
     effect = "Allow"
 
     actions = [
@@ -12,9 +11,9 @@ data "aws_iam_policy_document" "readwrite_de_prisons" {
       "s3:DeleteObjectVersion",
       "s3:PutObject",
       "s3:PutObjectAcl",
-      "s3:RestoreObject"
+      "s3:RestoreObject",
     ]
-    
+
     resources = [
       "arn:aws:s3:::mojap-land/hmpps/nomis*",
       "arn:aws:s3:::mojap-raw-hist/hmpps/nomis*",

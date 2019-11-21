@@ -230,7 +230,7 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid = "AttachRolesToSelfManagedGroups"
+    sid    = "AttachRolesToSelfManagedGroups"
     effect = "Allow"
 
     actions = [
@@ -239,14 +239,14 @@ data "aws_iam_policy_document" "data_engineer" {
       "iam:GetRole",
       "iam:GetRolePolicy",
       "iam:ListAttachedRolePolicies",
-      "iam:ListRoles"
-      ]
+      "iam:ListRoles",
+    ]
 
     resources = ["arn:aws:iam::*:role/alpha_user_*"]
   }
 
   statement {
-    sid = "ManageDataEngineerPolicies"
+    sid    = "ManageDataEngineerPolicies"
     effect = "Allow"
 
     actions = [
@@ -266,7 +266,7 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid = "ListDockerRepository"
+    sid    = "ListDockerRepository"
     effect = "Allow"
 
     actions = ["ecr:ListImages"]
