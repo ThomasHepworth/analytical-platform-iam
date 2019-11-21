@@ -255,7 +255,6 @@ module "add_hmcts_data_engineers_role_in_data_account" {
   role_policy        = "${data.aws_iam_policy_document.hmcts_data_engineer.json}"
 }
 
-
 #### PROBATION S3 Data Admin
 module "add_probation_data_engineers_group" {
   source = "modules/assume"
@@ -294,7 +293,6 @@ module "add_probation_data_engineers_role_in_data_account" {
   role_policy        = "${data.aws_iam_policy_document.probation_data_engineer.json}"
 }
 
-
 #### PRISON S3 Data Admin
 module "add_prison_data_engineers_group" {
   source = "modules/assume"
@@ -332,7 +330,6 @@ module "add_prison_data_engineers_role_in_data_account" {
   landing_account_id = "${var.landing_account_id}"
   role_policy        = "${data.aws_iam_policy_document.prison_data_engineer.json}"
 }
-
 
 #### CORPORATE S3 Data Admin
 module "add_corporate_data_engineers_group" {
