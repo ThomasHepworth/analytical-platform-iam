@@ -56,3 +56,19 @@ variable "security_account_id" {
 variable "data_engineers_name" {
   default = "data-engineers"
 }
+
+variable "hmcts_data_engineers_name" {
+  default = "data-engineers-hmcts"
+}
+
+variable "prison_data_engineers_name" {
+  default = "data-engineers-prisons"
+}
+
+variable "probation_data_engineers_name" {
+  default = "data-engineers-probation"
+}
+
+variable "corporate_data_engineers_name" {
+  default = "data-engineers-corporate"
+}
