@@ -53,18 +53,6 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid    = "ListSnsTopics"
-    effect = "Allow"
-
-    actions = [
-      "sns:ListTopics",
-      "sns:GetTopicAttributes",
-    ]
-
-    resources = ["*"]
-  }
-
-  statement {
     sid    = "AthenaCloudwatchAlarms"
     effect = "Allow"
 
@@ -94,28 +82,6 @@ data "aws_iam_policy_document" "data_engineer" {
 
     actions = [
       "glue:*",
-    ]
-
-    resources = ["*"]
-  }
-
-  statement {
-    sid    = "GlueEc2Describe"
-    effect = "Allow"
-
-    actions = [
-      "ec2:DescribeVpcEndpoints",
-      "ec2:DescribeRouteTables",
-      "ec2:CreateNetworkInterface",
-      "ec2:DeleteNetworkInterface",
-      "ec2:DescribeNetworkInterfaces",
-      "ec2:DescribeSecurityGroups",
-      "ec2:DescribeSubnets",
-      "ec2:DescribeVpcAttribute",
-      "ec2:DescribeVpcs",
-      "ec2:DescribeKeyPairs",
-      "ec2:DescribeInstances",
-      "ec2:DescribeImages",
     ]
 
     resources = ["*"]
@@ -192,58 +158,6 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid    = "GlueManageEc2Tags"
-    effect = "Allow"
-
-    actions = [
-      "ec2:CreateTags",
-      "ec2:DeleteTags",
-      "ec2:RunInstances",
-    ]
-
-    condition {
-      test     = "ForAllValues:StringEquals"
-      variable = "aws:TagKeys"
-      values   = ["aws-glue-service-resource"]
-    }
-
-    resources = [
-      "arn:aws:ec2:*:*:network-interface/*",
-      "arn:aws:ec2:*:*:security-group/*",
-      "arn:aws:ec2:*:*:instance/*",
-      "arn:aws:ec2:*:*:key-pair/*",
-      "arn:aws:ec2:*:*:image/*",
-      "arn:aws:ec2:*:*:subnet/*",
-      "arn:aws:ec2:*:*:volume/*",
-    ]
-  }
-
-  statement {
-    sid    = "GlueRedshiftAccess"
-    effect = "Allow"
-
-    actions = [
-      "redshift:DescribeClusters",
-      "redshift:DescribeClusterSubnetGroups",
-    ]
-
-    resources = ["*"]
-  }
-
-  statement {
-    sid    = "GlueRdsAccess"
-    effect = "Allow"
-
-    actions = [
-      "rds:DescribeDBInstances",
-      "rds:DescribeDBClusters",
-      "rds:DescribeDBSubnetGroups",
-    ]
-
-    resources = ["*"]
-  }
-
-  statement {
     sid    = "GlueCloudFormationRead"
     effect = "Allow"
 
@@ -251,15 +165,6 @@ data "aws_iam_policy_document" "data_engineer" {
       "cloudformation:DescribeStacks",
       "cloudformation:GetTemplateSummary",
     ]
-
-    resources = ["*"]
-  }
-
-  statement {
-    sid    = "GlueDynamoAccess"
-    effect = "Allow"
-
-    actions = ["dynamodb:ListTables"]
 
     resources = ["*"]
   }
@@ -295,31 +200,6 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid    = "GlueTearDownGlueInstances"
-    effect = "Allow"
-
-    actions = [
-      "ec2:TerminateInstances",
-      "ec2:CreateTags",
-      "ec2:DeleteTags",
-    ]
-
-    condition {
-      test     = "StringLike"
-      variable = "ec2:ResourceTag/aws:cloudformation:stack-id"
-      values   = ["arn:aws:cloudformation:*:*:stack/aws-glue-*/*"]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "ec2:ResourceTag/aws:cloudformation:logical-id"
-      values   = ["ZeppelinInstance"]
-    }
-
-    resources = ["arn:aws:ec2:*:*:instance/*"]
-  }
-
-  statement {
     sid    = "GlueIamPassRoleToServiceGlue"
     effect = "Allow"
 
@@ -335,21 +215,6 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid    = "GlueIamPassRoleToServiceEc2"
-    effect = "Allow"
-
-    actions = ["iam:PassRole"]
-
-    condition {
-      test     = "StringLike"
-      variable = "iam:PassedToService"
-      values   = ["ec2.amazonaws.com"]
-    }
-
-    resources = ["arn:aws:iam::*:role/AWSGlueServiceNotebookRole*"]
-  }
-
-  statement {
     sid    = "GlueIamPassRoleToServiceGlueService"
     effect = "Allow"
 
@@ -362,5 +227,50 @@ data "aws_iam_policy_document" "data_engineer" {
     }
 
     resources = ["arn:aws:iam::*:role/service-role/AWSGlueServiceRole*"]
+  }
+
+  statement {
+    sid = "AttachRolesToSelfManagedGroups"
+    effect = "Allow"
+
+    actions = [
+      "iam:AttachRolePolicy",
+      "iam:DetachRolePolicy",
+      "iam:GetRole",
+      "iam:GetRolePolicy",
+      "iam:ListAttachedRolePolicies",
+      "iam:ListRoles"
+      ]
+
+    resources = ["arn:aws:iam::*:role/alpha_user_*"]
+  }
+
+  statement {
+    sid = "ManageDataEngineerPolicies"
+    effect = "Allow"
+
+    actions = [
+      "iam:CreatePolicy",
+      "iam:CreatePolicyVersion",
+      "iam:DeletePolicy",
+      "iam:GetPolicy",
+      "iam:GetPolicyVersion",
+      "iam:ListPolicies",
+      "iam:ListPolicyVersions",
+    ]
+
+    resources = [
+      "arn:aws:iam::*:policy/StandardDatabaseAccess",
+      "arn:aws:iam::*:policy/StandardGlueAccess",
+    ]
+  }
+
+  statement {
+    sid = "ListDockerRepository"
+    effect = "Allow"
+
+    actions = ["ecr:ListImages"]
+
+    resources = ["*"]
   }
 }

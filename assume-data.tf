@@ -143,10 +143,10 @@ module "assume_data_admin_in_data" {
     "${aws_iam_user.ravi.name}",
     "${aws_iam_user.karik.name}",
     "${aws_iam_user.george.name}",
-    "${aws_iam_user.adam.name}",
     "${aws_iam_user.david.name}",
     "${aws_iam_user.andy.name}",
     "${aws_iam_user.josh.name}",
+    "${aws_iam_user.robin.name}"
   ]
 }
 
@@ -197,7 +197,9 @@ module "add_data_engineers_group" {
     "${aws_iam_user.adam.name}",
     "${aws_iam_user.josh.name}",
     "${aws_iam_user.calum.name}",
-    "${aws_iam_user.sam.name}",
+    "${aws_iam_user.anthony.name}",
+    "${aws_iam_user.robin.name}",
+    "${aws_iam_user.sam.name}"
   ]
 }
 
