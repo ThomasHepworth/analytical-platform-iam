@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "data_admin" {
       "s3:List*",
     ]
 
-    resources = ["*"]
+    resources = ["arn:aws:s3:::alpha_*"]
   }
 
   statement {
@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "data_admin" {
       "s3:RestoreObject",
     ]
 
-    resources = ["*"]
+    resources = ["arn:aws:s3:::alpha_*"]
   }
 
   statement {
@@ -37,6 +37,6 @@ data "aws_iam_policy_document" "data_admin" {
       "s3:PutMetricsConfiguration",
     ]
 
-    resources = ["*"]
+    resources = ["arn:aws:s3:::alpha_*"]
   }
 }
