@@ -16,6 +16,10 @@ The commands run within the codebuild stages are in the [buildspec-plan.yml](bui
 
 ![Image](iam-pipeline.png?raw=true)
 
-
 ### Checking pipeline progress
+
 The progress of the pipeline execution can be checked in the AWS Console in "AWS CodePipeline" > "Pipelines" in the `landing` AWS account (be sure to be in the Ireland region).
+
+## Developer guide
+
+The pipeline runs as role `landing-iam-role`, which has permissions defined in an inline policy, edited in [../init-roles/iam.tf](../init-roles/iam.tf).

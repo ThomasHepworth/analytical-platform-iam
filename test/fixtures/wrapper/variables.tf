@@ -33,7 +33,8 @@ variable "landing_account_id" {
 }
 
 variable "landing_iam_role" {
-  default = "landing-iam-role"
+  description = "Used by CI for applying this terraform"
+  default     = "landing-iam-role"
 }
 
 variable "ap_accounts" {

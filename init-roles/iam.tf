@@ -23,6 +23,7 @@ data "aws_iam_policy_document" "iam_role" {
 
     actions = [
       "iam:AddUserToGroup",
+      "iam:AttachGroupPolicy",
       "iam:AttachRolePolicy",
       "iam:AttachUserPolicy",
       "iam:CreatePolicyVersion",
@@ -46,6 +47,7 @@ data "aws_iam_policy_document" "iam_role" {
       "iam:Get*",
       "iam:List*",
       "iam:PutRolePolicy",
+      "iam:RemoveUserFromGroup",
       "iam:TagRole",
       "iam:UpdateAssumeRolePolicy",
       "iam:UpdateGroup",
