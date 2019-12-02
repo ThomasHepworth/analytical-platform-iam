@@ -148,8 +148,8 @@ From this account you can click on your user menu and then "switch role" to a ro
 Alternatively just use these links:
 * https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=read-only-data&displayName=read-only@data
 * https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=restricted-admin-data&displayName=restricted-admin@data
-* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=read-only-landing&displayName=read-only@data
-* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@data
+* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=read-only-landing&displayName=read-only@landing
+* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@landing
 
 Please use the 'read-only' roles by default - only use 'restricted-admin' when you need to make a change.
 
