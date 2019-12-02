@@ -50,3 +50,25 @@ variable "audit_security_name" {
 variable "security_account_id" {
   description = "AWS Security account ID"
 }
+
+## Data Engineers
+
+variable "data_engineers_name" {
+  default = "data-engineers"
+}
+
+variable "hmcts_data_engineers_name" {
+  default = "data-engineers-hmcts"
+}
+
+variable "prison_data_engineers_name" {
+  default = "data-engineers-prisons"
+}
+
+variable "probation_data_engineers_name" {
+  default = "data-engineers-probation"
+}
+
+variable "corporate_data_engineers_name" {
+  default = "data-engineers-corporate"
+}
