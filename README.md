@@ -33,7 +33,11 @@ resource "aws_iam_user" "bob" {
 
 Create a PR with this change (and you probably want to add it to some existing groups in this same PR - see next section).
 
-Ask for this PR to be reviewed, and then merge it. Give it a few minutes for the AWS CodeBuild pipeline to run, then ask someone from the 'restricted admin' group to send you your AWS console password.
+Ask for this PR to be reviewed, and then merge it.
+
+### First login
+
+Following the creation of your user (give it a few minutes for the AWS CodeBuild pipeline to run) ask someone from the 'restricted admin' group to send you your AWS console password.
 
 Access the AWS console here: https://analytical-platform-landing.signin.aws.amazon.com/console
 
