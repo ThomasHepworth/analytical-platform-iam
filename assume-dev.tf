@@ -18,13 +18,9 @@ module "assume_restricted_admin_in_dev" {
   group_name         = "${var.restricted_admin_name}-${local.dev}"
 
   users = [
-    "${aws_iam_user.mikael.name}",
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
-    "${aws_iam_user.ravi.name}",
     "${aws_iam_user.david.name}",
-    "${aws_iam_user.andy.name}",
-    "${aws_iam_user.josh.name}",
   ]
 }
 
@@ -57,13 +53,9 @@ module "assume_read_only_in_dev" {
   group_name         = "${var.read_only_name}-${local.dev}"
 
   users = [
-    "${aws_iam_user.mikael.name}",
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
-    "${aws_iam_user.ravi.name}",
     "${aws_iam_user.david.name}",
-    "${aws_iam_user.andy.name}",
-    "${aws_iam_user.josh.name}",
   ]
 }
 
