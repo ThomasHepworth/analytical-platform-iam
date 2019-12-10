@@ -1,3 +1,5 @@
+# Role used by the "iam" pipeline
+
 variable "iam_role" {
   default = "landing-iam-role"
 }
@@ -40,6 +42,7 @@ data "aws_iam_policy_document" "iam_role" {
       "iam:DeleteUser",
       "iam:DeleteUserPolicy",
       "iam:DetachRolePolicy",
+      "iam:DeleteVirtualMFADevice",
       "iam:Get*",
       "iam:List*",
       "iam:PutRolePolicy",
