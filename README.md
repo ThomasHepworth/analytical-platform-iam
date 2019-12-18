@@ -150,14 +150,14 @@ Once you've [created your user](#User-creation) you have access to the [AWS cons
 From this account you can click on your user menu and then "switch role" to a role in another AWS account. e.g. to account `mojanalytics` as `restricted-admin-data`.
 
 Alternatively just use these links:
-* https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=read-only-data&displayName=read-only@data
-* https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=restricted-admin-data&displayName=restricted-admin@data
-* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=read-only-landing&displayName=read-only@landing
-* https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@landing
-* https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-hmcts&displayName=data-engineers-hmcts@mojanalytics
-* https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-prisons&displayName=data-engineers-prisons@mojanalytics
-* https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-probation&displayName=data-engineers-probation@mojanalytics
-* https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-corporate&displayName=data-engineers-corporate@mojanalytics
+* [read-only@data](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=read-only-data&displayName=read-only@data)
+* [restricted-admin@data](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=restricted-admin-data&displayName=restricted-admin@data)
+* [read-only@landing](https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=read-only-landing&displayName=read-only@landing)
+* [restricted-admin@landing](https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@landing)
+* [data-engineers-hmcts@mojanalytics](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-hmcts&displayName=data-engineers-hmcts@mojanalytics)
+* [data-engineers-prisons@mojanalytics](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-prisons&displayName=data-engineers-prisons@mojanalytics)
+* [data-engineers-probation@mojanalytics](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-probation&displayName=data-engineers-probation@mojanalytics)
+* [data-engineers-corporate@mojanalytics](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-corporate&displayName=data-engineers-corporate@mojanalytics)
 
 Please use the 'read-only' roles by default - only use 'restricted-admin' when you need to make a change.
 
