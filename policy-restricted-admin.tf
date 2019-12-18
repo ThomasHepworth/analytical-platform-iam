@@ -87,6 +87,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:DeleteRolePolicy",
       "iam:DeleteSAMLProvider",
       "iam:DeleteOpenIDConnectProvider",
+      "iam:DeletePolicyVersion",
       "iam:DeleteSSHPublicKey",
       "iam:DeleteUser",
       "iam:DeleteUserPolicy",
