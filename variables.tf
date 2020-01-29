@@ -57,6 +57,10 @@ variable "data_engineers_name" {
   default = "data-engineers"
 }
 
+variable "billing_viewer_name" {
+  default = "billing-viewer"
+}
+
 variable "hmcts_data_engineers_name" {
   default = "data-engineers-hmcts"
 }

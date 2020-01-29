@@ -52,11 +52,7 @@ module "assume_read_only_in_data" {
   landing_account_id = "${var.landing_account_id}"
   group_name         = "${var.read_only_name}-${local.data}"
 
-  users = [
-    "${aws_iam_user.shojul.name}",
-    "${aws_iam_user.aldo.name}",
-    "${aws_iam_user.david.name}",
-  ]
+  users = []
 }
 
 ## Create read only role in data account
@@ -88,11 +84,8 @@ module "assume_read_s3_only_in_data" {
   group_name         = "${var.read_data_only_name}-${local.data}-acc"
 
   users = [
-    "${aws_iam_user.shojul.name}",
-    "${aws_iam_user.aldo.name}",
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.sam.name}",
-    "${aws_iam_user.david.name}",
   ]
 }
 
@@ -346,4 +339,44 @@ module "add_corporate_data_engineers_role_in_data_account" {
   role_name          = "${var.corporate_data_engineers_name}"
   landing_account_id = "${var.landing_account_id}"
   role_policy        = "${data.aws_iam_policy_document.corporate_data_engineer.json}"
+}
+
+#### Billing  ####
+## Create Billing Viewer Role in Data Account
+
+module "add_billing_viewer_role_in_data_account" {
+  source = "modules/role"
+
+  providers = {
+    aws = "aws.data"
+  }
+
+  role_name          = "${var.billing_viewer_name}"
+  landing_account_id = "${var.landing_account_id}"
+  role_policy        = "${data.aws_iam_policy_document.billing_viewer.json}"
+}
+
+## Billing Viewer Group
+
+module "add_billing_viewer_group" {
+  source = "modules/assume"
+
+  assumed_role_name = "${var.billing_viewer_name}"
+
+  assume_role_in_account_id = [
+    "${var.ap_accounts["data"]}",
+  ]
+
+  landing_account_id = "${var.landing_account_id}"
+  group_name         = "${var.billing_viewer_name}"
+
+  users = [
+    "${aws_iam_user.karik.name}",
+    "${aws_iam_user.calum.name}",
+    "${aws_iam_user.robin.name}",
+    "${aws_iam_user.sam.name}",
+    "${aws_iam_user.shojul.name}",
+    "${aws_iam_user.david.name}",
+    "${aws_iam_user.aldo.name}",
+  ]
 }
