@@ -178,8 +178,7 @@ module "add_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}",
-    "${aws_iam_user.dhiraj.name}"
+    "${aws_iam_user.sam.name}"
   ]
 }
 
@@ -217,8 +216,7 @@ module "add_hmcts_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}",
-    "${aws_iam_user.dhiraj.name}"
+    "${aws_iam_user.sam.name}"
   ]
 }
 
@@ -255,8 +253,7 @@ module "add_probation_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}",
-    "${aws_iam_user.dhiraj.name}"
+    "${aws_iam_user.sam.name}"
   ]
 }
 
@@ -293,8 +290,7 @@ module "add_prison_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}",
-    "${aws_iam_user.dhiraj.name}"
+    "${aws_iam_user.sam.name}"
   ]
 }
 
@@ -331,8 +327,7 @@ module "add_corporate_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}",
-    "${aws_iam_user.dhiraj.name}"
+    "${aws_iam_user.sam.name}"
   ]
 }
 
