@@ -21,6 +21,7 @@ module "assume_restricted_admin_in_data" {
     "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.david.name}",
+    "${aws_iam_user.dhiraj.name}",
   ]
 }
 
@@ -86,6 +87,7 @@ module "assume_read_s3_only_in_data" {
   users = [
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.sam.name}",
+    "${aws_iam_user.dhiraj.name}"
   ]
 }
 
