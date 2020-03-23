@@ -18,7 +18,6 @@ module "assume_restricted_admin_in_data" {
   group_name         = "${var.restricted_admin_name}-${local.data}"
 
   users = [
-    "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.david.name}",
     "${aws_iam_user.dhiraj.name}",
@@ -122,7 +121,6 @@ module "assume_data_admin_in_data" {
   group_name         = "${var.data_admin_name}-${local.data}-acc"
 
   users = [
-    "${aws_iam_user.shojul.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.karik.name}",
     "${aws_iam_user.george.name}",
@@ -381,7 +379,6 @@ module "add_billing_viewer_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.robin.name}",
     "${aws_iam_user.sam.name}",
-    "${aws_iam_user.shojul.name}",
     "${aws_iam_user.david.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.dhiraj.name}",
