@@ -82,6 +82,18 @@ To approve an IAM change, a Landing Account Restricted Admin should:
   * select "Apply"
 * Email the user their AWS console password and the link to: [First login](#first-login)
 
+An admin (from the 'restricted admin group') then needs to:
+
+* Go to login to AP's Landing AWS account and switch to [restricted-admin@landing](https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@landing)
+* In CodePipeline, in region `eu-west-1`, go to the pipeline `iam-pipeline`
+* On the 'Plan' step, check the output of 'terraform plan' looks right
+* On the 'Approve' step, click 'Review' and 'Approve'
+* Wait 2 minutes to ensure the 'Apply' step succeeds
+* Go to IAM and click on the newly created User
+* Go to the 'Security Credentials' tab, and under 'Console password' click 'Manage'
+* In this form click 'Enable' and check the 'Require password reset' box, before clicking 'Apply'
+* Show the password and send it to the user privately
+
 ### First login
 
 You should have received your AWS console password - see above.
@@ -92,7 +104,9 @@ Access the AWS console here: https://analytical-platform-landing.signin.aws.amaz
 * IAM username: `bob@digital.justice.gov.uk` (the name you specified in users.tf)
 * Password: (was sent to you)
 
-Log-in and it'll prompt you to change your password. It needs to be: minimum 16 characters, including uppercase, a number and a symbol from: `(!@#$%^&*()_+-=[]{}|')`.
+Log-in and it'll prompt you to change your password. The password needs to be: minimum 16 characters, including uppercase, a number and a symbol from: `!@#$%^&*()_+-=[]{}|'`.
+
+(If it does not prompt you to change your password then you'll need to come back to this after you've setup MFA and logged out and in again)
 
 You MUST set-up MFA - it is required to be able to switch role. To set-up MFA:
 
@@ -100,7 +114,7 @@ You MUST set-up MFA - it is required to be able to switch role. To set-up MFA:
 2. Click button "Assign MFA device"
 3. etc... (Full instructions are [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable.html))
 
-NB: Before you can switch role you must also log out of the AWS Console and back in again, so that you've used MFA during log-in.
+Now you MUST log out of the AWS Console and back in again, so that it registers you've used MFA, before you can do anything else.
 
 Note: Managing users with Terraform (e.g. passwords) is still at best clunky, so we decided that admins should do this with the AWS console instead.
 
