@@ -21,7 +21,7 @@ module "assume_restricted_admin_in_data" {
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.david.name}",
     "${aws_iam_user.dhiraj.name}",
-    "${aws_iam_user.andrew.name}"
+    "${aws_iam_user.andrew.name}",
   ]
 }
 
@@ -88,7 +88,7 @@ module "assume_read_s3_only_in_data" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.sam.name}",
     "${aws_iam_user.dhiraj.name}",
-    "${aws_iam_user.andrew.name}"
+    "${aws_iam_user.andrew.name}",
   ]
 }
 
@@ -127,7 +127,7 @@ module "assume_data_admin_in_data" {
     "${aws_iam_user.david.name}",
     "${aws_iam_user.robin.name}",
     "${aws_iam_user.dhiraj.name}",
-    "${aws_iam_user.andrew.name}"
+    "${aws_iam_user.andrew.name}",
   ]
 }
 
@@ -179,7 +179,7 @@ module "add_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}"
+    "${aws_iam_user.sam.name}",
   ]
 }
 
@@ -217,7 +217,7 @@ module "add_hmcts_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}"
+    "${aws_iam_user.sam.name}",
   ]
 }
 
@@ -254,7 +254,7 @@ module "add_probation_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}"
+    "${aws_iam_user.sam.name}",
   ]
 }
 
@@ -291,7 +291,7 @@ module "add_prison_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}"
+    "${aws_iam_user.sam.name}",
   ]
 }
 
@@ -328,7 +328,7 @@ module "add_corporate_data_engineers_group" {
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.anthony.name}",
     "${aws_iam_user.robin.name}",
-    "${aws_iam_user.sam.name}"
+    "${aws_iam_user.sam.name}",
   ]
 }
 
@@ -382,10 +382,9 @@ module "add_billing_viewer_group" {
     "${aws_iam_user.david.name}",
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.dhiraj.name}",
-    "${aws_iam_user.andrew.name}"
+    "${aws_iam_user.andrew.name}",
   ]
 }
-
 
 ##### Quicksight Admin #####
 ## Quicksight Admin Group
