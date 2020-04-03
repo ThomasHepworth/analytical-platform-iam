@@ -76,3 +76,9 @@ variable "probation_data_engineers_name" {
 variable "corporate_data_engineers_name" {
   default = "data-engineers-corporate"
 }
+
+## Quicksight Admin
+
+variable "quicksight_admin_name" {
+  default = "quicksight-admin"
+}
