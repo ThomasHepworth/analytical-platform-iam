@@ -64,3 +64,18 @@ resource "aws_iam_user" "gareth" {
   name          = "gareth.davies@digital.justice.gov.uk"
   force_destroy = true
 }
+
+resource "aws_iam_user" "alec" {
+  name          = "alec.johnson@digital.justice.gov.uk"
+  force_destroy = true
+}
+
+resource "aws_iam_user" "darius" {
+  name          = "darius.nicholson@digital.justice.gov.uk"
+  force_destroy = true
+}
+
+resource "aws_iam_user" "davidf" {
+  name          = "david.fuller@digital.justice.gov.uk"
+  force_destroy = true
+}
