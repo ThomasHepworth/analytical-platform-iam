@@ -60,3 +60,13 @@ provider "aws" {
     role_arn = "arn:aws:iam::${var.ap_accounts["data"]}:role/${var.landing_iam_role}"
   }
 }
+
+provider "aws" {
+  region  = "eu-west-1"
+  version = "~> 2.6"
+  alias   = "data-engineering"
+
+  assume_role {
+    role_arn = "arn:aws:iam::${var.data_engineering_id}:role/${var.landing_iam_role}"
+  }
+}
