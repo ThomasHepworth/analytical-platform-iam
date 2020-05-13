@@ -1,5 +1,5 @@
 locals {
-    data-engineering = "data-engineering"
+  data-engineering = "data-engineering"
 }
 
 ##### Restricted Admin #####
@@ -14,7 +14,7 @@ module "assume_restricted_admin_in_data_engineering" {
     "${var.data_engineering_id}",
   ]
 
-landing_account_id = "${var.landing_account_id}"
+  landing_account_id = "${var.landing_account_id}"
   group_name         = "${var.restricted_admin_name}-${local.data-engineering}"
 
   users = [
@@ -37,4 +37,3 @@ module "add_restricted_admin_role_in_data_engineering" {
   landing_account_id = "${var.landing_account_id}"
   role_policy        = "${data.aws_iam_policy_document.restricted_admin.json}"
 }
-    
