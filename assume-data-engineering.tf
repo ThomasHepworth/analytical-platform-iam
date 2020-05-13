@@ -37,3 +37,4 @@ module "add_restricted_admin_role_in_data_engineering" {
   landing_account_id = "${var.landing_account_id}"
   role_policy        = "${data.aws_iam_policy_document.restricted_admin.json}"
 }
+    
