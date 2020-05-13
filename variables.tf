@@ -83,6 +83,6 @@ variable "quicksight_admin_name" {
   default = "quicksight-admin"
 }
 
-variable "data_engineering_id" {
+variable "data_engineering_account_id" {
   description = "AWS Data Engineering account ID"
 }

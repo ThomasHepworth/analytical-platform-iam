@@ -11,7 +11,7 @@ module "assume_restricted_admin_in_data_engineering" {
   assumed_role_name = "${var.restricted_admin_name}-${local.data-engineering}"
 
   assume_role_in_account_id = [
-    "${var.data_engineering_id}",
+    "${var.data_engineering_account_id}",
   ]
 
   landing_account_id = "${var.landing_account_id}"

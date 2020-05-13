@@ -67,6 +67,6 @@ provider "aws" {
   alias   = "data-engineering"
 
   assume_role {
-    role_arn = "arn:aws:iam::${var.data_engineering_id}:role/${var.landing_iam_role}"
+    role_arn = "arn:aws:iam::${var.data_engineering_account_id}:role/${var.landing_iam_role}"
   }
 }
