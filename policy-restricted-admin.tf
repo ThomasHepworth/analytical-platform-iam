@@ -34,6 +34,7 @@ data "aws_iam_policy_document" "restricted_admin" {
       "kms:*",
       "lambda:*",
       "logs:*",
+      "ram:*",
       "rds:*",
       "resource-groups:ListGroups*",
       "route53:*",
