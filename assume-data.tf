@@ -22,6 +22,7 @@ module "assume_restricted_admin_in_data" {
     "${aws_iam_user.david.name}",
     "${aws_iam_user.andrew.name}",
     "${aws_iam_user.nicholas.name}",
+    "${aws_iam_user.mohammad.name}",
   ]
 }
 
@@ -127,6 +128,7 @@ module "assume_data_admin_in_data" {
     "${aws_iam_user.robin.name}",
     "${aws_iam_user.andrew.name}",
     "${aws_iam_user.nicholas.name}",
+    "${aws_iam_user.mohammad.name}",
   ]
 }
 
@@ -382,6 +384,7 @@ module "add_billing_viewer_group" {
     "${aws_iam_user.aldo.name}",
     "${aws_iam_user.andrew.name}",
     "${aws_iam_user.nicholas.name}",
+    "${aws_iam_user.mohammad.name}",
   ]
 }
 
