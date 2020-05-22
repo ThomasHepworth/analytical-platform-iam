@@ -5,7 +5,6 @@ resource "aws_iam_user" "mohammad" {
   force_destroy = true
 }
 
-
 resource "aws_iam_user" "nicholas" {
   name          = "nicholas.tollervey@digital.justice.gov.uk"
   force_destroy = true
