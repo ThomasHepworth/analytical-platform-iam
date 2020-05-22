@@ -1,18 +1,51 @@
 # Analytical Platform IAM
 
-Analytical Platform IAM config
+Defines IAM Users in the Analytical Platform's Landing AWS Account and gives them permissions to switch role (AssumeRole) into other Analytical Platform AWS accounts.
+
+The Landing Account is for defining IAM Users and their permissions. The security of IAM is paramount therefore:
+
+* this IAM configuration is isolated in its own AWS Account, away from the rest of the platform - don't put other things in this account!
+* only a small number of people can modify it
+* deployment is automated and stored in code to be auditable
+
+In addition, since Analytical Platform is spread over multiple other AWS Accounts, it is convenient for each developer/devops to have one set of User creds, rather than having one for each AWS Account.
+
+At some point it would be good to setup these Users to have auth using some corporate SSO.
+
+## Contents of this repo
+
+### IAM Terraform definitions
+
+Terraform definitions, that are applied in multiple AWS Accounts.
+
+In the Landing AWS Account:
+
+* IAM Users - for use by administrators of the Analytical Platform
+* Those Users are added to Groups, which are given Policies, that allow them to:
+  * switch role (AssumeRole) into certain roles in certain remote accounts
+  * manage their own creds
+
+In remote AWS accounts:
+
+* Roles that Users in the Landing Account switch role (AssumeRole) into
+
+### IAM Pipeline
+
+Terraform definition of a CodePipeline, that does the Continuous Deployment of "IAM Terraform definitions"
+
+Folder: [pipeline](pipeline/README.md)
+
+### Init-roles
 
 Terraform definitions of:
 
-* IAM Users for the Landing AWS Account - for AWS users of the Analytical Platform
-* Users are added to Groups, which are given Policies, so that they have permissions
-* Roles & Policies for other AWS Accounts that allows these users to switch into those accounts - [INIT-ROLES](init-roles/README.md)
+* Roles to be created in remote AWS accounts, so that the IAM terraform can AssumeRole in - [INIT-ROLES](init-roles/README.md)
 
-CI: this repo's terraform is applied using a [defined CodePipeline](pipeline/README.md)
+Folder: [INIT-ROLES](init-roles/README.md)
 
-### AWS Account setup
+## AWS Account setup
 
-Before you can use any of these terraform modules, an AWS account needs an IAM role, which is in: [INIT-ROLES](init-roles/README.md)
+Before you can apply the "IAM Terraform definitions", every AWS account that it [specifies](vars/landing.tfvars) needs the Init-roles terraform applied - see: [INIT-ROLES](init-roles/README.md)
 
 ## Usage
 
@@ -20,7 +53,7 @@ As an example of usage, we'll create a user, then put it in a new "AWS Glue Admi
 
 ### User creation
 
-Typically a dev or data engineer will need a user account. This is an IAM User in the Landing (AWS) account, with which you can [assume role]() into the other AP AWS accounts.
+Typically a dev or data engineer will need a user account. This is an IAM User in the Landing (AWS) account, with which you can switch role [assume role]() into the other AP AWS accounts.
 
 To create yourself an IAM User, add a aws_iam_user resource to [users.tf](users.tf) e.g.:
 
@@ -33,11 +66,25 @@ resource "aws_iam_user" "bob" {
 
 Create a PR with this change (and you probably want to add it to some existing groups in this same PR - see next section).
 
-Ask for this PR to be reviewed, and then merge it.
+Ask for this PR to be reviewed, and then merge it. Now the AWS CodePipeline will spend a couple of minutes doing the `terraform plan`, then need approval before it is applied. So you should ask one of the [Landing Account Restricted Admin group](https://github.com/ministryofjustice/analytical-platform-iam/blob/master/assume-landing.tf#L21) to approve the IAM change, and provide links to your PR and [Approving an IAM change](#approving-an-iam-change)
+
+### Approving an IAM change
+
+To approve an IAM change, a Landing Account Restricted Admin should:
+
+* Login to AWS Landing Account, switch role to [restricted-admin in the Landing Account]
+* In the CodePipeline "iam-pipeline", review the plan output ("Details") and then approve
+* Wait for it to successfully apply
+* In IAM, find the new User and:
+  * in tab "Security credentials" "Console password" select "Manage"
+  * under "Console access" select "Enable"
+  * under "Require password reset" *check* the box
+  * select "Apply"
+* Email the user their AWS console password and the link to: [First login](#first-login)
 
 ### First login
 
-Following the creation of your user (give it a few minutes for the AWS CodeBuild pipeline to run) ask someone from the 'restricted admin' group to send you your AWS console password.
+You should have received your AWS console password - see above.
 
 Access the AWS console here: https://analytical-platform-landing.signin.aws.amazon.com/console
 

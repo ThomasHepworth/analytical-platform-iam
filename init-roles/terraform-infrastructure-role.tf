@@ -1,21 +1,25 @@
-# Role for codebuild
+# Creates a role "terraform-infrastructure" that can be assumed by:
+# * Landing AWS account user/roles (which also need permission via ../modules/assume),
+#   which is used by the IAM Terraform Pipeline
+# * CodeBuild, during the course of the running of the IAM Terraform Pipeline
 
 variable "terraform_inf_role" {
   default = "terraform-infrastructure"
 }
 
 data "aws_iam_policy_document" "terraform_inf_role_assume" {
+  # IAM Users/Roles in Landing Account
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
-    # Allow users from the landing account to assume
     principals {
       identifiers = ["arn:aws:iam::335823981503:root"]
       type        = "AWS"
     }
   }
 
+  # CodeBuild service role
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]

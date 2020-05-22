@@ -1,11 +1,11 @@
 variable "assume_role_in_account_id" {
-  description = "The ID of the account with the role you want to assume"
+  description = "The Account ID of the remote AWS Account(s) - i.e. which has the role you want to assume"
   type        = "list"
 }
 
 variable "landing_account_id" {
   default     = "335823981503"
-  description = "The Landing account ID"
+  description = "The account ID of the Landing AWS Account"
 }
 
 variable "assumed_role_name" {

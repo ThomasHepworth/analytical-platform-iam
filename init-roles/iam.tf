@@ -1,4 +1,4 @@
-# Role used by the "iam" pipeline
+# Role "landing-iam-role" used by the "iam" CodePipeline
 
 variable "iam_role" {
   default = "landing-iam-role"

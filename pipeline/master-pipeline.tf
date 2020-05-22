@@ -6,6 +6,7 @@ data "aws_iam_policy_document" "codebuild_policy" {
   }
 }
 
+# A CodePipeline that plan/applies the terraform found in the master branch of this (IAM) repo
 module "master-pipeline" {
   source = "github.com/ministryofjustice/analytical-platform-pipeline"
 
