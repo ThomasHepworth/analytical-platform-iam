@@ -22,6 +22,7 @@ module "assume_restricted_admin_in_data_engineering" {
     "${aws_iam_user.darius.name}",
     "${aws_iam_user.calum.name}",
     "${aws_iam_user.davidf.name}",
+    "${aws_iam_user.jacob.name}",
   ]
 }
 
