@@ -197,7 +197,7 @@ module "add_glue_admins_role_in_dev" {
 
 ### Authenticating
 
-#### AWS console
+#### AWS Console
 
 Once you've [created your user](#User-creation) you have access to the [AWS console for the Landing AWS Account](https://analytical-platform-landing.signin.aws.amazon.com/console).
 
@@ -216,13 +216,65 @@ Alternatively just use these links:
 
 Please use the 'read-only' roles by default - only use 'restricted-admin' when you need to make a change.
 
+#### AWS CLI
+
+Optionally you can also setup an AWS access key on your machine. This enables you to use the AWS Command Line Interface (AWS CLI) and other programmatic calls to the AWS API.
+
+To setup an AWS access key on your machine:
+
+1. If you have not installed the AWS CLI, which gives you the `aws` command, install it on your machine - see [AWS Command Line Interface](https://aws.amazon.com/cli/)
+2. Login to the AWS Console (see above)
+3. Select your username in the top-bar and in this drop-down menu select "My Security Credentials". (If you've switched to another account or role, first you'll have to select "Back to david.read@digital.justice.gov.uk", or similar)
+4. In the section "Access keys for CLI, SDK, & API access" select "Create access key"
+5. It should say "Your new access key is now available". Leave this on your screen while you configure these details into you command-line in the following step.
+6. Run `aws configure`, with the suggested profile name 'landing' and put in your Access Key ID and Secret Access Key seen on the AWS Console:
+
+    ```bash
+    $ aws configure --profile landing
+    AWS Access Key ID [None]: AKIA...
+    AWS Secret Access Key [None]: Ti2d7...
+    Default region name [None]: eu-west-1
+    Default output format [None]:
+    ```
+
+   This will add the creds to ~/.aws/credentials and default region to ~/.aws/config
+
+This profile is needed, but not much use on its own - you only use this landing account as a hop, from which you switch to a role in a destination account. To use the AWS CLI with the destination account & role, you have a couple of options - see the following sections.
+
 #### AWS CLI using profile
 
-It is convenient to configure an assumed role as a 'profile' in your ~/.aws/credentials file. See:
+You can create a special AWS profile that effectively logs you into your landing account and then switches you to the destination account & role. This is convenient!
 
-https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html
+Simply add these lines to your `~/.aws/credentials`:
 
-This works for aws cli, but note **it doesn't work for terraform commands**. For terraform, use assume-role - see below.
+```ini
+[data]
+role_arn = arn:aws:iam::593291632749:role/restricted-admin-data
+source_profile = landing
+```
+
+and add this to your `~/.aws/config`:
+
+```ini
+[profile data]
+region = eu-west-1
+```
+
+So to access the 'data' AWS account with the `restricted-admin-data` role, you just need to select the `data` profile. Check it works:
+
+```bash
+$ export AWS_PROFILE=data
+$ aws sts get-caller-identity
+{
+    "UserId": "AROAYUIXP4BW2DK7Y7ZLB:botocore-session-1593453280",
+    "Account": "593291632749",
+    "Arn": "arn:aws:sts::593291632749:assumed-role/restricted-admin-data/botocore-session-1593453280"
+}
+```
+
+For more info, see: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html
+
+NB this method works for running aws cli commands, but **it doesn't work for terraform commands**. For terraform, use assume-role - see below.
 
 #### AWS CLI using assume-role
 
