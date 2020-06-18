@@ -68,31 +68,24 @@ Create a PR with this change (and you probably want to add it to some existing g
 
 Ask for this PR to be reviewed, and then merge it. Now the AWS CodePipeline will spend a couple of minutes doing the `terraform plan`, then need approval before it is applied. So you should ask one of the [Landing Account Restricted Admin group](https://github.com/ministryofjustice/analytical-platform-iam/blob/master/assume-landing.tf#L21) to approve the IAM change, and provide links to your PR and [Approving an IAM change](#approving-an-iam-change)
 
-### Approving an IAM change
+### Approve and apply an IAM change
 
-To approve an IAM change, a Landing Account Restricted Admin should:
+To approve and apply an IAM change, an admin (from the 'restricted admin group') should:
 
-* Login to AWS Landing Account, switch role to [restricted-admin in the Landing Account]
-* In the CodePipeline "iam-pipeline", review the plan output ("Details") and then approve
-* Wait for it to successfully apply
-* In IAM, find the new User and:
+* Login to AP's Landing AWS account and switch to [restricted-admin@landing](https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@landing)
+* In CodePipeline, in region `eu-west-1`, go to the pipeline `iam-pipeline`
+* On the 'Plan' step, check the output of 'terraform plan' looks right
+* On the 'Approve' step, click 'Review' and 'Approve'
+* Wait 2 minutes to ensure the 'Apply' step succeeds
+
+For a new user:
+
+* in IAM, find the new User and:
   * in tab "Security credentials" "Console password" select "Manage"
   * under "Console access" select "Enable"
   * under "Require password reset" *check* the box
   * select "Apply"
 * Email the user their AWS console password and the link to: [First login](#first-login)
-
-An admin (from the 'restricted admin group') then needs to:
-
-* Go to login to AP's Landing AWS account and switch to [restricted-admin@landing](https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=restricted-admin-landing&displayName=restricted-admin@landing)
-* In CodePipeline, in region `eu-west-1`, go to the pipeline `iam-pipeline`
-* On the 'Plan' step, check the output of 'terraform plan' looks right
-* On the 'Approve' step, click 'Review' and 'Approve'
-* Wait 2 minutes to ensure the 'Apply' step succeeds
-* Go to IAM and click on the newly created User
-* Go to the 'Security Credentials' tab, and under 'Console password' click 'Manage'
-* In this form click 'Enable' and check the 'Require password reset' box, before clicking 'Apply'
-* Show the password and send it to the user privately
 
 ### First login
 
