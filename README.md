@@ -328,6 +328,10 @@ Unset your credentials:
 unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 ```
 
+#### AWS CLI with AWS Vault
+
+Since the [AWS CLI using assume-role](#aws-cli-using-assume-role) method is burdensome, consider using AWS Vault: https://github.com/99designs/aws-vault It has the benefit of storing secrets in the Mac keychain instead of a file on disk.
+
 ## Tests
 
 This project is tested using the [Kitchen Terraform](https://github.com/newcontext-oss/kitchen-terraform) testing harness. Admittedly Kitchen is not ideally suited for IAM because [Inspec](https://www.inspec.io/docs/reference/resources/#aws-resources) has limited support.
