@@ -1,9 +1,9 @@
-source "https://rubygems.org/" do
-  ruby '2.6.0'
+# frozen_string_literal: true
 
-  gem "kitchen-terraform", "~> 4.0"
-  gem 'rspec', '~> 3.8'
-  gem 'colorize', '~> 0.8.1'
-  gem 'rubocop', '~> 0.67.2'
-  gem 'test-kitchen', '~> 1.24', '>= 1.24.0'
+source 'https://rubygems.org/' do
+  ruby '2.6.6'
+
+  gem 'kitchen-terraform'
+  gem 'rubocop'
+  gem 'test-kitchen'
 end
