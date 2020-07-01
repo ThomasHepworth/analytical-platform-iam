@@ -204,7 +204,7 @@ Once you've [created your user](#User-creation) you have access to the [AWS cons
 From this account you can click on your user menu and then "switch role" to a role in another AWS account. e.g. to account `mojanalytics` as `restricted-admin-data`.
 
 Alternatively just use these links:
-* [read-only@data](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=read-only-data&displayName=read-only@data)
+* [read-only@data](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=read-only-data&displayName=read-only@data) (NB This one doesn't work currently)
 * [restricted-admin@data](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=restricted-admin-data&displayName=restricted-admin@data)
 * [billing-viewer@data](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=billing-viewer&displayName=billing-viewer@data)
 * [read-only@landing](https://signin.aws.amazon.com/switchrole?account=analytical-platform-landing&roleName=read-only-landing&displayName=read-only@landing)
