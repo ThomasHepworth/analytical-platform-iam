@@ -245,20 +245,20 @@ This profile is needed, but not much use on its own - you only use this landing 
 
 You can create a special AWS profile that effectively logs you into your landing account and then switches you to the destination account & role. This is convenient!
 
-Simply add these lines to your `~/.aws/credentials`:
-
-```ini
-[data]
-role_arn = arn:aws:iam::593291632749:role/restricted-admin-data
-source_profile = landing
-```
-
-and add this to your `~/.aws/config`:
+Simply add these lines to your `~/.aws/config`:
 
 ```ini
 [profile data]
-region = eu-west-1
+region=eu-west-1
+role_arn=arn:aws:iam::593291632749:role/restricted-admin-data
+source_profile=landing
+
+[profile landing-admin]
+region=eu-west-1
+role_arn=arn:aws:iam::335823981503:role/restricted-admin-landing
+source_profile=landing
 ```
+where `source_profile` references the 'landing' profile in `~/.aws/credentials`
 
 So to access the 'data' AWS account with the `restricted-admin-data` role, you just need to select the `data` profile. Check it works:
 
@@ -274,7 +274,7 @@ $ aws sts get-caller-identity
 
 For more info, see: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html
 
-NB this method works for running aws cli commands, but **it doesn't work for terraform commands**. For terraform, use assume-role - see below.
+NB this method works for running aws cli commands, but **it doesn't work for terraform commands**. For terraform, use assume-role or AWS Vault - see below.
 
 #### AWS CLI using assume-role
 
@@ -330,7 +330,23 @@ unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 
 #### AWS CLI with AWS Vault
 
-Since the [AWS CLI using assume-role](#aws-cli-using-assume-role) method is burdensome, consider using AWS Vault: https://github.com/99designs/aws-vault It has the benefit of storing secrets in the Mac keychain instead of a file on disk.
+Since the [AWS CLI using assume-role](#aws-cli-using-assume-role) method is burdensome, consider using AWS Vault: https://github.com/99designs/aws-vault It is convenient single command to do an Assume Role. And it has the benefit of storing secrets in the Mac keychain instead of a file on disk.
+
+1. [Install AWS Vault](https://github.com/99designs/aws-vault#installing)
+2. Add to AWS Vault your Landing Account's Access Key:
+   ```bash
+   aws-vault add landing
+   ```
+3. Test it:
+   ```bash
+   aws-vault exec landing -- aws sts get-caller-identity
+   ```
+3. For each role/account you want to switch to, you need a 'profile' setup in `~/.aws/config`. See the examples in [AWS CLI using profile](aws-cli-using-profile).
+4. Run AWS CLI commands in the remote roles using the `aws-vault exec <profile> -- ` prefix, for example:
+
+    ```bash
+    aws-vault exec dev -- aws sts get-caller-identity
+    ```
 
 ## Tests
 
