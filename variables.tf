@@ -3,7 +3,7 @@ variable "landing_account_id" {
 }
 
 variable "ap_accounts" {
-  type        = "map"
+  type        = map(string)
   description = "IDs of accounts to assume role into"
 }
 

@@ -34,4 +34,6 @@ variable "pipeline_github_branch" {
   default = "master"
 }
 
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {
+}
+

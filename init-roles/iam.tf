@@ -59,11 +59,11 @@ data "aws_iam_policy_document" "iam_role" {
 }
 
 resource "aws_iam_role" "iam_role" {
-  assume_role_policy = "${data.aws_iam_policy_document.iam_role_assume.json}"
-  name               = "${var.iam_role}"
+  assume_role_policy = data.aws_iam_policy_document.iam_role_assume.json
+  name               = var.iam_role
 }
 
 resource "aws_iam_role_policy" "iam_role" {
-  policy = "${data.aws_iam_policy_document.iam_role.json}"
-  role   = "${aws_iam_role.iam_role.id}"
+  policy = data.aws_iam_policy_document.iam_role.json
+  role   = aws_iam_role.iam_role.id
 }

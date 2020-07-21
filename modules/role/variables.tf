@@ -12,7 +12,8 @@ variable "landing_iam_role" {
   description = "The role to assume to manage roles in remote accounts"
 }
 
-variable "role_name" {}
+variable "role_name" {
+}
 
 variable "role_policy" {
   description = "The main policy to attach to the role"
@@ -25,12 +26,12 @@ variable "role_policy_arn" {
 }
 
 variable "tags" {
-  type = "map"
+  type = map(string)
 
   default = {
     business-unit = "Platforms"
     application   = "analytical-platform"
-    is-production = true
+    is-production = "1"
     owner         = "analytical-platform:analytics-platform-tech@digital.justice.gov.uk"
   }
 }

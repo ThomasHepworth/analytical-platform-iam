@@ -1,6 +1,4 @@
 terraform {
-  required_version = "~> 0.11.0"
-
   backend "s3" {
     acl            = "private"
     bucket         = "tf-state-analytical-platform-landing"

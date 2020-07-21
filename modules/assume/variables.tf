@@ -1,6 +1,6 @@
 variable "assume_role_in_account_id" {
   description = "The Account ID of the remote AWS Account(s) - i.e. which has the role you want to assume"
-  type        = "list"
+  type        = string
 }
 
 variable "landing_account_id" {
@@ -18,7 +18,7 @@ variable "group_name" {
 
 variable "users" {
   description = "A list of users"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "group_effect" {

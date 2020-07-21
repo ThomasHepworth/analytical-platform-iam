@@ -145,7 +145,7 @@ To use a managed policy instead, you can refer to the policy by using it's ARN w
 
 ```hcl
 module "add_glue_admins_role_in_dev" {
-  source = "modules/role"
+  source = "./modules/role"
   providers = {
     aws = "aws.dev"
   }
@@ -165,15 +165,11 @@ get created in the remote account.
 
 ```hcl
 module "assume_glue_admins_in_dev" {
-  source = "modules/assume"
+  source = "./modules/assume"
 
   assumed_role_name = "${var.glue_admins_name}-${local.dev}"
-
-  assume_role_in_account_id = [
-    "${var.ap_accounts["dev"]}",
-  ]
-
-  landing_account_id = "${var.landing_account_id}"
+  assume_role_in_account_id = var.ap_accounts["dev"]
+  landing_account_id = var.landing_account_id
   group_name         = "${var.glue_admins_name}-${local.dev}"
 
   users = [
@@ -183,7 +179,7 @@ module "assume_glue_admins_in_dev" {
 }
 
 module "add_glue_admins_role_in_dev" {
-  source = "modules/role"
+  source = "./modules/role"
   providers = {
     aws = "aws.dev"
   }
@@ -351,10 +347,6 @@ Since the [AWS CLI using assume-role](#aws-cli-using-assume-role) method is burd
 ## Tests
 
 This project is tested using the [Kitchen Terraform](https://github.com/newcontext-oss/kitchen-terraform) testing harness. Admittedly Kitchen is not ideally suited for IAM because [Inspec](https://www.inspec.io/docs/reference/resources/#aws-resources) has limited support.
-
-__TODO__:
-
-Remove Kitchen in favour of [awspec](https://github.com/k1LoW/awspec)
 
 __Tests__:
 

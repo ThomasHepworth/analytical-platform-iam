@@ -56,17 +56,17 @@ data "aws_iam_policy_document" "terraform_inf_role" {
 }
 
 resource "aws_iam_role" "terraform_inf_role" {
-  assume_role_policy = "${data.aws_iam_policy_document.terraform_inf_role_assume.json}"
-  name               = "${var.terraform_inf_role}"
+  assume_role_policy = data.aws_iam_policy_document.terraform_inf_role_assume.json
+  name               = var.terraform_inf_role
 }
 
 resource "aws_iam_policy" "terraform_inf_role" {
-  name   = "${var.terraform_inf_role}"
-  policy = "${data.aws_iam_policy_document.terraform_inf_role.json}"
+  name   = var.terraform_inf_role
+  policy = data.aws_iam_policy_document.terraform_inf_role.json
 }
 
 resource "aws_iam_policy_attachment" "terraform_inf_role_att" {
-  name       = "${var.terraform_inf_role}"
-  policy_arn = "${aws_iam_policy.terraform_inf_role.arn}"
-  roles      = ["${aws_iam_role.terraform_inf_role.name}"]
+  name       = var.terraform_inf_role
+  policy_arn = aws_iam_policy.terraform_inf_role.arn
+  roles      = [aws_iam_role.terraform_inf_role.name]
 }

@@ -1,24 +1,24 @@
 resource "aws_dynamodb_table" "state_lock" {
-  "attribute" {
-    name = "${var.partition_key}"
+  attribute {
+    name = var.partition_key
     type = "S"
   }
 
-  hash_key       = "${var.partition_key}"
+  hash_key       = var.partition_key
   name           = "${var.tf_state_name}-lock"
   read_capacity  = 20
   write_capacity = 20
 
-  tags {
+  tags = {
     business-unit = "Platforms"
     application   = "analytical-platform"
-    is-production = true
+    is-production = "1"
     owner         = "analytical-platform-analytics-platform-tech@digital.justice.gov.uk"
   }
 }
 
 resource "aws_iam_policy" "state_lock" {
-  policy = "${data.aws_iam_policy_document.state_lock.json}"
+  policy = data.aws_iam_policy_document.state_lock.json
   name   = "${var.tf_state_name}-lock"
 }
 
@@ -33,6 +33,6 @@ data "aws_iam_policy_document" "state_lock" {
       "dynamodb:DeleteItem",
     ]
 
-    resources = ["${aws_dynamodb_table.state_lock.arn}"]
+    resources = [aws_dynamodb_table.state_lock.arn]
   }
 }

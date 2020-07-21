@@ -2,10 +2,9 @@ version: 0.2
 
 env:
   variables:
-    TF_VERSION: "0.11.14"
+    TF_VERSION: "0.12.28"
 
 phases:
-
   install:
     commands:
       - echo Downloading Terraform

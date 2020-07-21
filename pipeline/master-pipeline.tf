@@ -14,5 +14,5 @@ module "master-pipeline" {
   pipeline_github_repo   = "analytical-platform-iam"
   pipeline_github_owner  = "ministryofjustice"
   pipeline_github_branch = "main"
-  codebuild_policy       = "${data.aws_iam_policy_document.codebuild_policy.json}"
+  codebuild_policy       = data.aws_iam_policy_document.codebuild_policy.json
 }

@@ -1,6 +1,4 @@
 terraform {
-  required_version = "~> 0.11.0"
-
   backend "s3" {
     acl            = "private"
     bucket         = "tf-state-analytical-platform-landing"
@@ -38,7 +36,7 @@ variable "landing_iam_role" {
 }
 
 variable "ap_accounts" {
-  type        = "map"
+  type        = map(string)
   description = "IDs of accounts to assume role into"
 
   default = {
@@ -51,3 +49,4 @@ variable "ap_accounts" {
 variable "kitchen_name" {
   default = "kitchen"
 }
+
