@@ -1,19 +1,19 @@
 data "aws_iam_policy_document" "data_admin" {
   statement {
-    sid    = "Read"
-    effect = "Allow"
+    sid       = "Read"
+    effect    = "Allow"
+    resources = ["arn:aws:s3:::alpha_*"]
 
     actions = [
       "s3:Get*",
       "s3:List*",
     ]
-
-    resources = ["arn:aws:s3:::alpha_*"]
   }
 
   statement {
-    sid    = "ObjectAdmin"
-    effect = "Allow"
+    sid       = "ObjectAdmin"
+    effect    = "Allow"
+    resources = ["arn:aws:s3:::alpha_*"]
 
     actions = [
       "s3:AbortMultipartUpload",
@@ -22,13 +22,12 @@ data "aws_iam_policy_document" "data_admin" {
       "s3:ReplicateObject",
       "s3:RestoreObject",
     ]
-
-    resources = ["arn:aws:s3:::alpha_*"]
   }
 
   statement {
-    sid    = "Bucket"
-    effect = "Allow"
+    sid       = "Bucket"
+    effect    = "Allow"
+    resources = ["arn:aws:s3:::alpha_*"]
 
     actions = [
       "s3:DeleteBucket*",
@@ -36,7 +35,5 @@ data "aws_iam_policy_document" "data_admin" {
       "s3:PutEncryptionConfiguration",
       "s3:PutMetricsConfiguration",
     ]
-
-    resources = ["arn:aws:s3:::alpha_*"]
   }
 }

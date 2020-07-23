@@ -1,6 +1,7 @@
 data "aws_iam_policy_document" "code_pipeline_approver" {
   statement {
-    effect = "Allow"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "codepipeline:GetPipeline",
@@ -13,10 +14,6 @@ data "aws_iam_policy_document" "code_pipeline_approver" {
       "codepipeline:RetryStageExecution",
       "codepipeline:StartPipelineExecution",
       "codepipeline:StopPipelineExecution",
-    ]
-
-    resources = [
-      "*",
     ]
   }
 }

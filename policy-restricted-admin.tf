@@ -1,6 +1,7 @@
 data "aws_iam_policy_document" "restricted_admin" {
   statement {
-    effect = "Allow"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "acm:*",
@@ -64,12 +65,11 @@ data "aws_iam_policy_document" "restricted_admin" {
       "waf:*",
       "waf-regional:*",
     ]
-
-    resources = ["*"]
   }
 
   statement {
-    effect = "Allow"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "iam:AddRoleToInstanceProfile",
@@ -130,7 +130,5 @@ data "aws_iam_policy_document" "restricted_admin" {
       "iam:UpdateRoleDescription",
       "iam:UploadSSHPublicKey",
     ]
-
-    resources = ["*"]
   }
 }

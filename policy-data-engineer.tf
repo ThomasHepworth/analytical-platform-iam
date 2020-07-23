@@ -1,16 +1,15 @@
 data "aws_iam_policy_document" "data_engineer" {
   statement {
-    sid    = "AthenaFullAccess"
-    effect = "Allow"
-
-    actions = ["athena:*"]
-
+    sid       = "AthenaFullAccess"
+    effect    = "Allow"
+    actions   = ["athena:*"]
     resources = ["*"]
   }
 
   statement {
-    sid    = "AthenaAccessQueryResults"
-    effect = "Allow"
+    sid       = "AthenaAccessQueryResults"
+    effect    = "Allow"
+    resources = ["arn:aws:s3:::aws-athena-query-results-*"]
 
     actions = [
       "s3:GetBucketLocation",
@@ -22,25 +21,23 @@ data "aws_iam_policy_document" "data_engineer" {
       "s3:CreateBucket",
       "s3:PutObject",
     ]
-
-    resources = ["arn:aws:s3:::aws-athena-query-results-*"]
   }
 
   statement {
-    sid    = "AthenaAccessExamples"
-    effect = "Allow"
+    sid       = "AthenaAccessExamples"
+    effect    = "Allow"
+    resources = ["arn:aws:s3:::athena-examples*"]
 
     actions = [
       "s3:GetObject",
       "s3:ListBucket",
     ]
-
-    resources = ["arn:aws:s3:::athena-examples*"]
   }
 
   statement {
-    sid    = "ListBuckets"
-    effect = "Allow"
+    sid       = "ListBuckets"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "s3:ListBucket",
@@ -48,13 +45,12 @@ data "aws_iam_policy_document" "data_engineer" {
       "s3:GetBucketLocation",
       "s3:ListAllMyBuckets",
     ]
-
-    resources = ["*"]
   }
 
   statement {
-    sid    = "AthenaCloudwatchAlarms"
-    effect = "Allow"
+    sid       = "AthenaCloudwatchAlarms"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "cloudwatch:DescribeAlarms",
@@ -63,33 +59,26 @@ data "aws_iam_policy_document" "data_engineer" {
       "cloudwatch:GetMetricData",
       "cloudwatch:ListDashboards",
     ]
-
-    resources = ["*"]
   }
 
   statement {
-    sid    = "AthenaLakeFormation"
-    effect = "Allow"
-
-    actions = ["lakeformation:GetDataAccess"]
-
+    sid       = "AthenaLakeFormation"
+    effect    = "Allow"
     resources = ["*"]
+    actions   = ["lakeformation:GetDataAccess"]
   }
 
   statement {
-    sid    = "GlueFullAccess"
-    effect = "Allow"
-
-    actions = [
-      "glue:*",
-    ]
-
+    sid       = "GlueFullAccess"
+    effect    = "Allow"
     resources = ["*"]
+    actions   = ["glue:*"]
   }
 
   statement {
-    sid    = "GlueIamGetReadRolesPolices"
-    effect = "Allow"
+    sid       = "GlueIamGetReadRolesPolices"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "iam:GetRole",
@@ -101,17 +90,13 @@ data "aws_iam_policy_document" "data_engineer" {
       "kms:ListAliases",
       "kms:DescribeKey",
     ]
-
-    resources = ["*"]
   }
 
   statement {
-    sid    = "GlueCreateBucket"
-    effect = "Allow"
-
-    actions = ["s3:CreateBucket"]
-
+    sid       = "GlueCreateBucket"
+    effect    = "Allow"
     resources = ["arn:aws:s3:::aws-glue-*"]
+    actions   = ["s3:CreateBucket"]
   }
 
   statement {
@@ -132,9 +117,8 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid    = "GlueS3Crawler"
-    effect = "Allow"
-
+    sid     = "GlueS3Crawler"
+    effect  = "Allow"
     actions = ["s3:GetObject"]
 
     resources = [
@@ -144,8 +128,9 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid    = "GlueCloudwatchLog"
-    effect = "Allow"
+    sid       = "GlueCloudwatchLog"
+    effect    = "Allow"
+    resources = ["arn:aws:logs:*:*:/aws-glue/*"]
 
     actions = [
       "logs:CreateLogGroup",
@@ -153,72 +138,50 @@ data "aws_iam_policy_document" "data_engineer" {
       "logs:GetLogEvents",
       "logs:PutLogEvents",
     ]
-
-    resources = ["arn:aws:logs:*:*:/aws-glue/*"]
   }
 
   statement {
-    sid    = "GlueCloudFormationRead"
-    effect = "Allow"
+    sid       = "GlueCloudFormationRead"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "cloudformation:DescribeStacks",
       "cloudformation:GetTemplateSummary",
     ]
+  }
 
+  statement {
+    sid       = "GlueTagService"
+    effect    = "Allow"
+    actions   = ["tag:GetResources"]
     resources = ["*"]
   }
 
   statement {
-    sid    = "GlueTagService"
-    effect = "Allow"
-
-    actions = ["tag:GetResources"]
-
-    resources = ["*"]
-  }
-
-  statement {
-    sid    = "GluePathCreateBucket"
-    effect = "Allow"
-
-    actions = ["s3:CreateBucket"]
-
+    sid       = "GluePathCreateBucket"
+    effect    = "Allow"
+    actions   = ["s3:CreateBucket"]
     resources = ["arn:aws:s3:::aws-glue-*"]
   }
 
   statement {
-    sid    = "GlueManageCloudformationStack"
-    effect = "Allow"
+    sid       = "GlueManageCloudformationStack"
+    effect    = "Allow"
+    resources = ["arn:aws:cloudformation:*:*:stack/aws-glue*/*"]
 
     actions = [
       "cloudformation:CreateStack",
       "cloudformation:DeleteStack",
     ]
 
-    resources = ["arn:aws:cloudformation:*:*:stack/aws-glue*/*"]
   }
 
   statement {
-    sid    = "GlueIamPassRoleToServiceGlue"
-    effect = "Allow"
-
-    actions = ["iam:PassRole"]
-
-    condition {
-      test     = "StringLike"
-      variable = "iam:PassedToService"
-      values   = ["glue.amazonaws.com"]
-    }
-
+    sid       = "GlueIamPassRoleToServiceGlue"
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
     resources = ["arn:aws:iam::*:role/AWSGlueServiceRole*"]
-  }
-
-  statement {
-    sid    = "GlueIamPassRoleToServiceGlueService"
-    effect = "Allow"
-
-    actions = ["iam:PassRole"]
 
     condition {
       test     = "StringLike"
@@ -226,12 +189,25 @@ data "aws_iam_policy_document" "data_engineer" {
       values   = ["glue.amazonaws.com"]
     }
 
-    resources = ["arn:aws:iam::*:role/service-role/AWSGlueServiceRole*"]
   }
 
   statement {
-    sid    = "AttachRolesToSelfManagedGroups"
-    effect = "Allow"
+    sid       = "GlueIamPassRoleToServiceGlueService"
+    effect    = "Allow"
+    resources = ["arn:aws:iam::*:role/service-role/AWSGlueServiceRole*"]
+    actions   = ["iam:PassRole"]
+
+    condition {
+      test     = "StringLike"
+      variable = "iam:PassedToService"
+      values   = ["glue.amazonaws.com"]
+    }
+  }
+
+  statement {
+    sid       = "AttachRolesToSelfManagedGroups"
+    effect    = "Allow"
+    resources = ["arn:aws:iam::*:role/alpha_user_*"]
 
     actions = [
       "iam:AttachRolePolicy",
@@ -241,8 +217,6 @@ data "aws_iam_policy_document" "data_engineer" {
       "iam:ListAttachedRolePolicies",
       "iam:ListRoles",
     ]
-
-    resources = ["arn:aws:iam::*:role/alpha_user_*"]
   }
 
   statement {
@@ -266,11 +240,9 @@ data "aws_iam_policy_document" "data_engineer" {
   }
 
   statement {
-    sid    = "ListDockerRepository"
-    effect = "Allow"
-
-    actions = ["ecr:ListImages"]
-
+    sid       = "ListDockerRepository"
+    effect    = "Allow"
+    actions   = ["ecr:ListImages"]
     resources = ["*"]
   }
 }

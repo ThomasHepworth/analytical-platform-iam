@@ -1,82 +1,50 @@
-locals {
-  landing = "landing"
-}
-
-##### RESTRICTED ADMIN #####
-## Restricted Admin Group
-
 module "assume_restricted_admin_in_landing" {
   source = "./modules/assume"
 
-  assumed_role_name         = "${var.restricted_admin_name}-${local.landing}"
+  assumed_role_name         = "${var.restricted_admin_name}-landing"
   assume_role_in_account_id = var.landing_account_id
   landing_account_id        = var.landing_account_id
-  group_name                = "${var.restricted_admin_name}-${local.landing}"
-
-  users = [
-    aws_iam_user.aldo.name,
-    aws_iam_user.sam.name,
-    aws_iam_user.david.name,
-    aws_iam_user.andrew.name,
-    aws_iam_user.nicholas.name,
-    aws_iam_user.toms.name,
-    aws_iam_user.danw.name,
-  ]
+  group_name                = "${var.restricted_admin_name}-landing"
+  users                     = local.analytical_platform_team
 }
 
-## Restricted Admin Role
-## Create restricted admin role in landing account
 module "add_restricted_admin_role_in_landing" {
   source    = "./modules/role"
   providers = { aws = aws.landing }
 
-  role_name          = "${var.restricted_admin_name}-${local.landing}"
+  role_name          = "${var.restricted_admin_name}-landing"
   landing_account_id = var.landing_account_id
   role_policy        = data.aws_iam_policy_document.restricted_admin.json
 }
 
-##### READ ONLY #####
-## Read Only Group
-
 module "assume_read_only_in_landing" {
   source = "./modules/assume"
 
-  assumed_role_name         = "${var.read_only_name}-${local.landing}"
+  assumed_role_name         = "${var.read_only_name}-landing"
   assume_role_in_account_id = var.landing_account_id
   landing_account_id        = var.landing_account_id
-  group_name                = "${var.read_only_name}-${local.landing}"
-
-  users = [
-    aws_iam_user.aldo.name,
-    aws_iam_user.david.name,
-    aws_iam_user.andrew.name,
-    aws_iam_user.nicholas.name,
-    aws_iam_user.toms.name,
-    aws_iam_user.danw.name,
-  ]
+  group_name                = "${var.read_only_name}-landing"
+  users                     = local.analytical_platform_team
 }
 
-## Create read only role in landing account
 module "add_read_only_role_in_landing" {
   source    = "./modules/role"
   providers = { aws = aws.landing }
 
-  role_name          = "${var.read_only_name}-${local.landing}"
+  role_name          = "${var.read_only_name}-landing"
   landing_account_id = var.landing_account_id
   role_policy        = data.aws_iam_policy_document.read_only.json
 }
 
-##### CODE PIPELINE APPROVER #####
-## Code pipeline approver group
-
 module "assume_code_pipeline_approver_in_landing" {
   source = "./modules/assume"
 
-  assumed_role_name         = "${var.code_pipeline_approver_name}-${local.landing}"
+  assumed_role_name         = "${var.code_pipeline_approver_name}-landing"
   assume_role_in_account_id = var.landing_account_id
   landing_account_id        = var.landing_account_id
-  group_name                = "${var.code_pipeline_approver_name}-${local.landing}"
+  group_name                = "${var.code_pipeline_approver_name}-landing"
 
+  # TODO this list of users seems arbitrary
   users = [
     aws_iam_user.adam.name,
     aws_iam_user.calum.name,
@@ -87,18 +55,14 @@ module "assume_code_pipeline_approver_in_landing" {
   ]
 }
 
-## Create code pipeline approver role in landing account
 module "add_code_pipeline_approver_role_in_landing" {
   source    = "./modules/role"
   providers = { aws = aws.landing }
 
-  role_name          = "${var.code_pipeline_approver_name}-${local.landing}"
+  role_name          = "${var.code_pipeline_approver_name}-landing"
   landing_account_id = var.landing_account_id
   role_policy        = data.aws_iam_policy_document.code_pipeline_approver.json
 }
-
-##### SUSPENDED USERS #####
-## Create suspended users group for inactive users
 
 module "add_suspended_users_group_in_landing" {
   source = "./modules/assume"
@@ -111,7 +75,6 @@ module "add_suspended_users_group_in_landing" {
   users                     = [aws_iam_user.suspended.name]
 }
 
-## Create audit security role in landing account
 module "add_audit_security_role_in_landing" {
   source    = "./modules/role"
   providers = { aws = aws.landing }

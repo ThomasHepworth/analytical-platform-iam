@@ -1,23 +1,21 @@
 data "aws_iam_policy_document" "billing_viewer" {
   statement {
-    sid    = "ViewBillingAndCostManagement"
-    effect = "Allow"
+    sid       = "ViewBillingAndCostManagement"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "aws-portal:View*",
     ]
-
-    resources = ["*"]
   }
 
   statement {
-    sid    = "DenyAccountSettings"
-    effect = "Deny"
+    sid       = "DenyAccountSettings"
+    effect    = "Deny"
+    resources = ["*"]
 
     actions = [
       "aws-portal:*Account",
     ]
-
-    resources = ["*"]
   }
 }

@@ -1,6 +1,7 @@
 data "aws_iam_policy_document" "read_only" {
   statement {
-    effect = "Allow"
+    effect    = "Allow"
+    resources = ["*"]
 
     actions = [
       "cloudtrail:Describe*",
@@ -27,7 +28,5 @@ data "aws_iam_policy_document" "read_only" {
       "s3:Get*",
       "s3:List*",
     ]
-
-    resources = ["*"]
   }
 }
