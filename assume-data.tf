@@ -201,11 +201,7 @@ module "add_billing_viewer_group" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = var.billing_viewer_name
-
-  users = distinct(concat(
-    local.analytical_platform_team,
-    local.analytical_users,
-  ))
+  users                     = local.analytical_users
 }
 
 module "assume_quicksight_admin_in_data" {
