@@ -46,21 +46,21 @@ locals {
     aws_iam_user.robin.name,
   ]
 
-  data_engineering_team = distinct([
+  data_engineering_team = distinct(concat(
     local.courts_data_engineering_team,
     local.corporate_data_engineering_team,
     local.data_first_data_engineering_team,
     local.prisons_data_engineering_team,
     local.probation_data_engineering_team,
-  ])
+  ))
 
-  data_science_team = distinct([
+  data_science_team = distinct(concat(
     local.opg_data_science_team,
     local.data_first_data_science_team,
-  ])
+  ))
 
-  analytical_users = distinct([
+  analytical_users = distinct(concat(
     local.data_engineering_team,
     local.data_science_team,
-  ])
+  ))
 }

@@ -202,10 +202,10 @@ module "add_billing_viewer_group" {
   landing_account_id        = var.landing_account_id
   group_name                = var.billing_viewer_name
 
-  users = distinct([
+  users = distinct(concat(
     local.analytical_platform_team,
     local.analytical_users,
-  ])
+  ))
 }
 
 module "assume_quicksight_admin_in_data" {
