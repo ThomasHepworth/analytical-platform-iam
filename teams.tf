@@ -40,6 +40,7 @@ locals {
 
   opg_data_science_team = [
     aws_iam_user.sam.name,
+    aws_iam_user.rich_ingley.name,
   ]
 
   data_first_data_science_team = [
