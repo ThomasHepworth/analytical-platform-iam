@@ -74,3 +74,12 @@ variable "data_engineering_account_id" {
 variable "code_pipeline_approver_name" {
   default = "code-pipeline-approver"
 }
+
+locals {
+  tags = {
+    business-unit = "Platforms"
+    application   = "analytical-platform"
+    is-production = "true"
+    owner         = "analytical-platform-analytics-platform-tech@digital.justice.gov.uk"
+  }
+}

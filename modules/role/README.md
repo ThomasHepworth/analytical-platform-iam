@@ -1,6 +1,7 @@
-# Role module
+# AWS Module Role
 
-This folder contains a Terraform module that defines the infra that:
+This module:
 
-* creates a role in a remote AWS account
-* that an authorized user/role in the Landing AWS account can AssumeRole into. (That user/role in the Landing AWS account is created by the [assume module](../assume) )
+- Creates role in a remote account
+- Allows attaching a role policy document to resulting role
+- Allows attaching a role policy by specifying the policy's arn

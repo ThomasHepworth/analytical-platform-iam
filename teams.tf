@@ -64,4 +64,9 @@ locals {
     local.data_engineering_team,
     local.data_science_team,
   ))
+
+  all_users = distinct(concat(
+    local.analytical_users,
+    local.analytical_platform_team
+  ))
 }

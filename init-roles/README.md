@@ -1,4 +1,4 @@
-# INIT-ROLES
+# `init-roles`
 
 Defines some IAM roles that are needed in every AWS account in the system. These roles are the minimum that allows the Landing AWS Account to setup what it needs.
 
@@ -31,5 +31,3 @@ terraform plan
 ```bash
 terraform apply
 ```
-
-__Local state only__

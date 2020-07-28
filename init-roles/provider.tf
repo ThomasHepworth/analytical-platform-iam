@@ -1,9 +1,8 @@
 provider "aws" {
   region  = "eu-west-1"
-  version = "~> 2.31"
+  version = "~> 2"
 }
 
 terraform {
-  backend "local" {
-  }
+  backend "local" {}
 }
