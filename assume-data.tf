@@ -36,29 +36,6 @@ module "add_read_only_role_in_data" {
   role_policy        = data.aws_iam_policy_document.read_only.json
 }
 
-module "assume_read_s3_only_in_data" {
-  source = "./modules/assume"
-
-  assumed_role_name         = "${var.read_data_only_name}-data-acc"
-  assume_role_in_account_id = var.ap_accounts["data"]
-  landing_account_id        = var.landing_account_id
-  group_name                = "${var.read_data_only_name}-data-acc"
-
-  users = [
-    aws_iam_user.calum.name,
-    aws_iam_user.sam.name,
-  ]
-}
-
-module "add_read_data_only_role_in_data" {
-  source    = "./modules/role"
-  providers = { aws = aws.data }
-
-  role_name          = "${var.read_data_only_name}-data-acc"
-  landing_account_id = var.landing_account_id
-  role_policy        = data.aws_iam_policy_document.read_data_only.json
-}
-
 module "assume_data_admin_in_data" {
   source = "./modules/assume"
 

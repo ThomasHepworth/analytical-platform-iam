@@ -15,10 +15,6 @@ variable "read_only_name" {
   default = "read-only"
 }
 
-variable "read_data_only_name" {
-  default = "read-s3-only"
-}
-
 variable "data_admin_name" {
   default = "data-admin-in"
 }
