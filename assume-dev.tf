@@ -24,7 +24,7 @@ module "assume_read_only_in_dev" {
   assume_role_in_account_id = var.ap_accounts["dev"]
   landing_account_id        = var.landing_account_id
   group_name                = "${var.read_only_name}-dev"
-  users                     = local.analytical_platform_team
+  # users                     = local.analytical_platform_team
 }
 
 module "add_read_only_role_in_dev" {

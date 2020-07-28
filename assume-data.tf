@@ -24,7 +24,7 @@ module "assume_read_only_in_data" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = "${var.read_only_name}-data"
-  users                     = local.analytical_platform_team
+  # users                     = local.analytical_platform_team
 }
 
 module "add_read_only_role_in_data" {
@@ -47,9 +47,6 @@ module "assume_read_s3_only_in_data" {
   users = [
     aws_iam_user.calum.name,
     aws_iam_user.sam.name,
-    aws_iam_user.andrew.name,
-    aws_iam_user.toms.name,
-    aws_iam_user.danw.name,
   ]
 }
 
