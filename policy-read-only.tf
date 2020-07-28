@@ -29,4 +29,18 @@ data "aws_iam_policy_document" "read_only" {
       "s3:List*",
     ]
   }
+
+  statement {
+    sid       = "ViewBillingAndCostManagement"
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["aws-portal:View*"]
+  }
+
+  statement {
+    sid       = "DenyAccountSettings"
+    effect    = "Deny"
+    resources = ["*"]
+    actions   = ["aws-portal:*Account"]
+  }
 }

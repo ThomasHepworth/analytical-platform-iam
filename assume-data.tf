@@ -159,25 +159,6 @@ module "add_corporate_data_engineers_role_in_data_account" {
   role_policy        = data.aws_iam_policy_document.corporate_data_engineer.json
 }
 
-module "add_billing_viewer_role_in_data_account" {
-  source    = "./modules/role"
-  providers = { aws = aws.data }
-
-  role_name          = var.billing_viewer_name
-  landing_account_id = var.landing_account_id
-  role_policy        = data.aws_iam_policy_document.billing_viewer.json
-}
-
-module "add_billing_viewer_group" {
-  source = "./modules/assume"
-
-  assumed_role_name         = var.billing_viewer_name
-  assume_role_in_account_id = var.ap_accounts["data"]
-  landing_account_id        = var.landing_account_id
-  group_name                = var.billing_viewer_name
-  users                     = local.analytical_users
-}
-
 module "assume_quicksight_admin_in_data" {
   source = "./modules/assume"
 
