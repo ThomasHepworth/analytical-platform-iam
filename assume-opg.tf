@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "opg_access" {
   statement {
     effect  = "Allow"
     sid     = "ListBuckets"
-    actions = ["ListBucket"]
+    actions = ["s3:ListBucket"]
     resources = [
       "arn:aws:s3:::mojap-land",
       "arn:aws:s3:::alpha-opg*",
