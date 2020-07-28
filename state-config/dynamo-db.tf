@@ -13,7 +13,7 @@ resource "aws_dynamodb_table" "state_lock" {
     business-unit = "Platforms"
     application   = "analytical-platform"
     is-production = "1"
-    owner         = "analytical-platform-analytics-platform-tech@digital.justice.gov.uk"
+    owner         = "analytical-platform:analytics-platform-tech@digital.justice.gov.uk"
   }
 }
 

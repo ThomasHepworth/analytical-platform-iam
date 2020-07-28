@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "state" {
     business-unit = "Platforms"
     application   = "analytical-platform"
     is-production = "1"
-    owner         = "analytical-platform-analytics-platform-tech@digital.justice.gov.uk"
+    owner         = "analytical-platform:analytics-platform-tech@digital.justice.gov.uk"
   }
 }
 

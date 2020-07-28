@@ -76,6 +76,6 @@ locals {
     business-unit = "Platforms"
     application   = "analytical-platform"
     is-production = "true"
-    owner         = "analytical-platform-analytics-platform-tech@digital.justice.gov.uk"
+    owner         = "analytical-platform:analytics-platform-tech@digital.justice.gov.uk"
   }
 }
