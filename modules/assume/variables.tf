@@ -20,6 +20,7 @@ variable "group_name" {
 variable "users" {
   description = "A list of users"
   type        = list(string)
+  default     = []
 }
 
 variable "group_effect" {
