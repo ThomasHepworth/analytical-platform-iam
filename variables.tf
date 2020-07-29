@@ -11,10 +11,6 @@ variable "restricted_admin_name" {
   default = "restricted-admin"
 }
 
-variable "read_only_name" {
-  default = "read-only"
-}
-
 variable "data_admin_name" {
   default = "data-admin-in"
 }

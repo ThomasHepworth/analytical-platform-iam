@@ -17,25 +17,6 @@ module "add_restricted_admin_role_in_data" {
   role_policy        = data.aws_iam_policy_document.restricted_admin.json
 }
 
-module "assume_read_only_in_data" {
-  source = "./modules/assume"
-
-  assumed_role_name         = "${var.read_only_name}-data"
-  assume_role_in_account_id = var.ap_accounts["data"]
-  landing_account_id        = var.landing_account_id
-  group_name                = "${var.read_only_name}-data"
-  # users                     = local.analytical_platform_team
-}
-
-module "add_read_only_role_in_data" {
-  source    = "./modules/role"
-  providers = { aws = aws.data }
-
-  role_name          = "${var.read_only_name}-data"
-  landing_account_id = var.landing_account_id
-  role_policy        = data.aws_iam_policy_document.read_only.json
-}
-
 module "assume_data_admin_in_data" {
   source = "./modules/assume"
 

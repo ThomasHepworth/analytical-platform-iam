@@ -17,25 +17,6 @@ module "add_restricted_admin_role_in_prod" {
   role_policy        = data.aws_iam_policy_document.restricted_admin.json
 }
 
-module "assume_read_only_in_prod" {
-  source = "./modules/assume"
-
-  assumed_role_name         = "${var.read_only_name}-prod"
-  assume_role_in_account_id = var.ap_accounts["prod"]
-  landing_account_id        = var.landing_account_id
-  group_name                = "${var.read_only_name}-prod"
-  # users                     = local.analytical_platform_team
-}
-
-module "add_read_only_role_in_prod" {
-  source    = "./modules/role"
-  providers = { aws = aws.prod }
-
-  role_name          = "${var.read_only_name}-prod"
-  landing_account_id = var.landing_account_id
-  role_policy        = data.aws_iam_policy_document.read_only.json
-}
-
 module "add_audit_security_role_in_prod" {
   source    = "./modules/role"
   providers = { aws = aws.prod }

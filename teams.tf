@@ -47,6 +47,15 @@ locals {
     aws_iam_user.robin.name,
   ]
 
+  data_engineering_leads = [
+    aws_iam_user.adam.name,
+    aws_iam_user.calum.name,
+    aws_iam_user.george.name,
+    aws_iam_user.jacob.name,
+    aws_iam_user.karik.name,
+    aws_iam_user.sam.name,
+  ]
+
   data_engineering_team = distinct(concat(
     local.courts_data_engineering_team,
     local.corporate_data_engineering_team,
