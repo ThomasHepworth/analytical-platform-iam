@@ -62,7 +62,7 @@ provider "aws" {
 provider "aws" {
   region  = "eu-west-1"
   version = "~> 2.6"
-  alias   = "data-engineering"
+  alias   = "data_engineering"
 
   assume_role {
     role_arn = "arn:aws:iam::${var.data_engineering_account_id}:role/${var.landing_iam_role}"

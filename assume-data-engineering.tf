@@ -10,7 +10,7 @@ module "assume_restricted_admin_in_data_engineering" {
 
 module "add_restricted_admin_role_in_data_engineering" {
   source    = "./modules/role"
-  providers = { aws = aws.data-engineering }
+  providers = { aws = aws.data_engineering }
 
   role_name          = "${var.restricted_admin_name}-data-engineering"
   landing_account_id = var.landing_account_id

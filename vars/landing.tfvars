@@ -4,5 +4,5 @@ ap_accounts = {
   prod = "312423030077"
 }
 data_engineering_account_id = "189157455002"
-landing_account_id  = "335823981503"
-security_account_id = "110958189132"
+landing_account_id          = "335823981503"
+security_account_id         = "110958189132"
