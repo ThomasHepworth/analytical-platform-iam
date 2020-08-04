@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "assume" {
   }
 }
 
-resource "aws_iam_role" "this" {
+resource "aws_iam_role" "destination" {
   provider           = aws.destination
   name_prefix        = var.destination_role_name
   assume_role_policy = data.aws_iam_policy_document.assume.json
@@ -24,26 +24,26 @@ resource "aws_iam_role" "this" {
 }
 
 output "destination_role" {
-  value = aws_iam_role.this
+  value = aws_iam_role.destination
 }
 
 resource "aws_iam_role_policy_attachment" "managed" {
   for_each   = toset(var.managed_policies)
   provider   = aws.destination
-  role       = aws_iam_role.this.name
+  role       = aws_iam_role.destination.name
   policy_arn = each.key
 }
 
-resource "aws_iam_policy" "this" {
+resource "aws_iam_policy" "destination" {
   for_each    = var.aws_iam_policy_documents
   provider    = aws.destination
   name_prefix = each.key
   policy      = each.value.json
 }
 
-resource "aws_iam_role_policy_attachment" "this" {
-  for_each   = aws_iam_policy.this
+resource "aws_iam_role_policy_attachment" "destination" {
+  for_each   = aws_iam_policy.destination
   provider   = aws.destination
-  role       = aws_iam_role.this.name
+  role       = aws_iam_role.destination.name
   policy_arn = each.value["arn"]
 }
