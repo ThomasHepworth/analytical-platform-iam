@@ -5,7 +5,7 @@ module "assume_restricted_admin_in_landing" {
   assume_role_in_account_id = var.landing_account_id
   landing_account_id        = var.landing_account_id
   group_name                = "${var.restricted_admin_name}-landing"
-  users                     = local.analytical_platform_team
+  users                     = module.analytical_platform_team.user_names
 }
 
 module "add_restricted_admin_role_in_landing" {
@@ -24,7 +24,7 @@ module "assume_code_pipeline_approver_in_landing" {
   assume_role_in_account_id = var.landing_account_id
   landing_account_id        = var.landing_account_id
   group_name                = "${var.code_pipeline_approver_name}-landing"
-  users                     = local.data_engineering_leads
+  users                     = module.data_engineering_leads_team.user_names
 }
 
 module "add_code_pipeline_approver_role_in_landing" {

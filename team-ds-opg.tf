@@ -1,15 +1,29 @@
-module "opg" {
+module "opg_data_science" {
   source = "./modules/assume_role"
-  users  = local.opg_data_science_team
+  tags   = local.tags
 
-  destination_role_name   = "opg-data-access"
-  aws_iam_policy_document = data.aws_iam_policy_document.opg_access
-  tags                    = local.tags
+  destination_role_name = "opg-data-science"
+  user_names            = module.opg_data_science_group.user_names
+  user_arns             = module.opg_data_science_group.user_arns
+
+  managed_policies = [
+    "arn:aws:iam::aws:policy/AmazonAthenaFullAccess",
+    "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
+    "arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess",
+  ]
+
+  aws_iam_policy_documents = {
+    "opg_data_science" = data.aws_iam_policy_document.opg_access,
+  }
 
   providers = {
-    aws                     = aws.landing
-    aws.destination_account = aws.data
+    aws             = aws.landing
+    aws.destination = aws.data
   }
+}
+
+output "opg_ds_role_name" {
+  value = module.opg_data_science.destination_role.name
 }
 
 data "aws_iam_policy_document" "opg_access" {

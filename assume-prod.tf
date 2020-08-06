@@ -5,7 +5,7 @@ module "assume_restricted_admin_in_prod" {
   assume_role_in_account_id = var.ap_accounts["prod"]
   landing_account_id        = var.landing_account_id
   group_name                = "${var.restricted_admin_name}-prod"
-  users                     = local.analytical_platform_team
+  users                     = module.analytical_platform_team.user_names
 }
 
 module "add_restricted_admin_role_in_prod" {

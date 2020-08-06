@@ -1,4 +1,28 @@
 data "aws_iam_policy_document" "read_only" {
+  # statement {
+  #   sid       = "DenyAccessToSensitiveItems"
+  #   effect    = "Deny"
+  #   resources = ["*"]
+  #   actions = [
+  #     "cloudformation:GetTemplate",
+  #     "dynamodb:GetItem",
+  #     "dynamodb:BatchGetItem",
+  #     "dynamodb:Query",
+  #     "dynamodb:Scan",
+  #     "ec2:GetConsoleOutput",
+  #     "ec2:GetConsoleScreenshot",
+  #     "ecr:BatchGetImage",
+  #     "ecr:GetAuthorizationToken",
+  #     "ecr:GetDownloadUrlForLayer",
+  #     "kinesis:Get*",
+  #     "lambda:GetFunction",
+  #     "logs:GetLogEvents",
+  #     "s3:GetObject",
+  #     "sdb:Select*",
+  #     "sqs:ReceiveMessage"
+  #   ]
+  # }
+
   statement {
     effect    = "Allow"
     resources = ["*"]

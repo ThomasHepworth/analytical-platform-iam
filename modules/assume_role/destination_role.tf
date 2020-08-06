@@ -1,5 +1,6 @@
-data "aws_iam_policy_document" "assume" {
+data "aws_iam_policy_document" "destination" {
   statement {
+    sid     = "AllowSelectedUsersAssumeRole"
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
@@ -10,31 +11,35 @@ data "aws_iam_policy_document" "assume" {
     }
 
     principals {
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.landing.account_id}:root"]
+      identifiers = var.user_arns
       type        = "AWS"
     }
   }
 }
 
-resource "aws_iam_role" "role" {
-  provider           = aws.destination_account
-  name_prefix        = var.destination_role_name
-  assume_role_policy = data.aws_iam_policy_document.assume.json
-  tags               = var.tags
+resource "aws_iam_role" "destination" {
+  provider           = aws.destination
+  name               = var.destination_role_name
+  assume_role_policy = data.aws_iam_policy_document.destination.json
 }
 
-resource "aws_iam_role_policy" "role_policy" {
-  provider = aws.destination_account
-  policy   = var.aws_iam_policy_document.json
-  role     = aws_iam_role.role.id
-  name     = var.destination_role_name
+resource "aws_iam_role_policy_attachment" "managed" {
+  for_each   = toset(var.managed_policies)
+  provider   = aws.destination
+  role       = aws_iam_role.destination.name
+  policy_arn = each.key
 }
 
-# Specify an existing role for example arn:aws:iam::aws:policy/AdministratorAccess
-resource "aws_iam_role_policy_attachment" "role_policy_attachment" {
-  provider = aws.destination_account
-  count    = signum(length(var.existing_policy_arn))
+resource "aws_iam_policy" "destination" {
+  for_each    = var.aws_iam_policy_documents
+  provider    = aws.destination
+  name_prefix = each.key
+  policy      = each.value.json
+}
 
-  policy_arn = var.existing_policy_arn
-  role       = aws_iam_role.role.name
+resource "aws_iam_role_policy_attachment" "destination" {
+  for_each   = aws_iam_policy.destination
+  provider   = aws.destination
+  role       = aws_iam_role.destination.name
+  policy_arn = each.value["arn"]
 }

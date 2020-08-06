@@ -5,7 +5,7 @@ module "assume_restricted_admin_in_data" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = "${var.restricted_admin_name}-data"
-  users                     = local.analytical_platform_team
+  users                     = module.analytical_platform_team.user_names
 }
 
 module "add_restricted_admin_role_in_data" {
@@ -24,7 +24,7 @@ module "assume_data_admin_in_data" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = "${var.data_admin_name}-data-acc"
-  users                     = local.analytical_platform_team
+  users                     = module.analytical_platform_team.user_names
 }
 
 module "add_data_admin_role_in_data" {
@@ -71,7 +71,7 @@ module "add_hmcts_data_engineers_group" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = var.hmcts_data_engineers_name
-  users                     = local.courts_data_engineering_team
+  users                     = module.courts_data_engineering_team.user_names
 }
 
 module "add_hmcts_data_engineers_role_in_data_account" {
@@ -80,7 +80,7 @@ module "add_hmcts_data_engineers_role_in_data_account" {
 
   role_name          = var.hmcts_data_engineers_name
   landing_account_id = var.landing_account_id
-  role_policy        = data.aws_iam_policy_document.hmcts_data_engineer.json
+  role_policy        = data.aws_iam_policy_document.courts_data_engineer.json
 }
 
 module "add_probation_data_engineers_group" {
@@ -90,7 +90,7 @@ module "add_probation_data_engineers_group" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = var.probation_data_engineers_name
-  users                     = local.probation_data_engineering_team
+  users                     = module.probation_data_engineering_team.user_names
 }
 
 module "add_probation_data_engineers_role_in_data_account" {
@@ -109,7 +109,7 @@ module "add_prison_data_engineers_group" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = var.prison_data_engineers_name
-  users                     = local.prisons_data_engineering_team
+  users                     = module.prison_data_engineering_team.user_names
 }
 
 module "add_prison_data_engineers_role_in_data_account" {
@@ -128,7 +128,7 @@ module "add_corporate_data_engineers_group" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = var.corporate_data_engineers_name
-  users                     = local.corporate_data_engineering_team
+  users                     = module.corporate_data_engineering_team.user_names
 }
 
 module "add_corporate_data_engineers_role_in_data_account" {

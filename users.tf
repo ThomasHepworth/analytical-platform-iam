@@ -1,3 +1,8 @@
+resource "aws_iam_group" "users" {
+  name     = "users"
+  provider = aws.landing
+}
+
 resource "aws_iam_user" "nicholas" {
   name          = "nicholas.tollervey@digital.justice.gov.uk"
   force_destroy = true
@@ -93,7 +98,10 @@ resource "aws_iam_user" "danw" {
   force_destroy = true
 }
 
-resource "aws_iam_user" "rich_ingley" {
-  name          = "richard.ingley@digital.justice.gov.uk"
-  force_destroy = true
+module "rich_ingley" {
+  source      = "./modules/user"
+  email       = "richard.ingley@digital.justice.gov.uk"
+  tags        = local.tags
+  group_names = [aws_iam_group.users.name]
+  providers   = { aws = aws.landing }
 }
