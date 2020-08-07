@@ -103,5 +103,4 @@ module "rich_ingley" {
   email       = "richard.ingley@digital.justice.gov.uk"
   tags        = local.tags
   group_names = [aws_iam_group.users.name]
-  providers   = { aws = aws.landing }
 }

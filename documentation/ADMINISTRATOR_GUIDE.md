@@ -44,74 +44,57 @@ For a new user:
   * under "Console access" select "Enable"
   * under "Require password reset" *check* the box
   * select "Apply"
-* Email the user their AWS console password and the link to: [First login](#first-login)
+* Email the user their AWS console password and the link to: [First login](../README.md/#first-login)
 
-### New/editing groups
-
-#### Variables
-
-Group names should be held in variables (and we may well refer to it several times), so we'll put it in [variables.tf](variables.tf). For example we'll create a group called `glue-admins`
-You would add something like below to [variables.tf](variables.tf)
-
-```hcl
-## Glue Admins
-
-variable "glue_admins_name" {
-  default = "glue-admins"
-}
-```
+### Editing Policies
 
 #### Policies
 
-Create a policy for a *purpose* and attach it to multiple user groups. This is better than a group having one big policy, because it means you're likely to end up putting lots of users in bigger groups, which is against the 'principle of least privilege'. You can iterate on policies that already exist in this repository or create a policy document from scratch.
+Policies are designed to allow one team to perform the same role/job. Therefore when editing or creating new roles it should be for a team.
 
-Policy files should be prefixed with `policy-` for clarity. For example `policy-glue-admins.tf`
+The exception to this is the Data Engineering Team Leads team. This role gives leasd extra permissions to exploratation of new services & to approve code pipelines.
 
-To use a managed policy instead, you can refer to the policy by using it's ARN with the parameter `role_policy_arn`
+### AWS Managed Policies
 
-```hcl
-module "add_glue_admins_role_in_dev" {
-  source = "./modules/role"
-  providers = {
-    aws = "aws.dev"
-  }
+Where possible and appropreate, use AWS managed policies. These are often pre-built with a particular purpose in mind, for example running a Glue Job.
 
-  role_name                 = "${var.glue_admins_name}-${local.dev}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy_arn           = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess"
-}
-```
+#### Roles
 
-#### Roles and Groups
+The main portion of this repository provisions roles in remote AWS accounts and gives permisions to a trusted set of users to assume those roles
 
-The main portion of this repo provisions roles in remote aws accounts and groups where members can assume those roles.
-To do this you need to invoke both the `assume` and `role` modules. The `assume` module defines the group, it's members
-and the relationship with the role in the remote account. The `role` module defines the role and attached policies that
-get created in the remote account.
+The example module below, attaches a set of managed policies and a single named policy called `prison-data-engineer` to the destination role.
+
+Users passed in through `user_names` & `user_arns`, are the only people allowed to assume that role.
+
+Providers specify the accounts that the module has access to. If you need to create a role in the `prod` account, the destination should specify `prod`.
 
 ```hcl
-module "assume_glue_admins_in_dev" {
-  source = "./modules/assume"
+module "prison_data_engineer" {
+  source = "./modules/assume_role"
+  tags   = local.tags
 
-  assumed_role_name = "${var.glue_admins_name}-${local.dev}"
-  assume_role_in_account_id = var.ap_accounts["dev"]
-  landing_account_id = var.landing_account_id
-  group_name         = "${var.glue_admins_name}-${local.dev}"
+  destination_role_name = "prison-data-engineer"
+  user_names            = module.prison_data_engineering_team.user_names
+  user_arns             = module.prison_data_engineering_team.user_arns
 
-  users = [
-    "${aws_iam_user.bob.name}",
-    "${aws_iam_user.alice.name}",
+  managed_policies = [
+    "arn:aws:iam::aws:policy/AmazonAthenaFullAccess",
+    "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
+    "arn:aws:iam::aws:policy/AWSLakeFormationDataAdmin",
+    "arn:aws:iam::aws:policy/AWSSupportAccess",
+    "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
+    "arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess",
+    "arn:aws:iam::aws:policy/AWSCodePipelineApproverAccess",
+    "arn:aws:iam::aws:policy/AWSCodePipelineReadOnlyAccess",
   ]
-}
 
-module "add_glue_admins_role_in_dev" {
-  source = "./modules/role"
-  providers = {
-    aws = "aws.dev"
+  aws_iam_policy_documents = {
+    "prison_data_engineer" = data.aws_iam_policy_document.prison_data_engineer,
   }
 
-  role_name                 = "${var.glue_admins_name}-${local.dev}"
-  landing_account_id        = "${var.landing_account_id}"
-  role_policy               = "${data.aws_iam_policy_document.glue_admins.json}"
+  providers = {
+    aws             = aws.landing
+    aws.destination = aws.data
+  }
 }
 ```

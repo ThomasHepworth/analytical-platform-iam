@@ -25,6 +25,7 @@ In addition, since the Analytical Platform is spread over multiple other AWS Acc
     - [Authenticating](#authenticating)
       - [AWS CLI](#aws-cli)
       - [AWS Console](#aws-console)
+  - [Administration](#administration)
 
 ## Contents of this repo
 
@@ -70,23 +71,27 @@ The following example:
 
 File: [`users.tf`](users.tf)
 
-All users require an account in the landing account. Add an "aws_iam_user" resource, with your details. Using your preferred email address as the name.
+All users require an account in the landing account. Add user module, with your details.
 
 ```hcl
-resource "aws_iam_user" "bob" {
-  name          = "bob@digital.justice.gov.uk"
-  force_destroy = true
+module "bob" {
+  source      = "./modules/user"
+  email       = "bob@digital.justice.gov.uk"
+  tags        = local.tags
+  group_names = [aws_iam_group.users.name]
 }
 ```
 
-Add yourself the relevant groups in [`teams.tf`](teams.tf). For example, if you are part of the `data_first_data_engineering_team` then you would amend the following list:
+Add yourself the relevant groups in [`teams.tf`](teams.tf). For example, if you are part of the `data_first_data_engineering_team` then you would amend the following users list:
 
 ```hcl
-data_first_data_engineering_team = [
-  aws_iam_user.a.name,
-  aws_iam_user.b.name,
-  aws_iam_user.you_new_user.name,
-]
+module "data_first_data_engineering_team" {
+  source = "./modules/group"
+  users = [
+    aws_iam_user.george.name,
+    aws_iam_user.sam.name,
+  ]
+}
 ```
 
 Create a Pull Request (PR) with this change. The PR will automatically request a review from the relevant team.
@@ -142,3 +147,7 @@ Alternatively use these links:
 - [data-engineers-corporate@mojanalytics](https://signin.aws.amazon.com/switchrole?account=mojanalytics&roleName=data-engineers-corporate&displayName=data-engineers-corporate@mojanalytics)
 
 Please use the 'read-only' roles by default - only use 'restricted-admin' when you need to make a change.
+
+## Administration
+
+If you need to amend the current roles please see the [administration guide](documentation/ADMINISTRATOR_GUIDE.md)
