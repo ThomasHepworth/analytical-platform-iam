@@ -52,7 +52,7 @@ module "add_data_engineers_group" {
   assume_role_in_account_id = var.ap_accounts["data"]
   landing_account_id        = var.landing_account_id
   group_name                = var.data_engineers_name
-  users                     = local.data_engineering_team
+  users                     = module.data_engineering_team.user_names
 }
 
 module "add_data_engineers_role_in_data_account" {

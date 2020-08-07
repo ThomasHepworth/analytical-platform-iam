@@ -50,8 +50,16 @@ module "ap_team_data_restricted_admin" {
 
   destination_role_name    = "restricted-admin"
   destination_account_name = "data"
-  user_names               = module.analytical_platform_team.user_names
-  user_arns                = module.analytical_platform_team.user_arns
+
+  user_names = distinct(concat(
+    module.analytical_platform_team.user_names,
+    module.data_engineering_team.user_names,
+  ))
+
+  user_arns = distinct(concat(
+    module.analytical_platform_team.user_arns,
+    module.data_engineering_team.user_arns,
+  ))
 
   aws_iam_policy_documents = {
     "restricted-admin" = data.aws_iam_policy_document.restricted_admin,

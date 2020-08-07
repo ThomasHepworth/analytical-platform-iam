@@ -1,25 +1,28 @@
 locals {
-  data_engineering_team = distinct(concat(
-    module.courts_data_engineering_team.user_names,
-    module.corporate_data_engineering_team.user_names,
-    module.data_first_data_engineering_team.user_names,
-    module.prison_data_engineering_team.user_names,
-    module.probation_data_engineering_team.user_names,
-  ))
-
   data_science_team = distinct(concat(
     module.opg_data_science_group.user_names,
     module.data_first_data_science_team.user_names,
   ))
 
   analytical_users = distinct(concat(
-    local.data_engineering_team,
+    module.data_engineering_team.user_names,
     local.data_science_team,
   ))
 
   all_users = distinct(concat(
     local.analytical_users,
     module.analytical_platform_team.user_names
+  ))
+}
+
+module "data_engineering_team" {
+  source = "./modules/group"
+  users = distinct(concat(
+    module.courts_data_engineering_team.user_names,
+    module.corporate_data_engineering_team.user_names,
+    module.data_first_data_engineering_team.user_names,
+    module.prison_data_engineering_team.user_names,
+    module.probation_data_engineering_team.user_names,
   ))
 }
 

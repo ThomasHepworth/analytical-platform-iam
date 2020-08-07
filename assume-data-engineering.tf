@@ -5,7 +5,7 @@ module "assume_restricted_admin_in_data_engineering" {
   assume_role_in_account_id = var.data_engineering_account_id
   landing_account_id        = var.landing_account_id
   group_name                = "${var.restricted_admin_name}-data-engineering"
-  users                     = local.data_engineering_team
+  users                     = module.data_engineering_team.user_names
 }
 
 module "add_restricted_admin_role_in_data_engineering" {
