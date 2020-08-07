@@ -12,7 +12,11 @@ module "prison_data_engineer" {
     "arn:aws:iam::aws:policy/AWSLakeFormationDataAdmin",
     "arn:aws:iam::aws:policy/AWSSupportAccess",
     "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
+    "arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess",
     "arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess",
+    "arn:aws:iam::aws:policy/CloudWatchEventsReadOnlyAccess",
+    "arn:aws:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess",
+    "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
     "arn:aws:iam::aws:policy/AWSCodePipelineApproverAccess",
     "arn:aws:iam::aws:policy/AWSCodePipelineReadOnlyAccess",
   ]
