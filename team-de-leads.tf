@@ -7,16 +7,6 @@ module "data_engineering_leads" {
   user_arns             = module.data_engineering_leads_team.user_arns
 
   managed_policies = [
-    "arn:aws:iam::aws:policy/AmazonAthenaFullAccess",
-    "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
-    "arn:aws:iam::aws:policy/AWSLakeFormationDataAdmin",
-    "arn:aws:iam::aws:policy/AWSSupportAccess",
-    "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
-    "arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess",
-    "arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess",
-    "arn:aws:iam::aws:policy/CloudWatchEventsReadOnlyAccess",
-    "arn:aws:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess",
-    "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
     "arn:aws:iam::aws:policy/AWSCodePipelineApproverAccess",
     "arn:aws:iam::aws:policy/AWSCodePipelineReadOnlyAccess",
   ]
@@ -27,7 +17,7 @@ module "data_engineering_leads" {
 
   providers = {
     aws             = aws.landing
-    aws.destination = aws.data
+    aws.destination = aws.landing
   }
 }
 

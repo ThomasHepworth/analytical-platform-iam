@@ -17,7 +17,6 @@ module "data_first_data_science" {
     "arn:aws:iam::aws:policy/CloudWatchEventsReadOnlyAccess",
     "arn:aws:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess",
     "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
-    "arn:aws:iam::aws:policy/AWSCodePipelineApproverAccess",
     "arn:aws:iam::aws:policy/AWSCodePipelineReadOnlyAccess",
   ]
 

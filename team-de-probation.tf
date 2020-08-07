@@ -17,7 +17,6 @@ module "probation_data_engineer" {
     "arn:aws:iam::aws:policy/CloudWatchEventsReadOnlyAccess",
     "arn:aws:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess",
     "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
-    "arn:aws:iam::aws:policy/AWSCodePipelineApproverAccess",
     "arn:aws:iam::aws:policy/AWSCodePipelineReadOnlyAccess",
   ]
   aws_iam_policy_documents = {
