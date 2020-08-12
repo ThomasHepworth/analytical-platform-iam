@@ -30,9 +30,7 @@ module "corporate_data_engineer" {
   }
 }
 
-output "corporate_data_engineer_role_name" {
-  value = module.corporate_data_engineer.destination_role.name
-}
+
 
 data "aws_iam_policy_document" "corporate_data_engineer" {
   statement {
