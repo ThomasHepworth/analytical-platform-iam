@@ -116,6 +116,7 @@ source_profile=landing
 
 The following lines will grant you restricted admin to both the data and landing account.
 ```ini
+# ~/.aws/config
 [profile restricted-landing]
 region = eu-west-1
 role_arn=arn:aws:iam::335823981503:role/restricted-admin-landing
