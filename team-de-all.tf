@@ -17,9 +17,8 @@ locals {
     }
 
     "data-first-data-engineer" = {
-      user_names       = module.corporate_data_engineering_team.user_names
-      user_arns        = module.corporate_data_engineering_team.user_arns
-      policy_documents = {}
+      user_names = module.corporate_data_engineering_team.user_names
+      user_arns  = module.corporate_data_engineering_team.user_arns
     }
 
     "prison-data-engineer" = {
@@ -48,9 +47,17 @@ module "data_engineer" {
   destination_role_name    = each.key
   user_names               = each.value["user_names"]
   user_arns                = each.value["user_arns"]
-  aws_iam_policy_documents = each.value["policy_documents"]
+  aws_iam_policy_documents = contains(keys(each.value), "policy_documents") ? each.value["policy_documents"] : {}
+  managed_policies         = contains(keys(each.value), "managed_policies") ? each.value["managed_policies"] : local.default_managed_policies
 
-  managed_policies = [
+  providers = {
+    aws.source      = aws.landing
+    aws.destination = aws.data
+  }
+}
+
+locals {
+  default_managed_policies = [
     "arn:aws:iam::aws:policy/AmazonAthenaFullAccess",
     "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
     "arn:aws:iam::aws:policy/AWSLakeFormationDataAdmin",
@@ -62,13 +69,4 @@ module "data_engineer" {
     "arn:aws:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess",
     "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
   ]
-
-  providers = {
-    aws.source      = aws.landing
-    aws.destination = aws.data
-  }
-}
-
-output "role_name" {
-  value    = module.data_engineer[each.key].destination_role.name
 }
