@@ -113,3 +113,21 @@ region=eu-west-1
 role_arn=arn:aws:iam::335823981503:role/read-only-landing
 source_profile=landing
 ```
+
+The following lines will grant you restricted admin to both the data and landing account.
+```ini
+[profile restricted-landing]
+region = eu-west-1
+role_arn=arn:aws:iam::335823981503:role/restricted-admin-landing
+source_profile=landing
+
+[profile restricted-data]
+region = eu-west-1
+role_arn=arn:aws:iam::593291632749:role/restricted-admin-data
+source_profile=landing
+```
+
+Test everything is working with:
+```shell
+aws-vault exec restricted-data aws s3 ls
+```
