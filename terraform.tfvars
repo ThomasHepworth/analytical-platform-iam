@@ -7,6 +7,5 @@ ap_accounts = {
   landing          = "335823981503"
 }
 
-data_engineering_account_id = "189157455002"
 source_account_id           = "335823981503"
 security_account_id         = "110958189132"

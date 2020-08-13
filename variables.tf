@@ -51,10 +51,6 @@ variable "quicksight_admin_name" {
   default = "quicksight-admin"
 }
 
-variable "data_engineering_account_id" {
-  description = "AWS Data Engineering account ID"
-}
-
 variable "code_pipeline_approver_name" {
   default = "code-pipeline-approver"
 }
