@@ -23,10 +23,6 @@ variable "audit_security_name" {
   default = "AuditAdminRole"
 }
 
-variable "security_account_id" {
-  description = "AWS Security account ID"
-}
-
 variable "data_engineers_name" {
   default = "data-engineers"
 }

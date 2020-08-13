@@ -43,7 +43,7 @@ module "add_audit_security_role_in_data" {
   providers = { aws = aws.data }
 
   role_name         = var.audit_security_name
-  source_account_id = var.security_account_id
+  source_account_id = var.ap_accounts["security"]
   role_policy_arn   = "arn:aws:iam::aws:policy/SecurityAudit"
   tags              = local.tags
 }
