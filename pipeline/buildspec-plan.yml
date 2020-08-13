@@ -16,7 +16,7 @@ phases:
     commands:
       - cd $CODEBUILD_SRC_DIR
       - terraform init -input=false -no-color
-      - terraform plan -var-file=vars/landing.tfvars -out=tfplan -input=false -no-color
+      - terraform plan -out=tfplan -input=false -no-color
       - aws s3 cp tfplan s3://$PLAN_BUCKET/tfplan
 
   post_build:
