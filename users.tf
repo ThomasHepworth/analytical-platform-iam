@@ -111,3 +111,10 @@ module "tapan_perkins" {
   tags        = local.tags
   group_names = [aws_iam_group.users.name]
 }
+
+module "sam_lindsay" {
+  source      = "./modules/user"
+  email       = "sam.lindsay@digital.justice.gov.uk"
+  tags        = local.tags
+  group_names = [aws_iam_group.users.name]
+}
