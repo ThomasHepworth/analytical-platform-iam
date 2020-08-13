@@ -57,6 +57,10 @@ data "aws_iam_policy_document" "corporate_data_engineer" {
       "arn:aws:s3:::mojap-land/sop/*",
       "arn:aws:s3:::mojap-raw-hist/sop/*",
       "arn:aws:s3:::mojap-raw/sop/*",
+      "arn:aws:s3:::alpha-dag-sop-data-engineering/*",
+      "arn:aws:s3:::alpha-dag-sop-engineering-draft/*",
+      "arn:aws:s3:::alpha-dag-sop-engineering-backup/*",
+      "arn:aws:s3:::alpha-dag-sop-bulk-uploads/*",
     ]
   }
 }
