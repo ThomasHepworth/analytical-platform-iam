@@ -15,7 +15,7 @@ provider "aws" {
   version = "~> 2.6"
 
   assume_role {
-    role_arn = "arn:aws:iam::${var.landing_account_id}:role/${var.landing_iam_role}"
+    role_arn = "arn:aws:iam::${var.ap_accounts["landing"]}:role/${var.landing_iam_role}"
   }
 }
 
@@ -25,7 +25,7 @@ provider "aws" {
   alias   = "landing"
 
   assume_role {
-    role_arn = "arn:aws:iam::${var.landing_account_id}:role/${var.landing_iam_role}"
+    role_arn = "arn:aws:iam::${var.ap_accounts["landing"]}:role/${var.landing_iam_role}"
   }
 }
 
@@ -65,6 +65,6 @@ provider "aws" {
   alias   = "data_engineering"
 
   assume_role {
-    role_arn = "arn:aws:iam::${var.data_engineering_account_id}:role/${var.landing_iam_role}"
+    role_arn = "arn:aws:iam::${var.ap_accounts["data_engineering"]}:role/${var.landing_iam_role}"
   }
 }

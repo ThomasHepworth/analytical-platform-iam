@@ -3,7 +3,7 @@ data "aws_iam_policy_document" "assume" {
     effect = "Allow"
 
     principals {
-      identifiers = ["arn:aws:iam::${var.landing_account_id}:root"]
+      identifiers = ["arn:aws:iam::${var.source_account_id}:root"]
       type        = "AWS"
     }
 
@@ -11,9 +11,7 @@ data "aws_iam_policy_document" "assume" {
       test     = "BoolIfExists"
       variable = "aws:MultiFactorAuthPresent"
 
-      values = [
-        "true",
-      ]
+      values = ["true"]
     }
 
     actions = ["sts:AssumeRole"]
@@ -24,13 +22,7 @@ data "aws_iam_policy_document" "assume" {
 resource "aws_iam_role" "role" {
   name               = var.role_name
   assume_role_policy = data.aws_iam_policy_document.assume.json
-
-  tags = {
-    business-unit = var.tags["business-unit"]
-    application   = var.tags["application"]
-    is-production = var.tags["is-production"]
-    owner         = var.tags["owner"]
-  }
+  tags               = var.tags
 }
 
 # Allow attaching a role policy document to resulting role

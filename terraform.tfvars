@@ -8,5 +8,5 @@ ap_accounts = {
 }
 
 data_engineering_account_id = "189157455002"
-landing_account_id          = "335823981503"
+source_account_id           = "335823981503"
 security_account_id         = "110958189132"

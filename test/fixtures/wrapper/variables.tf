@@ -21,11 +21,11 @@ provider "aws" {
   alias   = "landing"
 
   assume_role {
-    role_arn = "arn:aws:iam::${var.landing_account_id}:role/${var.landing_iam_role}"
+    role_arn = "arn:aws:iam::${var.ap_accounts["landing"]}:role/${var.landing_iam_role}"
   }
 }
 
-variable "landing_account_id" {
+variable "source_account_id" {
   description = "ID of account containing IAM users"
   default     = "335823981503"
 }

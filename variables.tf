@@ -1,7 +1,3 @@
-variable "landing_account_id" {
-  description = "ID of account containing IAM users"
-}
-
 variable "ap_accounts" {
   type        = map(string)
   description = "IDs of accounts to assume role into"

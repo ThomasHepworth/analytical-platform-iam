@@ -8,9 +8,9 @@ variable "assumed_role_name" {
   description = "The name of the role to be assumed in the remote account"
 }
 
-variable "landing_account_id" {
-  default     = "335823981503"
+variable "source_account_id" {
   description = "The account ID of the Landing AWS Account"
+  type        = string
 }
 
 variable "group_name" {

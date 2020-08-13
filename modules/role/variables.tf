@@ -2,9 +2,9 @@ variable "region" {
   default = "eu-west-1"
 }
 
-variable "landing_account_id" {
-  default     = "335823981503"
+variable "source_account_id" {
   description = "The Landing account ID"
+  type        = string
 }
 
 variable "landing_iam_role" {
@@ -27,11 +27,4 @@ variable "role_policy_arn" {
 
 variable "tags" {
   type = map(string)
-
-  default = {
-    business-unit = "Platforms"
-    application   = "analytical-platform"
-    is-production = "1"
-    owner         = "analytical-platform:analytics-platform-tech@digital.justice.gov.uk"
-  }
 }
