@@ -7,10 +7,6 @@ variable "restricted_admin_name" {
   default = "restricted-admin"
 }
 
-variable "data_admin_name" {
-  default = "data-admin-in"
-}
-
 variable "landing_iam_role" {
   default = "landing-iam-role"
 }

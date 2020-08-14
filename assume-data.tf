@@ -18,26 +18,6 @@ module "add_restricted_admin_role_in_data" {
   tags              = local.tags
 }
 
-module "assume_data_admin_in_data" {
-  source = "./modules/assume"
-
-  assumed_role_name         = "${var.data_admin_name}-data-acc"
-  assume_role_in_account_id = var.ap_accounts["data"]
-  source_account_id         = var.ap_accounts["landing"]
-  group_name                = "${var.data_admin_name}-data-acc"
-  users                     = module.analytical_platform_team.user_names
-}
-
-module "add_data_admin_role_in_data" {
-  source    = "./modules/role"
-  providers = { aws = aws.data }
-
-  role_name         = "${var.data_admin_name}-data-acc"
-  source_account_id = var.ap_accounts["landing"]
-  role_policy       = data.aws_iam_policy_document.data_admin.json
-  tags              = local.tags
-}
-
 module "add_audit_security_role_in_data" {
   source    = "./modules/role"
   providers = { aws = aws.data }
