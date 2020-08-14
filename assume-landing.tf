@@ -38,17 +38,6 @@ module "add_code_pipeline_approver_role_in_landing" {
   tags              = local.tags
 }
 
-module "add_suspended_users_group_in_landing" {
-  source = "./modules/assume"
-
-  assumed_role_name         = "nil"
-  assume_role_in_account_id = "nil"
-  source_account_id         = var.ap_accounts["landing"]
-  group_name                = var.suspended_users_name
-  group_effect              = "Deny"
-  users                     = [aws_iam_user.suspended.name]
-}
-
 module "add_audit_security_role_in_landing" {
   source    = "./modules/role"
   providers = { aws = aws.landing }

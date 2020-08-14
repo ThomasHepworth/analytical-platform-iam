@@ -11,10 +11,6 @@ variable "landing_iam_role" {
   default = "landing-iam-role"
 }
 
-variable "suspended_users_name" {
-  default = "suspended_users"
-}
-
 variable "audit_security_name" {
   default = "AuditAdminRole"
 }
