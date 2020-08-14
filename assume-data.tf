@@ -127,26 +127,3 @@ module "add_corporate_data_engineers_role_in_data_account" {
   role_policy       = data.aws_iam_policy_document.corporate_data_engineer.json
   tags              = local.tags
 }
-
-module "assume_quicksight_admin_in_data" {
-  source = "./modules/assume"
-
-  assumed_role_name         = "${var.quicksight_admin_name}-data"
-  assume_role_in_account_id = var.ap_accounts["data"]
-  source_account_id         = var.ap_accounts["landing"]
-  group_name                = "${var.quicksight_admin_name}-data"
-
-  users = [
-    aws_iam_user.gareth.name,
-  ]
-}
-
-module "add_quicksight_admin_role_in_data" {
-  source    = "./modules/role"
-  providers = { aws = aws.data }
-
-  role_name         = "${var.quicksight_admin_name}-data"
-  source_account_id = var.ap_accounts["landing"]
-  role_policy       = data.aws_iam_policy_document.quicksight_admin.json
-  tags              = local.tags
-}

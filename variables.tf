@@ -39,10 +39,6 @@ variable "corporate_data_engineers_name" {
   default = "data-engineers-corporate"
 }
 
-variable "quicksight_admin_name" {
-  default = "quicksight-admin"
-}
-
 variable "code_pipeline_approver_name" {
   default = "code-pipeline-approver"
 }
