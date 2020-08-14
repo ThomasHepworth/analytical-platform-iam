@@ -86,9 +86,9 @@ For full, OS specific instructions please see the [AWS-Vault README](https://git
 
 - You will then be able to ask AWS STS which account you are logged into:
 
-```shell
-aws-vault exec landing -- aws sts get-caller-identity
-```
+  ```shell
+  aws-vault exec landing -- aws sts get-caller-identity
+  ```
 
 - To be able to access resources in another account you will need to add your MFA serial to the landing config. The MFA ARN can be copied from the AWS Console [here](https://console.aws.amazon.com/iam/home#/security_credentials), under "Assigned MFA device".
 
@@ -115,20 +115,22 @@ source_profile=landing
 ```
 
 The following lines will grant you restricted admin to both the data and landing account.
+
 ```ini
 # ~/.aws/config
 [profile restricted-landing]
 region = eu-west-1
-role_arn=arn:aws:iam::335823981503:role/restricted-admin-landing
+role_arn=arn:aws:iam::335823981503:role/restricted-admin
 source_profile=landing
 
 [profile restricted-data]
 region = eu-west-1
-role_arn=arn:aws:iam::593291632749:role/restricted-admin-data
+role_arn=arn:aws:iam::593291632749:role/restricted-admin
 source_profile=landing
 ```
 
 Test everything is working with:
+
 ```shell
-aws-vault exec restricted-data aws s3 ls
+aws-vault exec restricted-data aws sts get-caller-identity
 ```
