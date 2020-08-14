@@ -35,10 +35,6 @@ variable "corporate_data_engineers_name" {
   default = "data-engineers-corporate"
 }
 
-variable "code_pipeline_approver_name" {
-  default = "code-pipeline-approver"
-}
-
 locals {
   tags = {
     business-unit = "Platforms"

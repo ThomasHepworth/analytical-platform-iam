@@ -110,7 +110,7 @@ The following lines will grant you read-only access to resources in the landing 
 # ~/.aws/config
 [profile readonly-landing]
 region=eu-west-1
-role_arn=arn:aws:iam::335823981503:role/read-only-landing
+role_arn=arn:aws:iam::335823981503:role/read-only
 source_profile=landing
 ```
 
