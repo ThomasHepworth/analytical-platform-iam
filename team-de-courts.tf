@@ -29,10 +29,6 @@ module "courts_data_engineer" {
   }
 }
 
-output "courts_engineer_role_name" {
-  value = module.courts_data_engineer.destination_role.name
-}
-
 data "aws_iam_policy_document" "courts_data_engineer" {
   statement {
     sid    = "ReadWrite"

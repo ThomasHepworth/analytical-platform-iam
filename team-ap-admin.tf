@@ -17,9 +17,6 @@ module "ap_team_dev_restricted_admin" {
   }
 }
 
-output "ap_team_dev_restricted_admin_role_name" {
-  value = module.ap_team_dev_restricted_admin.destination_role.name
-}
 
 module "ap_team_prod_restricted_admin" {
   source = "./modules/assume_role"
@@ -38,10 +35,6 @@ module "ap_team_prod_restricted_admin" {
     aws             = aws.landing
     aws.destination = aws.prod
   }
-}
-
-output "ap_team_prod_restricted_admin_role_name" {
-  value = module.ap_team_prod_restricted_admin.destination_role.name
 }
 
 module "ap_team_data_restricted_admin" {
@@ -71,10 +64,6 @@ module "ap_team_data_restricted_admin" {
   }
 }
 
-output "ap_team_data_restricted_admin_role_name" {
-  value = module.ap_team_data_restricted_admin.destination_role.name
-}
-
 module "ap_team_landing_restricted_admin" {
   source = "./modules/assume_role"
   tags   = local.tags
@@ -92,10 +81,6 @@ module "ap_team_landing_restricted_admin" {
     aws             = aws.landing
     aws.destination = aws.landing
   }
-}
-
-output "ap_team_landing_restricted_admin_role_name" {
-  value = module.ap_team_landing_restricted_admin.destination_role.name
 }
 
 module "ap_team_data_engineering_restricted_admin" {
@@ -124,8 +109,3 @@ module "ap_team_data_engineering_restricted_admin" {
     aws.destination = aws.data_engineering
   }
 }
-
-output "ap_team_data_engineering_restricted_admin_role_name" {
-  value = module.ap_team_data_engineering_restricted_admin.destination_role.name
-}
-

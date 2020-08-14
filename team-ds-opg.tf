@@ -30,10 +30,6 @@ module "opg_data_science" {
   }
 }
 
-output "opg_ds_role_name" {
-  value = module.opg_data_science.destination_role.name
-}
-
 data "aws_iam_policy_document" "opg_access" {
   statement {
     effect = "Allow"

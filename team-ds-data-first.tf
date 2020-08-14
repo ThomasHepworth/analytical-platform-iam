@@ -25,7 +25,3 @@ module "data_first_data_science" {
     aws.destination = aws.data
   }
 }
-
-output "data_first_data_science_role_name" {
-  value = module.data_first_data_science.destination_role.name
-}

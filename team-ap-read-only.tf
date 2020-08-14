@@ -17,10 +17,6 @@ module "ap_team_dev_read_only" {
   }
 }
 
-output "ap_team_dev_read_only_role_name" {
-  value = module.ap_team_dev_read_only.destination_role.name
-}
-
 module "ap_team_prod_read_only" {
   source = "./modules/assume_role"
   tags   = local.tags
@@ -38,10 +34,6 @@ module "ap_team_prod_read_only" {
     aws             = aws.landing
     aws.destination = aws.prod
   }
-}
-
-output "ap_team_prod_read_only_role_name" {
-  value = module.ap_team_prod_read_only.destination_role.name
 }
 
 module "ap_team_data_read_only" {
@@ -63,10 +55,6 @@ module "ap_team_data_read_only" {
   }
 }
 
-output "ap_team_data_read_only_role_name" {
-  value = module.ap_team_data_read_only.destination_role.name
-}
-
 module "ap_team_landing_read_only" {
   source = "./modules/assume_role"
   tags   = local.tags
@@ -85,8 +73,3 @@ module "ap_team_landing_read_only" {
     aws.destination = aws.landing
   }
 }
-
-output "ap_team_landing_read_only_role_name" {
-  value = module.ap_team_landing_read_only.destination_role.name
-}
-

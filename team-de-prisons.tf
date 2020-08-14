@@ -30,10 +30,6 @@ module "prison_data_engineer" {
   }
 }
 
-output "prison_data_engineer_role_name" {
-  value = module.prison_data_engineer.destination_role.name
-}
-
 data "aws_iam_policy_document" "prison_data_engineer" {
   statement {
     sid    = "ReadWrite"

@@ -29,10 +29,6 @@ module "probation_data_engineer" {
   }
 }
 
-output "probation_engineer_role_name" {
-  value = module.probation_data_engineer.destination_role.name
-}
-
 data "aws_iam_policy_document" "probation_data_engineer" {
   statement {
     sid    = "ReadWrite"

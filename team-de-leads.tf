@@ -21,10 +21,6 @@ module "data_engineering_leads" {
   }
 }
 
-output "data_engineering_leads_role_name" {
-  value = module.data_engineering_leads.destination_role.name
-}
-
 data "aws_iam_policy_document" "code_pipeline_approver" {
   statement {
     effect    = "Allow"

@@ -30,10 +30,6 @@ module "data_first_data_engineer" {
   }
 }
 
-output "data_first_engineer_role_name" {
-  value = module.data_first_data_engineer.destination_role.name
-}
-
 data "aws_iam_policy_document" "data_first_data_engineer" {
   statement {
     sid    = "ReadWrite"
