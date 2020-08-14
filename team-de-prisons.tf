@@ -61,6 +61,13 @@ data "aws_iam_policy_document" "prison_data_engineer" {
       "arn:aws:s3:::mojap-raw-hist/hmpps/pathfinder*",
       "arn:aws:s3:::mojap-raw-hist/hmpps/prison*",
       "arn:aws:s3:::mojap-raw-hist/hmpps-migration-backup/*",
+      "arn:aws:s3:::alpha-nomis/*",
+      "arn:aws:s3:::alpha-viper/*",
+      "arn:aws:s3:::alpha-prison-population/*",
+      "arn:aws:s3:::alpha-anvil/*",
+      "arn:aws:s3:::alpha-nomis-discovery/*",
+      "arn:aws:s3:::alpha-data-engineer-logs/raw/nomis*",
+      "arn:aws:s3:::alpha-data-engineer-logs/raw/pathfinder/*",
     ]
   }
 }
