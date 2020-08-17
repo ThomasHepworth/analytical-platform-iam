@@ -50,6 +50,7 @@ module "data_first_data_engineering_team" {
     aws_iam_user.sam.name,
     module.tapan_perkins.name,
     module.sam_lindsay.name,
+    aws_iam_user.robin.name,
   ]
 }
 

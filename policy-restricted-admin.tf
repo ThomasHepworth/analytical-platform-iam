@@ -74,6 +74,7 @@ data "aws_iam_policy_document" "restricted_admin" {
     actions = [
       "iam:AddRoleToInstanceProfile",
       "iam:AddUserToGroup",
+      "iam:AttachUserPolicy",
       "iam:AttachGroupPolicy",
       "iam:AttachRolePolicy",
       "iam:CreateAccessKey",
