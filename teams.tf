@@ -85,6 +85,7 @@ module "data_first_data_science_team" {
   source = "./modules/group"
   users = [
     aws_iam_user.robin.name,
+    module.sam_lindsay.name,
   ]
 }
 
